@@ -213,4 +213,7 @@ Create sign up component
 Create log ou component
   -create thunk action to handle logout request
 
+
+//setup root with package.json to communicate with heroku
+    //backend will serve the static frontend build
 */
