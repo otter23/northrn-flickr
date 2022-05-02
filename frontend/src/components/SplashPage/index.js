@@ -5,7 +5,7 @@ import { NavLink, Link } from 'react-router-dom';
 // import { useSelector } from 'react-redux';
 
 import flickrLogo from '../../images/flickrLogo.svg';
-import flickerImage from '../../images/splash-bg.jpg';
+import flickerImage from '../../images/splash-bg-alt.jpg';
 import fbIcon from '../../images/icons/fb-icon.svg';
 import twitterIcon from '../../images/icons/twitter-icon.svg';
 import instaIcon from '../../images/icons/insta-icon.svg';
@@ -75,10 +75,14 @@ function Splash({ isLoaded }) {
         </div>
         <div className='splash-photo-meta-container'>
           <div className='splash-photo-title'>
-            <Link to='#'>Northern Flicker</Link>
+            <a href='https://www.flickr.com/photos/137364640@N08/51103074015/'>
+              Northern Flicker
+            </a>
           </div>
           <div className='splash-photo-username'>
-            <Link to='#'>by Steve Jones</Link>
+            <a href='https://www.flickr.com/photos/137364640@N08/51103074015/'>
+              by Steve Jones
+            </a>
           </div>
         </div>
       </div>

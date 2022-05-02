@@ -175,6 +175,11 @@
   font-size: 14px;
 }
 
+.splash-photo-username a:hover,
+.splash-photo-title a:hover {
+  text-decoration: underline;
+}
+
 .splash-footer {
   display: flex;
   background-color: black;
