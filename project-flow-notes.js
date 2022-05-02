@@ -101,6 +101,19 @@ SEQUELIZE:
     //check database for correct table creation
       `$ psql <database name> -c 'SELECT * FROM "Users"'
 
+    //repeat above for the following in order
+      npx sequelize model:generate --name Image --attributes userId:integer,title:string,description:text,imageUrl:string
+      npx sequelize model:generate --name Album --attributes userId:integer,title:string,description:text
+      npx sequelize model:generate --name Comment --attributes userId:integer,albumId:integer,comment:text
+      npx sequelize model:generate --name JoinImageAlbum --attributes imageId:integer,albumId:integer
+
+      npx sequelize seed:generate --name image-data
+      npx sequelize seed:generate --name album-data
+      npx sequelize seed:generate --name comment-data
+      npx sequelize seed:generate --name imageAlbum-data
+
+
+
 Express Authentication Flow:
 
 The backend login flow in this project will be based on the following plan:

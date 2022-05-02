@@ -1,23 +1,20 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Albums', {
+    return queryInterface.createTable('JoinImageAlbums', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      userId: {
+      imageId: {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
-      title: {
+      albumId: {
         allowNull: false,
-        type: Sequelize.STRING,
-      },
-      description: {
-        type: Sequelize.TEXT,
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,
@@ -32,6 +29,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Albums');
+    return queryInterface.dropTable('JoinImageAlbums');
   },
 };

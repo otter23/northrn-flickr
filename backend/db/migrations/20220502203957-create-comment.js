@@ -6,28 +6,33 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       userId: {
-        type: Sequelize.INTEGER
+        allowNull: false,
+        type: Sequelize.INTEGER,
       },
-      albumId: {
-        type: Sequelize.INTEGER
+      imageId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
       },
       comment: {
-        type: Sequelize.TEXT
+        allowNull: false,
+        type: Sequelize.TEXT,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('now'),
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('now'),
+      },
     });
   },
   down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('Comments');
-  }
+  },
 };
