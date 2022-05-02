@@ -25,52 +25,92 @@ body,
 
 .splash-nav {
   background-color: rgba(0, 0, 0, 0.25);
-
   width: 100%;
   position: absolute;
+  display: flex;
 }
 
 .splash-nav-inner {
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  /* justify-content: center; */
   height: 64px;
-  /* width: 100%;   */
+  width: 100%;
   padding: 0px 24px;
 }
 
-.splash-nav-search-div {
-  padding: 0px 100px;
-  margin-left: 23px;
-  width: auto;
+.splash-nav-right {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
 }
 
-.splash-nav-search-div input {
+.splash-nav-search-div {
+  flex-grow: 1;
+}
+
+.splash-nav-search-form {
+  display: flex;
+  padding: 0px 100px;
+  margin-left: 23px;
+  /* grow to fit rest of container */
+  flex-grow: 1;
+}
+
+.splash-nav-search-form div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.75);
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  padding-left: 11px;
+  padding-right: 5px;
+  color: rgb(94, 94, 94);
+  width: 37px;
+}
+
+.splash-nav-search-form input {
   width: 100%;
   padding: 6px 10px 6px 0px;
+  background-color: rgba(255, 255, 255, 0.75);
   font-size: 14px;
+  border: none;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  outline: none;
 }
 
 .splash-login {
   display: flex;
-}
+  justify-content: center;
+  align-items: center;
 
-.splash-login a {
+  width: 96px;
+  height: 32px;
+  padding: 0px 20px;
+
   color: white;
+
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .splash-signup {
   display: flex;
-  width: 32px;
-  padding: 0px 20px;
-  background-color: white;
-  text-decoration: none;
-  border-radius: 3px;
-}
+  justify-content: center;
+  align-items: center;
 
-.splash-signup a {
+  width: 96px;
+  height: 32px;
+  padding: 0px 20px;
+
+  background-color: white;
+  border-radius: 3px;
   color: black;
+
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .splash-background {
@@ -145,7 +185,7 @@ body,
 
 .splash-footer {
   display: flex;
-  background-color: var(--nav);
+  background-color: black;
   color: rgba(255, 255, 255, 0.6);
   justify-content: space-around;
   align-items: center;
@@ -164,4 +204,13 @@ body,
   display: flex;
   justify-content: space-around;
   gap: 32px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.footer-icon-container img {
+  /* https://codepen.io/sosuke/pen/Pjoqqp */
+  /* color: #8a8a8a; */
+
+  filter: brightness(0) saturate(100%) invert(59%) sepia(0%) saturate(0%)
+    hue-rotate(151deg) brightness(94%) contrast(81%);
 }

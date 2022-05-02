@@ -1,9 +1,8 @@
 import './Splash.css';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import ProfileButton from '../Navigation/ProfileButton';
+// import { useSelector } from 'react-redux';
 
 import flickrLogo from '../../images/flickrLogo.svg';
 import flickerImage from '../../images/splash-bg.jpg';
@@ -12,28 +11,11 @@ import twitterIcon from '../../images/icons/twitter-icon.svg';
 import instaIcon from '../../images/icons/insta-icon.svg';
 
 function Splash({ isLoaded }) {
-  const sessionUser = useSelector((state) => state.session.user);
+  // const sessionUser = useSelector((state) => state.session.user);
 
-  const [bgImage, setBgImage] = useState(flickerImage);
+  //setup a setInterval to move through photos to mimic splash page
+  // const [bgImage, setBgImage] = useState(flickerImage);
   // setBgImage(flickerImage); //create function and update later
-
-  let sessionLinks;
-  //is user, show profile button, else show login/signup links
-  if (sessionUser) {
-    sessionLinks = <ProfileButton user={sessionUser} />;
-  } else {
-    sessionLinks = (
-      <>
-        <div className='splash-login'>
-          <Link to='/login'>Log In</Link>
-        </div>
-
-        <div className='splash-signup'>
-          <Link to='/sign-up'>Sign Up</Link>
-        </div>
-      </>
-    );
-  }
 
   return (
     <>
@@ -50,15 +32,36 @@ function Splash({ isLoaded }) {
               />
             </NavLink>
           </div>
-          <div className='splash-nav-search-div'>
-            <input type='search'></input>
+
+          <div className='splash-nav-right'>
+            <div className='splash-nav-search-div'>
+              <form className='splash-nav-search-form'>
+                <label></label>
+                <div className='material-icons'>search</div>
+                <input
+                  type='search'
+                  placeholder='Photos, people, or groups'
+                ></input>
+              </form>
+            </div>
+
+            <div>
+              <Link className='splash-login' to='/login'>
+                Log In
+              </Link>
+            </div>
+
+            <div>
+              <Link className='splash-signup' to='/sign-up'>
+                Sign Up
+              </Link>
+            </div>
           </div>
-          {isLoaded && sessionLinks}
         </div>
       </nav>
       <div
         className='splash-background'
-        style={{ backgroundImage: `url(${bgImage})` }}
+        style={{ backgroundImage: `url(${flickerImage})` }}
       >
         <div className='splash-body-container'>
           <h1 className='find-inspiration'> Find your inspiration.</h1>

@@ -9,6 +9,7 @@ import { Redirect, Link } from 'react-router-dom';
 
 import flickrIcon from '../../images/icons/flickr-icon.svg';
 import flickrLogo from '../../images/flickrLogo.svg';
+import loginBg from '../../images/login-bg.jpeg';
 
 export default function LoginFormPage() {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ export default function LoginFormPage() {
 
   //slices of react state for controlled inputs
   const [credential, setCredential] = useState(
-    window.localStorage.getItem('nflckEmail') || ''
+    window.localStorage.getItem('nFlckrEmail') || ''
   );
   const [credentialLabel, setCredentialLabel] = useState(false);
   const [password, setPassword] = useState('');
@@ -44,7 +45,7 @@ export default function LoginFormPage() {
 
       if (response.ok) {
         //save email for next session if remember checked
-        if (remember) window.localStorage.setItem('nflckEmail', credential);
+        if (remember) window.localStorage.setItem('nFlckrEmail', credential);
         return;
       }
     } catch (errorResponse) {
@@ -61,7 +62,10 @@ export default function LoginFormPage() {
   };
 
   return (
-    <div className='login-background'>
+    <div
+      className='login-background'
+      style={{ backgroundImage: `url(${loginBg})` }}
+    >
       <nav className='login-nav'>
         <div className='login-nav-inner'>
           <Link to='/'>
