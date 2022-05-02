@@ -1,9 +1,11 @@
 import './Navigation.css';
 
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useState } from 'react';
+import { NavLink, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
+
+import flickrLogo from '../../images/flickrLogo.svg';
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
@@ -15,21 +17,36 @@ function Navigation({ isLoaded }) {
   } else {
     sessionLinks = (
       <>
-        <NavLink to='/login'>Log In</NavLink>
-        <NavLink to='/sign-up'>Sign Up</NavLink>
+        <div className='login'>
+          <Link to='/login'>Log In</Link>
+        </div>
+
+        <div className='signup'>
+          <Link to='/sign-up'>Sign Up</Link>
+        </div>
       </>
     );
   }
 
   return (
-    <ul>
-      <li>
-        <NavLink exact to='/'>
-          Home
-        </NavLink>
-        {isLoaded && sessionLinks}
-      </li>
-    </ul>
+    <>
+      <nav className='nav'>
+        <div className='nav-inner'>
+          <div className='left-nav'>
+            <NavLink exact to='/'>
+              <img
+                className='logo-nav'
+                src={flickrLogo}
+                alt='logo'
+                viewBox='0 0 100 100'
+                preserveAspectRatio='xMidYMid meet'
+              />
+            </NavLink>
+          </div>
+          {isLoaded && sessionLinks}
+        </div>
+      </nav>
+    </>
   );
 }
 

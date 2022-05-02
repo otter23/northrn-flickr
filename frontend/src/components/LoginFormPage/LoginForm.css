@@ -20,10 +20,16 @@ body,
   margin: 0px;
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
 /* https://www.pexels.com/search/birds/ */
 /* https://www.pexels.com/photo/greyscale-photography-of-birds-3401967/ */
 .login-background {
-  background-image: url('https://images.pexels.com/photos/3375493/pexels-photo-3375493.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=4000&w=6000');
+  /* background-image: url('https://images.pexels.com/photos/3375493/pexels-photo-3375493.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=4000&w=6000'); */
+  background-image: url('../../images/login-bg.jpeg');
   background-size: cover;
   height: 100%;
   width: 100%;
@@ -33,13 +39,13 @@ body,
   flex-direction: column;
 }
 
-nav {
+.login-nav {
   background-color: var(--nav);
   height: 48px;
   width: 100%;
 }
 
-nav div {
+.login-nav-inner {
   display: flex;
   align-items: center;
   height: 48px;
@@ -252,7 +258,9 @@ nav div {
 }
 .not-member {
   width: 100%;
-  text-align: center;
+  display: flex;
+  gap: 4px;
+  justify-content: center;
   font-size: 14px;
   padding-top: 16px;
 }

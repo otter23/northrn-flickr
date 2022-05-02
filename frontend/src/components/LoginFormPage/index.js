@@ -4,10 +4,11 @@ import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 
-//format for Create-react-app which uses SVGR under the hood
-// import { ReactComponent as FlickrLogo } from './Flickr.svg';
-import flickrIcon from './flickrIcon.svg';
-import flickrLogo from './flickrLogo.svg';
+//format for Create-react-app which uses SVGR under the hood:
+//import { ReactComponent as FlickrLogo } from './Flickr.svg';
+
+import flickrIcon from '../../images/icons/flickr-icon.svg';
+import flickrLogo from '../../images/flickrLogo.svg';
 
 export default function LoginFormPage() {
   const dispatch = useDispatch();
@@ -16,7 +17,9 @@ export default function LoginFormPage() {
   const sessionUser = useSelector((state) => state.session.user);
 
   //slices of react state for controlled inputs
-  const [credential, setCredential] = useState('');
+  const [credential, setCredential] = useState(
+    window.localStorage.getItem('nflckEmail') || ''
+  );
   const [credentialLabel, setCredentialLabel] = useState(false);
   const [password, setPassword] = useState('');
   const [passwordLabel, setPasswordLabel] = useState(false);
@@ -25,27 +28,42 @@ export default function LoginFormPage() {
   const [errors, setErrors] = useState([]);
 
   //if redux state updated with user session, redirect to homepage
-  //consider using history if you want it to take you back to login page
+  //consider using history if want to be able to use back button
   if (sessionUser) return <Redirect to='/' />;
 
   //on submit dispatch login thunk
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors([]); //reset error state
 
-    //send request to backend API login route (api/session)
-    return dispatch(sessionActions.login({ credential, password })).catch(
-      async (res) => {
-        const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
+    // send request to backend API login route (api/session)
+    try {
+      const response = await dispatch(
+        sessionActions.login({ credential, password })
+      );
+
+      if (response.ok) {
+        //save email for next session if remember checked
+        if (remember) window.localStorage.setItem('nflckEmail', credential);
+        return;
       }
-    );
+    } catch (errorResponse) {
+      const data = await errorResponse.json();
+      if (data && data.errors) setErrors(data.errors);
+    }
+
+    // return dispatch(sessionActions.login({ credential, password })).catch(
+    //   async (res) => {
+    //     const data = await res.json();
+    //     if (data && data.errors) setErrors(data.errors);
+    //   }
+    // );
   };
 
   return (
     <div className='login-background'>
-      <nav>
-        <div>
+      <nav className='login-nav'>
+        <div className='login-nav-inner'>
           <Link to='/'>
             <img
               className='logo-nav'
@@ -193,7 +211,7 @@ export default function LoginFormPage() {
 
             <div className='not-member'>
               <span>Not a Northrn Flickr member?</span>
-              <Link className='link-signup' to='/signup'>
+              <Link className='link-signup' to='/sign-up'>
                 Sign up here.
               </Link>
             </div>

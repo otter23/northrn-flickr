@@ -1,0 +1,167 @@
+@import url('../../index.css');
+
+/* https://fonts.google.com/icons?icon.query=eye */
+/* Allows you to customize icons specific to this page view */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  height: 1.5rem;
+  width: 1.5rem;
+  fill: currentColor;
+  color: gray;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+.splash-nav {
+  background-color: rgba(0, 0, 0, 0.25);
+
+  width: 100%;
+  position: absolute;
+}
+
+.splash-nav-inner {
+  display: flex;
+  align-items: center;
+  height: 64px;
+  /* width: 100%;   */
+  padding: 0px 24px;
+}
+
+.splash-nav-search-div {
+  padding: 0px 100px;
+  margin-left: 23px;
+  width: auto;
+}
+
+.splash-nav-search-div input {
+  width: 100%;
+  padding: 6px 10px 6px 0px;
+  font-size: 14px;
+}
+
+.splash-login {
+  display: flex;
+}
+
+.splash-login a {
+  color: white;
+  text-decoration: none;
+}
+
+.splash-signup {
+  display: flex;
+  width: 32px;
+  padding: 0px 20px;
+  background-color: white;
+  text-decoration: none;
+  border-radius: 3px;
+}
+
+.splash-signup a {
+  color: black;
+  text-decoration: none;
+}
+
+.splash-background {
+  height: 100%;
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 60px;
+  /* position: relative; */
+}
+
+.splash-body-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  max-width: 640px;
+}
+
+.find-inspiration {
+  color: white;
+  text-align: center;
+  font-size: 56px;
+  margin-top: 38px;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+.find-inspiration + h2 {
+  color: white;
+  text-align: center;
+  margin: 0px;
+  margin-bottom: 50px;
+}
+
+.start-for-free {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: white;
+  text-decoration: none;
+  color: black;
+  font-size: 22px;
+  font-weight: 600;
+
+  padding: 0px 20px;
+  height: 64px;
+  border-radius: 3px;
+}
+
+.splash-photo-meta-container {
+  position: absolute;
+  bottom: 70px;
+}
+
+.splash-photo-title a {
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+}
+.splash-photo-username a {
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+}
+
+.splash-footer {
+  display: flex;
+  background-color: var(--nav);
+  color: rgba(255, 255, 255, 0.6);
+  justify-content: space-around;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 200;
+  padding: 16px 0px;
+}
+
+.english-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-icon-container {
+  display: flex;
+  justify-content: space-around;
+  gap: 32px;
+}
