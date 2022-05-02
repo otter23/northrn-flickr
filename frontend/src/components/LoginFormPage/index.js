@@ -88,7 +88,7 @@ export default function LoginFormPage() {
     >
       <nav className='login-nav'>
         <div className='login-nav-inner'>
-          <Link to='/'>
+          <Link to='/' className='login-nav-link'>
             <img
               className='login-nav-logo'
               src={flickrLogo}

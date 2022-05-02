@@ -36,7 +36,6 @@ function App() {
           <LoginFormPage />
         </Route>
         <Route path='/sign-up'>
-          <Navigation isLoaded={isLoaded} />
           <SignupFormPage />
         </Route>
         <Route>
