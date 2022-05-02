@@ -217,3 +217,12 @@ Create log ou component
 //setup root with package.json to communicate with heroku
     //backend will serve the static frontend build
 */
+/*
+
+Challenges
+
+mainly getting css to work
+learned that need to add styling to root, html, body, for react component to fill the page
+learned about width % and margin auto for resizing the screen
+
+*/

@@ -4,10 +4,12 @@ import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 
-//format for Create-react-app which uses SVGR under the hood
-// import { ReactComponent as FlickrLogo } from './Flickr.svg';
-import flickrIcon from './flickrIcon.svg';
-import flickrLogo from './flickrLogo.svg';
+//format for Create-react-app which uses SVGR under the hood:
+//import { ReactComponent as FlickrLogo } from './Flickr.svg';
+
+import flickrIcon from '../../images/icons/flickr-icon.svg';
+import flickrLogo from '../../images/flickrLogo.svg';
+import loginBg from '../../images/login-bg.jpeg';
 
 export default function LoginFormPage() {
   const dispatch = useDispatch();
@@ -16,7 +18,9 @@ export default function LoginFormPage() {
   const sessionUser = useSelector((state) => state.session.user);
 
   //slices of react state for controlled inputs
-  const [credential, setCredential] = useState('');
+  const [credential, setCredential] = useState(
+    window.localStorage.getItem('nFlckrEmail') || ''
+  );
   const [credentialLabel, setCredentialLabel] = useState(false);
   const [password, setPassword] = useState('');
   const [passwordLabel, setPasswordLabel] = useState(false);
@@ -25,30 +29,68 @@ export default function LoginFormPage() {
   const [errors, setErrors] = useState([]);
 
   //if redux state updated with user session, redirect to homepage
-  //consider using history if you want it to take you back to login page
+  //consider using history if want to be able to use back button
   if (sessionUser) return <Redirect to='/' />;
 
   //on submit dispatch login thunk
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors([]); //reset error state
 
-    //send request to backend API login route (api/session)
-    return dispatch(sessionActions.login({ credential, password })).catch(
-      async (res) => {
-        const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
+    // send request to backend API login route (api/session)
+    try {
+      const response = await dispatch(
+        sessionActions.login({ credential, password })
+      );
+
+      if (response.ok) {
+        //save email for next session if remember checked
+        if (remember) window.localStorage.setItem('nFlckrEmail', credential);
+        return;
       }
-    );
+    } catch (errorResponse) {
+      const data = await errorResponse.json();
+      if (data && data.errors) setErrors(data.errors);
+    }
+
+    // return dispatch(sessionActions.login({ credential, password })).catch(
+    //   async (res) => {
+    //     const data = await res.json();
+    //     if (data && data.errors) setErrors(data.errors);
+    //   }
+    // );
+  };
+
+  const demoLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await dispatch(
+        sessionActions.login({
+          credential: 'demo@user.io',
+          password: 'password',
+        })
+      );
+
+      if (response.ok) {
+        return;
+      }
+    } catch (errorResponse) {
+      //should not return errors unless demo user no longer in database
+      const data = await errorResponse.json();
+      if (data && data.errors) setErrors(data.errors);
+    }
   };
 
   return (
-    <div className='login-background'>
-      <nav>
-        <div>
-          <Link to='/'>
+    <div
+      className='login-background'
+      style={{ backgroundImage: `url(${loginBg})` }}
+    >
+      <nav className='login-nav'>
+        <div className='login-nav-inner'>
+          <Link to='/' className='login-nav-link'>
             <img
-              className='logo-nav'
+              className='login-nav-logo'
               src={flickrLogo}
               alt='logo'
               viewBox='0 0 100 100'
@@ -58,9 +100,9 @@ export default function LoginFormPage() {
         </div>
       </nav>
 
-      <div className='card-container'>
+      <div className='login-card-container'>
         <div className='login-card'>
-          <div className='logo-container'>
+          <div className='login-logo-icon-container'>
             <img
               src={flickrIcon}
               alt='logo'
@@ -73,8 +115,8 @@ export default function LoginFormPage() {
           <h6 className='login-header'>Log in to Northrn Flickr</h6>
 
           {errors.length > 0 && (
-            <div className='error-container'>
-              <p className='error-message'>Invalid email or password.</p>
+            <div className='login-error-container'>
+              <p className='login-error-message'>Invalid email or password.</p>
               {/* {errors.map((error, idx) => (
             <p key={idx}>{error}</p>
           ))} */}
@@ -82,7 +124,7 @@ export default function LoginFormPage() {
           )}
 
           <form
-            className={`form-control`}
+            className={`login-form-control`}
             autoComplete='off'
             onSubmit={handleSubmit}
           >
@@ -93,14 +135,16 @@ export default function LoginFormPage() {
                 styles='display:none;'
               ></input> */}
             <div
-              className={`form-group ${
-                credentialLabel ? 'form-group-color' : ''
+              className={`login-form-group ${
+                credentialLabel ? 'login-form-group-color' : ''
               }`}
             >
               <label
-                className={`label ${
-                  credential.length > 0 || credentialLabel ? 'label-small' : ''
-                } ${credentialLabel ? 'label-color' : ''}`}
+                className={`login-label ${
+                  credential.length > 0 || credentialLabel
+                    ? 'login-label-small'
+                    : ''
+                } ${credentialLabel ? 'login-label-color' : ''}`}
                 htmlFor='email'
               >
                 Email address
@@ -108,7 +152,7 @@ export default function LoginFormPage() {
               </label>
               <input
                 id='email'
-                className={`input`}
+                className={`login-input`}
                 type='text'
                 name='email'
                 value={credential}
@@ -120,22 +164,24 @@ export default function LoginFormPage() {
             </div>
 
             <div
-              className={`form-group ${
-                passwordLabel ? 'form-group-color' : ''
+              className={`login-form-group ${
+                passwordLabel ? 'login-form-group-color' : ''
               }`}
             >
               <label
-                className={`label ${
-                  password.length > 0 || passwordLabel ? 'label-small' : ''
-                } ${passwordLabel ? 'label-color' : ''}`}
+                className={`login-label ${
+                  password.length > 0 || passwordLabel
+                    ? 'login-label-small'
+                    : ''
+                } ${passwordLabel ? 'login-label-color' : ''}`}
                 htmlFor='password'
               >
                 Password
               </label>
-              <div className='input-icon-container'>
+              <div className='login-input-icon-container'>
                 <input
                   id='password'
-                  className={`input`}
+                  className={`login-input`}
                   type={hidePassword ? 'password' : 'text'}
                   name='password'
                   value={password}
@@ -145,7 +191,7 @@ export default function LoginFormPage() {
                   required
                 />
                 <div
-                  className='icon-container'
+                  className='login-eye-icon-container'
                   onClick={(e) => setHidePassword((prevVal) => !prevVal)}
                 >
                   {hidePassword ? (
@@ -161,8 +207,8 @@ export default function LoginFormPage() {
               </div>
             </div>
 
-            <div className='checkbox-container'>
-              <label className='checkbox-label' htmlFor='remember'>
+            <div className='login-checkbox-container'>
+              <label className='login-checkbox-label' htmlFor='remember'>
                 <input
                   id='remember'
                   className=''
@@ -176,24 +222,35 @@ export default function LoginFormPage() {
               </label>
             </div>
 
-            <div className='sign-in-btn-container'>
-              <button className='sign-in-btn' type='submit'>
+            <div className='login-sign-in-btn-container'>
+              <button className='login-sign-in-btn' type='submit'>
                 Sign In
               </button>
               {/* <Link className='btn btn-cancel' to='/'>Cancel</Link> */}
             </div>
+
+            <div className='demo-sign-in-btn-container'>
+              <button
+                className='demo-sign-in-btn'
+                type='button'
+                onClick={demoLogin}
+              >
+                Demo User Sign In
+              </button>
+            </div>
           </form>
 
           <div className='login-card-bottom'>
-            <div className='forgot-password'>
-              <Link className='link-forgot' to='/forgot-password'>
+            <div className='login-forgot-password'>
+              {/* to='/forgot-password' */}
+              <Link className='login-link-forgot' to='#'>
                 Forgot password?
               </Link>
             </div>
 
-            <div className='not-member'>
+            <div className='login-not-member'>
               <span>Not a Northrn Flickr member?</span>
-              <Link className='link-signup' to='/signup'>
+              <Link className='login-link-signup' to='/sign-up'>
                 Sign up here.
               </Link>
             </div>

@@ -1,0 +1,213 @@
+@import url('../../index.css');
+
+/* https://fonts.google.com/icons?icon.query=eye */
+/* Allows you to customize icons specific to this page view */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  height: 1.5rem;
+  width: 1.5rem;
+  fill: currentColor;
+  color: gray;
+}
+
+.splash-nav {
+  background-color: rgba(0, 0, 0, 0.25);
+  width: 100%;
+  position: absolute;
+  display: flex;
+}
+
+.splash-nav-inner {
+  display: inline-flex;
+  align-items: center;
+  /* justify-content: center; */
+  height: 64px;
+  width: 100%;
+  padding: 0px 24px;
+}
+
+.splash-nav-logo {
+  width: 98px;
+  height: 21px;
+}
+
+.splash-nav-right {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.splash-nav-search-div {
+  flex-grow: 1;
+}
+
+.splash-nav-search-form {
+  display: flex;
+  padding: 0px 100px;
+  margin-left: 23px;
+  /* grow to fit rest of container */
+  flex-grow: 1;
+}
+
+.splash-nav-search-form div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.75);
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  padding-left: 11px;
+  padding-right: 5px;
+  color: rgb(94, 94, 94);
+  width: 37px;
+}
+
+.splash-nav-search-form input {
+  width: 100%;
+  padding: 6px 10px 6px 0px;
+  background-color: rgba(255, 255, 255, 0.75);
+  font-size: 14px;
+  border: none;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  outline: none;
+}
+
+.splash-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 96px;
+  height: 32px;
+  padding: 0px 20px;
+
+  color: white;
+
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.splash-signup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 96px;
+  height: 32px;
+  padding: 0px 20px;
+
+  background-color: white;
+  border-radius: 3px;
+  color: black;
+
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.splash-background {
+  height: 100%;
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 60px;
+  /* position: relative; */
+}
+
+.splash-body-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  max-width: 640px;
+}
+
+.splash-find-inspiration {
+  color: white;
+  text-align: center;
+  font-size: 56px;
+  margin-top: 38px;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+.splash-find-inspiration + h2 {
+  color: white;
+  text-align: center;
+  margin: 0px;
+  margin-bottom: 50px;
+}
+
+.splash-start-for-free {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: white;
+  text-decoration: none;
+  color: black;
+  font-size: 22px;
+  font-weight: 600;
+
+  padding: 0px 20px;
+  height: 64px;
+  border-radius: 3px;
+}
+
+.splash-photo-meta-container {
+  position: absolute;
+  bottom: 70px;
+}
+
+.splash-photo-title a {
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+}
+.splash-photo-username a {
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+}
+
+.splash-photo-username a:hover,
+.splash-photo-title a:hover {
+  text-decoration: underline;
+}
+
+.splash-footer {
+  display: flex;
+  background-color: black;
+  color: rgba(255, 255, 255, 0.6);
+  justify-content: space-around;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 200;
+  padding: 16px 0px;
+}
+
+.splash-english-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.splash-footer-icon-container {
+  display: flex;
+  justify-content: space-around;
+  gap: 32px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.splash-footer-icon-container img {
+  /* https://codepen.io/sosuke/pen/Pjoqqp */
+  /* color: #8a8a8a; */
+
+  filter: brightness(0) saturate(100%) invert(59%) sepia(0%) saturate(0%)
+    hue-rotate(151deg) brightness(94%) contrast(81%);
+}
