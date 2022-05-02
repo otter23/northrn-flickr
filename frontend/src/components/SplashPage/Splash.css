@@ -10,19 +10,6 @@
   color: gray;
 }
 
-html,
-body,
-#root {
-  height: 100%;
-  width: 100%;
-  margin: 0px;
-}
-
-#root {
-  display: flex;
-  flex-direction: column;
-}
-
 .splash-nav {
   background-color: rgba(0, 0, 0, 0.25);
   width: 100%;
@@ -37,6 +24,11 @@ body,
   height: 64px;
   width: 100%;
   padding: 0px 24px;
+}
+
+.splash-nav-logo {
+  width: 98px;
+  height: 21px;
 }
 
 .splash-nav-right {
@@ -135,7 +127,7 @@ body,
   max-width: 640px;
 }
 
-.find-inspiration {
+.splash-find-inspiration {
   color: white;
   text-align: center;
   font-size: 56px;
@@ -144,14 +136,14 @@ body,
   font-weight: 600;
 }
 
-.find-inspiration + h2 {
+.splash-find-inspiration + h2 {
   color: white;
   text-align: center;
   margin: 0px;
   margin-bottom: 50px;
 }
 
-.start-for-free {
+.splash-start-for-free {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -194,20 +186,20 @@ body,
   padding: 16px 0px;
 }
 
-.english-div {
+.splash-english-div {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.footer-icon-container {
+.splash-footer-icon-container {
   display: flex;
   justify-content: space-around;
   gap: 32px;
   color: rgba(255, 255, 255, 0.6);
 }
 
-.footer-icon-container img {
+.splash-footer-icon-container img {
   /* https://codepen.io/sosuke/pen/Pjoqqp */
   /* color: #8a8a8a; */
 

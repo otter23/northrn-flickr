@@ -24,7 +24,7 @@ function Splash({ isLoaded }) {
           <div className='splash-left-nav'>
             <NavLink exact to='/'>
               <img
-                className='logo-nav'
+                className='splash-nav-logo'
                 src={flickrLogo}
                 alt='logo'
                 viewBox='0 0 100 100'
@@ -64,12 +64,12 @@ function Splash({ isLoaded }) {
         style={{ backgroundImage: `url(${flickerImage})` }}
       >
         <div className='splash-body-container'>
-          <h1 className='find-inspiration'> Find your inspiration.</h1>
+          <h1 className='splash-find-inspiration'> Find your inspiration.</h1>
           <h2>
             Join the Northrn Flickr community, home to tens of billions of
             photos and 2 million groups
           </h2>
-          <Link to='/sign-up' className='start-for-free'>
+          <Link to='/sign-up' className='splash-start-for-free'>
             Start for free
           </Link>
         </div>
@@ -93,22 +93,26 @@ function Splash({ isLoaded }) {
         <div>Privacy</div>
         <div>Terms</div>
         <div>Cookies</div>
-        <div className='english-div'>
+        <div className='splash-english-div'>
           English
           <span className='material-symbols-outlined login-footer-icon'>
             expand_more
           </span>
         </div>
         <div>SmugMug+Flickr.</div>
-        <div className='footer-icon-container'>
-          <img className='fb-icon' src={fbIcon} alt='facebook icon' />
+        <div className='splash-footer-icon-container'>
+          <img className='splash-fb-icon' src={fbIcon} alt='facebook icon' />
           <img
-            className='logo-nav'
+            className='splash-twt-icon'
             src={twitterIcon}
             alt='twitter icon'
             style={{ width: '24px', height: '24px' }}
           />
-          <img className='insta-icon' src={instaIcon} alt='instagram icon' />
+          <img
+            className='splash-insta-icon'
+            src={instaIcon}
+            alt='instagram icon'
+          />
         </div>
       </footer>
     </>
