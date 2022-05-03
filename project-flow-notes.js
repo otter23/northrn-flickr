@@ -48,7 +48,7 @@
     -^'dotenv' tells sequelize to load db config env vars from the .env file
 
 
-Express Setup:
+EXPRESS SETUP:
   -create express app.js
     -import numerous packages
   - add numerous middleware to app
@@ -155,11 +155,12 @@ SEQUELIZE:
 
 Heroku CLI - Connect to DB
   ~$ heroku pg:psql postgresql-pointy-91357 --app northrn-flickr
-  ~$ \dt - list tables
+  =# \dt - list tables
+  =# select * from "Table"  to see data
 
 
 
-Express Authentication Flow:
+EXPRESS AUTHENTICATION FLOW:
 
 The backend login flow in this project will be based on the following plan:
   1) The API login route will be hit with a request body holding a valid credential
@@ -279,8 +280,14 @@ Create log ou component
 
 Challenges
 
-mainly getting css to work
+mainly getting css to work as intended
 learned that need to add styling to root, html, body, for react component to fill the page
 learned about width % and margin auto for resizing the screen
+flex does not affect a text node, need to wrap the text in something
+
+Database setup - went smoothly
+
+CRUD Feature 1
+
 
 */

@@ -9,7 +9,7 @@ import { Redirect, Link } from 'react-router-dom';
 
 import flickrIcon from '../../images/icons/flickr-icon.svg';
 import flickrLogo from '../../images/flickrLogo.svg';
-import loginBg from '../../images/login-bg.jpeg';
+import loginBg from '../../images/login-bg-2000x1333.jpg';
 
 export default function LoginFormPage() {
   const dispatch = useDispatch();
@@ -67,7 +67,7 @@ export default function LoginFormPage() {
       const response = await dispatch(
         sessionActions.login({
           credential: 'demo@user.io',
-          password: 'password',
+          password: 'password1',
         })
       );
 

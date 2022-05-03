@@ -10,6 +10,10 @@
   color: gray;
 }
 
+#root {
+  overflow-y: auto;
+}
+
 .splash-nav {
   background-color: rgba(0, 0, 0, 0.25);
   width: 100%;
@@ -189,6 +193,23 @@
   font-size: 14px;
   font-weight: 200;
   padding: 16px 0px;
+  flex-grow: 1;
+}
+
+.splash-footer-top-row {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /* width: 100%; */
+  flex-grow: 1;
+  padding: 0px 20px;
+}
+.splash-footer-bot-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 20px;
+  gap: 20px;
 }
 
 .splash-english-div {
@@ -210,4 +231,96 @@
 
   filter: brightness(0) saturate(100%) invert(59%) sepia(0%) saturate(0%)
     hue-rotate(151deg) brightness(94%) contrast(81%);
+}
+
+@media screen and (max-width: 1080px) {
+  .splash-nav-search-form {
+    padding: 0px 50px;
+    margin-left: 23px;
+  }
+
+  .splash-footer {
+    flex-direction: column;
+    padding: 0px;
+    position: relative;
+  }
+  .splash-footer-top-row {
+    display: flex;
+    width: 100%;
+    padding: 16px 20px;
+  }
+
+  .splash-footer-bot-row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    gap: 18px;
+    padding: 18px 20px;
+  }
+
+  .splash-photo-meta-container {
+    top: -50px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  div.splash-body-container {
+    /* height: 1335px; */
+    height: 2012px;
+  }
+
+  .splash-nav-search-form {
+    padding: 0px 25px;
+    margin-left: 23px;
+  }
+
+  .splash-footer {
+    flex-direction: column;
+    padding-bottom: 18px;
+    position: relative;
+  }
+
+  .splash-footer-top-row {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0px 20px;
+  }
+
+  .splash-footer-top-row div {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+    padding: 16px 0px;
+    width: 100%;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  /* need higher selector here */
+  div.splash-english-div {
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .splash-footer-bot-row {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    gap: 18px;
+    padding: 0px 20px;
+  }
+
+  .splash-footer-smug {
+    padding-top: 30px;
+  }
+
+  .splash-footer-icon-container {
+    gap: 40px;
+  }
+
+  .splash-photo-meta-container {
+    top: -50px;
+  }
 }
