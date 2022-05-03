@@ -48,7 +48,7 @@
     -^'dotenv' tells sequelize to load db config env vars from the .env file
 
 
-Express Setup:
+EXPRESS SETUP:
   -create express app.js
     -import numerous packages
   - add numerous middleware to app
@@ -90,7 +90,8 @@ SEQUELIZE:
     //add User Model methods for API route interaction with User table into model file
     //migrate table
       ~$ npx dotenv sequelize db:migrate
-    //add User table seed file
+
+      //add User table seed file
       ~$ npx sequelize seed:generate --name demo-user
     //update seed file with user record objects
     //seed all
@@ -101,7 +102,65 @@ SEQUELIZE:
     //check database for correct table creation
       `$ psql <database name> -c 'SELECT * FROM "Users"'
 
-Express Authentication Flow:
+    //repeat above for the following in order
+      npx sequelize model:generate --name Image --attributes userId:integer,title:string,description:text,imageUrl:string
+      npx sequelize model:generate --name Album --attributes userId:integer,title:string,description:text
+      npx sequelize model:generate --name Comment --attributes userId:integer,imageId:integer,comment:text
+      npx sequelize model:generate --name JoinImageAlbum --attributes imageId:integer,albumId:integer
+
+      npx sequelize seed:generate --name image-data
+      npx sequelize seed:generate --name album-data
+      npx sequelize seed:generate --name comment-data
+      npx sequelize seed:generate --name imageAlbum-data
+
+    //Associations
+      * User hasMany Images  /  Image belongsTo User *
+
+          User.hasMany(models.Image, { foreignKey: "userId" });
+          Image.belongsTo(models.User, { foreignKey: "userId" });
+
+      * User hasMany Albums  /  Album belongsTo User *
+
+          User.hasMany(models.Album, { foreignKey: "userId" });
+          Album.belongsTo(models.User, { foreignKey: "userId" });
+
+      * User hasMany Comments  /  Comment belongsTo User *
+
+          User.hasMany(models.Comment, { foreignKey: "userId" });
+          Comment.belongsTo(models.User, { foreignKey: "userId" });
+
+      * Image hasMany Comments  /  Comment belongsTo Image *
+
+          Image.hasMany(models.Comment, { foreignKey: "imageId" });
+          Comment.belongsTo(models.Image, { foreignKey: "imageId" });
+
+      * Album hasMany Images  /  Images hasMany Album *
+
+        const columnMapping = {
+              through: "JoinImageAlbum",
+              otherKey: "imageId",
+              foreignKey: "albumId",
+          };
+
+        Album.belongsToMany(models.Image, columnMapping);
+
+        const columnMapping2 = {
+              through: "JoinImageAlbum",
+              otherKey: "albumId",
+              foreignKey: "imageId",
+          };
+
+        Image.belongsToMany(models.Album, columnMapping2);
+
+
+Heroku CLI - Connect to DB
+  ~$ heroku pg:psql postgresql-pointy-91357 --app northrn-flickr
+  =# \dt - list tables
+  =# select * from "Table"  to see data
+
+
+
+EXPRESS AUTHENTICATION FLOW:
 
 The backend login flow in this project will be based on the following plan:
   1) The API login route will be hit with a request body holding a valid credential
@@ -221,8 +280,14 @@ Create log ou component
 
 Challenges
 
-mainly getting css to work
+mainly getting css to work as intended
 learned that need to add styling to root, html, body, for react component to fill the page
 learned about width % and margin auto for resizing the screen
+flex does not affect a text node, need to wrap the text in something
+
+Database setup - went smoothly
+
+CRUD Feature 1
+
 
 */

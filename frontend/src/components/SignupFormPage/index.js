@@ -6,7 +6,7 @@ import * as sessionActions from '../../store/session';
 
 import flickrIcon from '../../images/icons/flickr-icon.svg';
 import flickrLogo from '../../images/flickrLogo.svg';
-import signupBg from '../../images/login-bg.jpeg';
+import signupBg from '../../images/login-bg-2000x1333.jpg';
 
 function SignupFormPage() {
   const dispatch = useDispatch();
