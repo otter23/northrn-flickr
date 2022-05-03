@@ -156,8 +156,11 @@ SEQUELIZE:
 Heroku CLI - Connect to DB
   ~$ heroku pg:psql postgresql-pointy-91357 --app northrn-flickr
   =# \dt - list tables
+  =# \d table_name - describe a table
   =# select * from "Table"  to see data
 
+  heroku run npm run sequelize db:migrate
+  heroku run npm run sequelize db:seed:all
 
 
 EXPRESS AUTHENTICATION FLOW:

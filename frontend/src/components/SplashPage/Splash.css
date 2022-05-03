@@ -265,6 +265,21 @@
 }
 
 @media screen and (max-width: 700px) {
+  .splash-login {
+    width: 67px;
+    height: 34px;
+    padding: 5px 10px;
+    margin: 0 8px;
+    border: 2px solid white;
+  }
+
+  .splash-signup {
+    display: none;
+  }
+
+  /* TO DO add class that updates search input and hides flickr logo upon focus */
+
+  /* needed extra specificity to overwrite */
   div.splash-body-container {
     /* height: 1335px; */
     height: 2012px;
