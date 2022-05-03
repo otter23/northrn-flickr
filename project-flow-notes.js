@@ -90,7 +90,8 @@ SEQUELIZE:
     //add User Model methods for API route interaction with User table into model file
     //migrate table
       ~$ npx dotenv sequelize db:migrate
-    //add User table seed file
+
+      //add User table seed file
       ~$ npx sequelize seed:generate --name demo-user
     //update seed file with user record objects
     //seed all
@@ -104,13 +105,57 @@ SEQUELIZE:
     //repeat above for the following in order
       npx sequelize model:generate --name Image --attributes userId:integer,title:string,description:text,imageUrl:string
       npx sequelize model:generate --name Album --attributes userId:integer,title:string,description:text
-      npx sequelize model:generate --name Comment --attributes userId:integer,albumId:integer,comment:text
+      npx sequelize model:generate --name Comment --attributes userId:integer,imageId:integer,comment:text
       npx sequelize model:generate --name JoinImageAlbum --attributes imageId:integer,albumId:integer
 
       npx sequelize seed:generate --name image-data
       npx sequelize seed:generate --name album-data
       npx sequelize seed:generate --name comment-data
       npx sequelize seed:generate --name imageAlbum-data
+
+    //Associations
+      * User hasMany Images  /  Image belongsTo User *
+
+          User.hasMany(models.Image, { foreignKey: "userId" });
+          Image.belongsTo(models.User, { foreignKey: "userId" });
+
+      * User hasMany Albums  /  Album belongsTo User *
+
+          User.hasMany(models.Album, { foreignKey: "userId" });
+          Album.belongsTo(models.User, { foreignKey: "userId" });
+
+      * User hasMany Comments  /  Comment belongsTo User *
+
+          User.hasMany(models.Comment, { foreignKey: "userId" });
+          Comment.belongsTo(models.User, { foreignKey: "userId" });
+
+      * Image hasMany Comments  /  Comment belongsTo Image *
+
+          Image.hasMany(models.Comment, { foreignKey: "imageId" });
+          Comment.belongsTo(models.Image, { foreignKey: "imageId" });
+
+      * Album hasMany Images  /  Images hasMany Album *
+
+        const columnMapping = {
+              through: "JoinImageAlbum",
+              otherKey: "imageId",
+              foreignKey: "albumId",
+          };
+
+        Album.belongsToMany(models.Image, columnMapping);
+
+        const columnMapping2 = {
+              through: "JoinImageAlbum",
+              otherKey: "albumId",
+              foreignKey: "imageId",
+          };
+
+        Image.belongsToMany(models.Album, columnMapping2);
+
+
+Heroku CLI - Connect to DB
+  ~$ heroku pg:psql postgresql-pointy-91357 --app northrn-flickr
+  ~$ \dt - list tables
 
 
 

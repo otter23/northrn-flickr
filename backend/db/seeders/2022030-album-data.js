@@ -6,16 +6,25 @@ module.exports = {
       Add altering commands here.
       Return a promise to correctly handle asynchronicity.
       */
-    return queryInterface.bulkInsert('Images', [{}], {});
+    return queryInterface.bulkInsert(
+      'Albums',
+      [
+        {
+          userId: 1,
+          title: 'Album1',
+          description: 'A collection of my favorite bird photos',
+        },
+        { userId: 1, title: 'Album2', description: '' },
+      ],
+      {}
+    );
   },
 
   down: (queryInterface, Sequelize) => {
     /*
       Add reverting commands here.
       Return a promise to correctly handle asynchronicity.
-
-      Example:
       */
-    return queryInterface.bulkDelete('Images', null, {});
+    return queryInterface.bulkDelete('Albums', null, {});
   },
 };

@@ -14,7 +14,7 @@ module.exports = {
         unique: true, //adds indexed constrain by default
       },
       email: {
-        type: Sequelize.STRING(256),
+        type: Sequelize.STRING(255),
         allowNull: false,
         unique: true, //adds indexed constrain by default
       },
