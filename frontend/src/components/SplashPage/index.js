@@ -1,10 +1,11 @@
 import './Splash.css';
 
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // import { useSelector } from 'react-redux';
 
-import flickrLogo from '../../images/flickrLogo.svg';
+import Navigation from '../Navigation';
+
 import flickerImage from '../../images/splash-bg-alt.jpg';
 import fbIcon from '../../images/icons/fb-icon.svg';
 import twitterIcon from '../../images/icons/twitter-icon.svg';
@@ -19,46 +20,7 @@ function Splash({ isLoaded }) {
 
   return (
     <>
-      <nav className='splash-nav'>
-        <div className='splash-nav-inner'>
-          <div className='splash-left-nav'>
-            <NavLink exact to='/'>
-              <img
-                className='splash-nav-logo'
-                src={flickrLogo}
-                alt='logo'
-                viewBox='0 0 100 100'
-                preserveAspectRatio='xMidYMid meet'
-              />
-            </NavLink>
-          </div>
-
-          <div className='splash-nav-right'>
-            <div className='splash-nav-search-div'>
-              <form className='splash-nav-search-form'>
-                <label></label>
-                <div className='material-icons'>search</div>
-                <input
-                  type='search'
-                  placeholder='Photos, people, or groups'
-                ></input>
-              </form>
-            </div>
-
-            <div>
-              <Link className='splash-login' to='/login'>
-                Log In
-              </Link>
-            </div>
-
-            <div>
-              <Link className='splash-signup' to='/sign-up'>
-                Sign Up
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navigation />
       <div
         className='splash-background'
         style={{ backgroundImage: `url(${flickerImage})` }}

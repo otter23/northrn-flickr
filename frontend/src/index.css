@@ -21,6 +21,8 @@ body,
 #root {
   display: flex;
   flex-direction: column;
+  /* used to only apply to splash, double check in  */
+  overflow-y: auto;
 }
 
 /* THEME */

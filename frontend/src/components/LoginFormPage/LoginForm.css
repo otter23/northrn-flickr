@@ -25,29 +25,6 @@
   flex-direction: column;
 }
 
-.login-nav {
-  background-color: var(--nav);
-  height: 48px;
-  width: 100%;
-}
-
-.login-nav-inner {
-  display: flex;
-  align-items: center;
-  height: 48px;
-  width: 80%;
-  margin: auto;
-}
-
-.login-nav-link {
-  display: flex;
-}
-
-.login-nav-logo {
-  width: 98px;
-  height: 21.6px;
-}
-
 .login-card-container {
   display: flex;
   justify-content: center;

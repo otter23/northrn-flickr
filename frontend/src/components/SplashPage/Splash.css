@@ -10,105 +10,6 @@
   color: gray;
 }
 
-#root {
-  overflow-y: auto;
-}
-
-.splash-nav {
-  background-color: rgba(0, 0, 0, 0.25);
-  width: 100%;
-  position: absolute;
-  display: flex;
-}
-
-.splash-nav-inner {
-  display: inline-flex;
-  align-items: center;
-  /* justify-content: center; */
-  height: 64px;
-  width: 100%;
-  padding: 0px 24px;
-}
-
-.splash-nav-logo {
-  width: 98px;
-  height: 21px;
-}
-
-.splash-nav-right {
-  display: flex;
-  align-items: center;
-  flex-grow: 1;
-}
-
-.splash-nav-search-div {
-  flex-grow: 1;
-}
-
-.splash-nav-search-form {
-  display: flex;
-  padding: 0px 100px;
-  margin-left: 23px;
-  /* grow to fit rest of container */
-  flex-grow: 1;
-}
-
-.splash-nav-search-form div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(255, 255, 255, 0.75);
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
-  padding-left: 11px;
-  padding-right: 5px;
-  color: rgb(94, 94, 94);
-  width: 37px;
-}
-
-.splash-nav-search-form input {
-  width: 100%;
-  padding: 6px 10px 6px 0px;
-  background-color: rgba(255, 255, 255, 0.75);
-  font-size: 14px;
-  border: none;
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
-  outline: none;
-}
-
-.splash-login {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  width: 96px;
-  height: 32px;
-  padding: 0px 20px;
-
-  color: white;
-
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.splash-signup {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  width: 96px;
-  height: 32px;
-  padding: 0px 20px;
-
-  background-color: white;
-  border-radius: 3px;
-  color: black;
-
-  text-decoration: none;
-  white-space: nowrap;
-}
-
 .splash-background {
   height: 100%;
   width: 100%;
@@ -234,11 +135,6 @@
 }
 
 @media screen and (max-width: 1080px) {
-  .splash-nav-search-form {
-    padding: 0px 50px;
-    margin-left: 23px;
-  }
-
   .splash-footer {
     flex-direction: column;
     padding: 0px;
@@ -265,29 +161,10 @@
 }
 
 @media screen and (max-width: 700px) {
-  .splash-login {
-    width: 67px;
-    height: 34px;
-    padding: 5px 10px;
-    margin: 0 8px;
-    border: 2px solid white;
-  }
-
-  .splash-signup {
-    display: none;
-  }
-
-  /* TO DO add class that updates search input and hides flickr logo upon focus */
-
   /* needed extra specificity to overwrite */
   div.splash-body-container {
     /* height: 1335px; */
     height: 2012px;
-  }
-
-  .splash-nav-search-form {
-    padding: 0px 25px;
-    margin-left: 23px;
   }
 
   .splash-footer {

@@ -4,11 +4,12 @@ import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 
+import Navigation from '../Navigation';
+
 //format for Create-react-app which uses SVGR under the hood:
 //import { ReactComponent as FlickrLogo } from './Flickr.svg';
 
 import flickrIcon from '../../images/icons/flickr-icon.svg';
-import flickrLogo from '../../images/flickrLogo.svg';
 import loginBg from '../../images/login-bg-2000x1333.jpg';
 
 export default function LoginFormPage() {
@@ -86,19 +87,7 @@ export default function LoginFormPage() {
       className='login-background'
       style={{ backgroundImage: `url(${loginBg})` }}
     >
-      <nav className='login-nav'>
-        <div className='login-nav-inner'>
-          <Link to='/' className='login-nav-link'>
-            <img
-              className='login-nav-logo'
-              src={flickrLogo}
-              alt='logo'
-              viewBox='0 0 100 100'
-              preserveAspectRatio='xMidYMid meet'
-            />
-          </Link>
-        </div>
-      </nav>
+      <Navigation />
 
       <div className='login-card-container'>
         <div className='login-card'>

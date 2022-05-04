@@ -25,29 +25,6 @@
   flex-direction: column;
 }
 
-.signup-nav {
-  background-color: var(--nav);
-  height: 48px;
-  width: 100%;
-}
-
-.signup-nav-inner {
-  display: flex;
-  align-items: center;
-  height: 48px;
-  width: 80%;
-  margin: auto;
-}
-
-.signup-nav-link {
-  display: flex;
-}
-
-.signup-nav-logo {
-  width: 98px;
-  height: 21.6px;
-}
-
 .signup-card-container {
   display: flex;
   justify-content: center;
