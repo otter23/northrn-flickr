@@ -287,10 +287,16 @@ mainly getting css to work as intended
 learned that need to add styling to root, html, body, for react component to fill the page
 learned about width % and margin auto for resizing the screen
 flex does not affect a text node, need to wrap the text in something
+understanding the concept of a build and that all the styling is in one file
+-understanding how important class name conventions are and never to use ids for styling since they are too selective
 
 Database setup - went smoothly
 
 CRUD Feature 1
+
+backend Routes
+-conflating the frontend url vs backend api routes
+-understanding require auth and making sure to compare the userid to the session user.id
 
 
 */
