@@ -15,7 +15,7 @@ router.get(
   '/',
   asyncHandler(async (req, res) => {
     //query db for all images
-    const images = await Image.findAll();
+    const images = await Image.findAll({ order: [['createdAt', 'DESC']] });
 
     return res.json(images);
   })
@@ -55,17 +55,21 @@ router.post(
   requireAuth, //if no user info in verified jwt, then will throw error
   validateImage, //if validation errors, errors thrown with array of error messages
   asyncHandler(async (req, res) => {
-    const userId = parseInt(req.user.id, 10); //ensures will only succeed if requireAuth suceeds
-    const { title, description, imageUrl } = req.body;
+    const sessionUserId = parseInt(req.user.id, 10); //ensures will only succeed if requireAuth succeeds
+    const { title, description, imageUrl, userId } = req.body;
 
-    const newImage = await Image.create({
-      userId,
-      title,
-      description,
-      imageUrl,
-    });
+    if (sessionUserId === userId) {
+      const newImage = await Image.create({
+        userId,
+        title,
+        description,
+        imageUrl,
+      });
 
-    return res.json(newImage);
+      return res.json(newImage);
+    } else {
+      return res.json('Unauthorized');
+    }
   })
 );
 

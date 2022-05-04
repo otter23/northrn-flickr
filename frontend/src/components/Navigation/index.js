@@ -72,7 +72,7 @@ function Navigation({ isLoaded }) {
                 <input
                   type='search'
                   placeholder='Photos, people, or groups'
-                  disabled='true'
+                  disabled={true}
                 ></input>
               </form>
             </div>

@@ -59,7 +59,10 @@ router.get(
     const userId = req.params.userId;
 
     //query db for all images that belong to user
-    const images = await Image.findAll({ where: { userId } });
+    const images = await Image.findAll({
+      where: { userId },
+      order: [['createdAt', 'DESC']],
+    });
 
     return res.json(images);
   })

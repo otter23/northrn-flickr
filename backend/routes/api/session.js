@@ -89,7 +89,7 @@ module.exports = router;
 //     'Content-Type': 'application/json',
 //     'XSRF-TOKEN': `<value of XSRF-TOKEN cookie>`,
 //   },
-//   body: JSON.stringify({ credential: 'Demo-lition', password: 'password' }),
+//   body: JSON.stringify({ credential: 'DemoUser', password: 'password1' }),
 // })
 //   .then((res) => res.json())
 //   .then((data) => console.log(data));
@@ -101,7 +101,7 @@ module.exports = router;
 //     'Content-Type': 'application/json',
 //     'XSRF-TOKEN': `<value of XSRF-TOKEN cookie>`,
 //   },
-//   body: JSON.stringify({ credential: 'Demo-lition', password: 'Hello World!' }),
+//   body: JSON.stringify({ credential: 'DemoUser', password: 'Hello World!' }),
 // })
 //   .then((res) => res.json())
 //   .then((data) => console.log(data));
