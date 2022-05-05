@@ -28,6 +28,7 @@
   width: 100%;
   position: absolute;
   display: flex;
+  z-index: 2;
 }
 
 .splash-nav-inner {

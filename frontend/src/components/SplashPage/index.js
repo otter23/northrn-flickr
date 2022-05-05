@@ -5,13 +5,11 @@ import { Link } from 'react-router-dom';
 // import { useSelector } from 'react-redux';
 
 import Navigation from '../Navigation';
+import Footer from '../Footer';
 
 import flickerImage from '../../images/splash-bg-alt.jpg';
-import fbIcon from '../../images/icons/fb-icon.svg';
-import twitterIcon from '../../images/icons/twitter-icon.svg';
-import instaIcon from '../../images/icons/insta-icon.svg';
 
-function Splash({ isLoaded }) {
+export default function SplashPage({ isLoaded }) {
   // const sessionUser = useSelector((state) => state.session.user);
 
   //setup a setInterval to move through photos to mimic splash page
@@ -35,8 +33,7 @@ function Splash({ isLoaded }) {
             Start for free
           </Link>
         </div>
-      </div>
-      <footer className='splash-footer'>
+
         <div className='splash-photo-meta-container'>
           <div className='splash-photo-title'>
             <a href='https://www.flickr.com/photos/137364640@N08/51103074015/'>
@@ -49,45 +46,9 @@ function Splash({ isLoaded }) {
             </a>
           </div>
         </div>
+      </div>
 
-        <div className='splash-footer-top-row'>
-          <div>About</div>
-          <div>Jobs</div>
-          <div>Blogs</div>
-          <div>Developers</div>
-          <div>Guidelines</div>
-          <div>Help</div>
-          <div>Help forum</div>
-          <div>Privacy</div>
-          <div>Terms</div>
-          <div>Cookies</div>
-          <div className='splash-english-div'>
-            <span>English</span>
-            <span className='material-symbols-outlined login-footer-icon'>
-              expand_more
-            </span>
-          </div>
-        </div>
-        <div className='splash-footer-bot-row'>
-          <div className='splash-footer-smug'>SmugMug+Flickr.</div>
-          <div className='splash-footer-icon-container'>
-            <img className='splash-fb-icon' src={fbIcon} alt='facebook icon' />
-            <img
-              className='splash-twt-icon'
-              src={twitterIcon}
-              alt='twitter icon'
-              style={{ width: '24px', height: '24px' }}
-            />
-            <img
-              className='splash-insta-icon'
-              src={instaIcon}
-              alt='instagram icon'
-            />
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }
-
-export default Splash;

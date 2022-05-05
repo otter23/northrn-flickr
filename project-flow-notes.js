@@ -298,5 +298,15 @@ backend Routes
 -conflating the frontend url vs backend api routes
 -understanding require auth and making sure to compare the userid to the session user.id
 
+frontend Thunk
+-only made a shallow copy of state, forgot to deep clone the nested objects and arrays, was a bit tricky but not too bad to figure out
+-
+-haven't added any error handling to my thunks
+
+Routing
+-using regex in Route path one \d+ instead of \\d+
+-needed to use exact for nested routes at the app level, otherwise need to route with in the component
+
+
 
 */

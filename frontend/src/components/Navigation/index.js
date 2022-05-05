@@ -7,7 +7,7 @@ import ProfileButton from './ProfileButton';
 
 import flickrLogo from '../../images/flickrLogo.svg';
 
-function Navigation({ isLoaded }) {
+export default function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
 
   let sessionLinks;
@@ -118,9 +118,12 @@ function Navigation({ isLoaded }) {
         </Route>
         <Route path='/login'>{authNav}</Route>
         <Route path='/sign-up'>{authNav}</Route>
+        <Route exact path='/photos/:userId(\d+)'>
+          {authNav}
+        </Route>
+        <Route path='/photos/:userId(\d+)/:imageId(\d+)'>{authNav}</Route>
+        <Route path='/photos/upload'>{authNav}</Route>
       </Switch>
     </>
   );
 }
-
-export default Navigation;
