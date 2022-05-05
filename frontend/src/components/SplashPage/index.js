@@ -18,7 +18,7 @@ export default function SplashPage({ isLoaded }) {
 
   return (
     <>
-      <Navigation />
+      <Navigation isLoaded={isLoaded} />
       <div
         className='splash-background'
         style={{ backgroundImage: `url(${flickerImage})` }}

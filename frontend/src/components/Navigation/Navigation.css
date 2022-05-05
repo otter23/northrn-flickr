@@ -1,3 +1,65 @@
+.upload-nav {
+  background-color: rgb(249, 249, 249);
+  height: 48px;
+  width: 100%;
+}
+
+.upload-nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 10px;
+  height: 43px;
+  /* margin: auto; */
+}
+
+.upload-nav-inner li {
+  list-style-type: none;
+}
+
+.upload-nav-right-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.upload-nav-left {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  flex-grow: 1;
+}
+
+.upload-nav-right {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  flex-grow: 1;
+}
+
+.upload-nav-link {
+  display: flex;
+}
+
+.upload-nav-photostream,
+.upload-nav-create,
+.upload-nav-oldUploadr,
+.upload-nav-newHere {
+  color: rgb(102, 102, 102);
+  text-decoration: none;
+  cursor: text;
+}
+
+.upload-nav-photostream {
+  cursor: pointer;
+}
+
+/* .upload-nav-logo {} */
+
+/* AUTH NAV */
 .auth-nav {
   background-color: var(--nav);
   height: 48px;

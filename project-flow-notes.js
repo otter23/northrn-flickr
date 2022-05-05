@@ -281,7 +281,7 @@ Create log ou component
 */
 /*
 
-Challenges
+Challenges:
 
 mainly getting css to work as intended
 learned that need to add styling to root, html, body, for react component to fill the page
@@ -292,21 +292,30 @@ understanding the concept of a build and that all the styling is in one file
 
 Database setup - went smoothly
 
-CRUD Feature 1
+//IMAGE CRUD
 
-backend Routes
--conflating the frontend url vs backend api routes
--understanding require auth and making sure to compare the userid to the session user.id
+  BACKEND:
+    -conflating the frontend url vs backend api routes
+    -understanding require auth and making sure to compare the userid to the session user.id
 
-frontend Thunk
--only made a shallow copy of state, forgot to deep clone the nested objects and arrays, was a bit tricky but not too bad to figure out
--
--haven't added any error handling to my thunks
+  FRONTEND:
+    -Setting up store and thunks
+      -only made a shallow copy of state, forgot to deep clone the nested objects and arrays, was a bit tricky but not too bad to figure out
 
-Routing
--using regex in Route path one \d+ instead of \\d+
--needed to use exact for nested routes at the app level, otherwise need to route with in the component
+    -Routing:
+      -using regex in Route path one \d+ instead of \\d+
+      -needed to use exact for nested routes at the app level, otherwise need to route with in the component
+      -app loading the wrong route before user session loaded
+        -added a clause so app won't render until session is loaded.
+    -eager loading db data into redux state on the initial app render helped with any reference errors down the line
 
 
+
+
+TO DO:
+add proper error handling to api routes so get better messages when sequelize message returns
+also add proper error handling to thunks
+
+add styling to profile button dropDown
 
 */

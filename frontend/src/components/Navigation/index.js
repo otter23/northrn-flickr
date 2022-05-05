@@ -9,11 +9,20 @@ import flickrLogo from '../../images/flickrLogo.svg';
 
 export default function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
+  let userId;
+  if (sessionUser) {
+    userId = sessionUser.id;
+  }
 
   let sessionLinks;
   //is user, show profile button, else show login/signup links
   if (sessionUser) {
-    sessionLinks = <ProfileButton user={sessionUser} />;
+    sessionLinks = (
+      <>
+        <Link to='/photos/upload'>UPLOAD PAGE</Link>
+        <ProfileButton user={sessionUser} />
+      </>
+    );
   } else {
     sessionLinks = (
       <>
@@ -94,6 +103,51 @@ export default function Navigation({ isLoaded }) {
     );
   }
 
+  const photosUploadNav = (
+    <nav className='upload-nav'>
+      <div className='upload-nav-inner'>
+        <Link to='/' className='upload-nav-link'>
+          <img
+            className='upload-nav-logo'
+            src={
+              'https://combo.staticflickr.com/pw/images/flickr-logo-small.png'
+            }
+            alt='logo'
+          />
+        </Link>
+        <div className='upload-nav-right-container'>
+          <ul className='upload-nav-left'>
+            <li>
+              <Link className='upload-nav-photostream' to={`/photos/${userId}`}>
+                Your Photostream
+              </Link>
+            </li>
+            <li>
+              <Link className='upload-nav-create' to={`#`}>
+                Create
+              </Link>
+            </li>
+          </ul>
+          <ul className='upload-nav-right'>
+            <li>
+              <Link className='upload-nav-oldUploadr' to={`#`}>
+                Old Uploadr
+              </Link>
+            </li>
+            <li>
+              <Link className='upload-nav-newHere' to={`#`}>
+                New Here?
+              </Link>
+            </li>
+            <li>
+              <ProfileButton user={sessionUser} />
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  );
+
   const authNav = (
     <nav className='auth-nav'>
       <div className='auth-nav-inner'>
@@ -122,7 +176,7 @@ export default function Navigation({ isLoaded }) {
           {authNav}
         </Route>
         <Route path='/photos/:userId(\d+)/:imageId(\d+)'>{authNav}</Route>
-        <Route path='/photos/upload'>{authNav}</Route>
+        <Route path='/photos/upload'>{photosUploadNav}</Route>
       </Switch>
     </>
   );

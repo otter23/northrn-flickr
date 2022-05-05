@@ -90,6 +90,7 @@ export const addPhotoThunk = (formData) => async (dispatch) => {
   });
   const userPhoto = await response.json();
   dispatch(addPhoto(userPhoto));
+  response.userPhoto = userPhoto;
   return response;
 };
 
@@ -105,6 +106,7 @@ export const updatePhotoThunk = (formData) => async (dispatch) => {
   });
   const userPhoto = await response.json();
   dispatch(updatePhoto(userPhoto));
+  response.userPhoto = userPhoto;
   return response;
 };
 
@@ -154,6 +156,9 @@ export default function photosReducer(state = initialState, action) {
       newState[key] = userObj;
     }
   });
+
+  // optional chaining that works in transpiler, ?. doesn't work
+  // const testVar = action || {}.payload || {}.allPhotos;
 
   let userId;
   let imageId;

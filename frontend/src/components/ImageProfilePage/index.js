@@ -11,11 +11,12 @@ import Footer from '../Footer';
 import defaultUserPhoto from '../../images/login-bg-2000x1333.jpg';
 import defaultCoverPhoto from '../../images/login-bg-2000x1333.jpg';
 
-export default function ImageProfilePage() {
+export default function ImageProfilePage({ isLoaded }) {
   const dispatch = useDispatch();
 
   //subscribe to redux session state
   const sessionUser = useSelector((state) => state.session.user);
+
   // const sessionUserId = sessionUser.id;
   // const { userId } = useParams();
   // const userPhotos = useSelector((state) => state.photos[userId]);
@@ -25,7 +26,7 @@ export default function ImageProfilePage() {
 
   return (
     <div>
-      <Navigation />
+      <Navigation isLoaded={isLoaded} />
       <div className='image-photo-list-container'></div>
       <Footer />
     </div>

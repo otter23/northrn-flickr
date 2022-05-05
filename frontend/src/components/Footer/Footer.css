@@ -10,6 +10,7 @@
   font-weight: 200;
   padding: 16px 0px;
   flex-grow: 1;
+  max-height: 56px;
 }
 
 .footer-top-row {
@@ -53,6 +54,7 @@
   .footer-container {
     flex-direction: column;
     padding: 0px;
+    max-height: 111px;
   }
   .footer-top-row {
     display: flex;
@@ -74,6 +76,7 @@
   .footer-container {
     flex-direction: column;
     padding-bottom: 18px;
+    max-height: 750px;
   }
 
   .footer-top-row {
@@ -91,7 +94,7 @@
     align-items: flex-start;
   }
 
-  /* need higher selector here */
+  /* needed higher selector here */
   div.footer-english-div {
     justify-content: flex-start;
     align-items: center;

@@ -11,22 +11,26 @@ import Footer from '../Footer';
 import defaultUserPhoto from '../../images/login-bg-2000x1333.jpg';
 import defaultCoverPhoto from '../../images/login-bg-2000x1333.jpg';
 
-export default function UserProfilePage() {
+export default function UserProfilePage({ isLoaded }) {
   const dispatch = useDispatch();
 
   //subscribe to redux session state
   const sessionUser = useSelector((state) => state.session.user);
   // const sessionUserId = sessionUser.id;
+
+  //need version of page for non-logged in user
   const { userId } = useParams();
   const userPhotos = useSelector((state) => state.photos[userId]);
 
   //grab user photos before render
   // dispatch(photosActions.getUserPhotosThunk(userId));
 
+  //will need to grab the photos specific to the user's page to display
+
   return (
     <>
       <div>
-        <Navigation />
+        <Navigation isLoaded={isLoaded} />
 
         <div className='profile-coverPhoto'>
           <div className='profile-coverPhoto-inner-div'>
