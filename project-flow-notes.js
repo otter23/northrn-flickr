@@ -325,7 +325,7 @@ Modularity
           -only load app once needed state is loaded.
           -should probably make route specific instead of entire app
     -race conditions
-      -state not loading before rendering and checking routes
+      -redux state not loading before rendering and checking routes
       -part of issue is not having enough stores setup, e.g. a user store
       -also would help to add a fetch one image route
       -easier to query the db then check state
@@ -341,4 +341,10 @@ add styling to profile button dropDown
 
 change app load to be only depended on isLoaded, and then route specific waiting for other state
 
-*/
+add user api route
+add get one photos api thunk
+
+
+click handler in the img map list and dont user url param, pass down imageUrl form image object as prop
+
+make navs absolute */
