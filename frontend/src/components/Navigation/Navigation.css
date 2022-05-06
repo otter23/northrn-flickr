@@ -1,3 +1,8 @@
+.nav-inner {
+  display: flex;
+  flex-direction: column;
+}
+
 .upload-nav {
   background-color: rgb(249, 249, 249);
   height: 48px;

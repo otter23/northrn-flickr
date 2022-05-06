@@ -36,7 +36,7 @@ export const updatePhoto = (userPhoto) => ({
   payload: { userPhoto },
 });
 
-//Payload: userId and imageId to key into hashmap
+//Payload: userId and imageId to key into imageByKey user object
 export const deletePhoto = (userId, imageId) => ({
   type: DELETE_PHOTO,
   payload: { userId, imageId },
@@ -126,8 +126,10 @@ export const deletePhotoThunk = (userId, imageId) => async (dispatch) => {
 //Photo REDUCER:
 const initialState = { allPhotos: [], explore: [] }; // userId1:  {imagId1: imageObj imagId2: imageObj }, userId2: {};
 //in scalable version each userId object would also have a property:    allUserPhotos:[]
+//When map over user obj, need to first make it an array with Object.array in component
 
 // allPhotos: [] - this will be for the landing page
+//to update this part of state need to user .find or .findIndex
 // explore: [] - this will be to store a list of photos that matches a search query on the explore page
 
 export default function photosReducer(state = initialState, action) {

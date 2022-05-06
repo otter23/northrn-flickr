@@ -16,10 +16,16 @@ import * as photosActions from './store/photos';
 
 export default function App() {
   const sessionUser = useSelector((state) => state.session.user);
+  // const photos = useSelector((state) => state.photos);
   const dispatch = useDispatch();
 
   const [isLoaded, setIsLoaded] = useState(false);
-  const [userId, setUserId] = useState(null);
+  const [isPhotosLoaded, setIsPhotosLoaded] = useState(false);
+  const [sessionUserId, setSessionUserId] = useState(null);
+
+  //grab userId and imageId if exists from location.pathname
+  // const location = useLocation();
+  // const arr = location.pathname.split("/photos/")
 
   //on first render, check whether jwt token credentials matches user in db,
   //if so add user to Redux State
@@ -27,22 +33,26 @@ export default function App() {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
 
     //eager load all photos in db into state
-    dispatch(photosActions.getAllPhotosThunk());
+    dispatch(photosActions.getAllPhotosThunk()).then(() =>
+      setIsPhotosLoaded(true)
+    );
   }, [dispatch]);
 
   //load userId to state once userSession is loaded
   useEffect(() => {
-    if (sessionUser) setUserId(sessionUser.id);
+    if (sessionUser) setSessionUserId(sessionUser.id);
   }, [isLoaded, sessionUser]);
 
   //eager load sessionUsers photos into state on first render or once userId is updated.
   useEffect(() => {
-    if (userId) dispatch(photosActions.getUserPhotosThunk(userId));
-  }, [userId, dispatch]);
+    if (sessionUserId)
+      dispatch(photosActions.getUserPhotosThunk(sessionUserId));
+  }, [sessionUserId, dispatch]);
 
   //ensure app rendering waits for sessionUser (if exists) to be loaded to state
-  //TO DO: can remove isLoaded props most likeley except for Navigation.  Or just make Navigation dependent on sessionuser only
-  if (isLoaded) {
+  //TO DO: can remove isLoaded props most likely except for Navigation.
+  // Or just make Navigation dependent on sessionUser only
+  if (isLoaded && isPhotosLoaded) {
     return (
       <>
         <Switch>
@@ -72,6 +82,13 @@ export default function App() {
           {/*Could move to a nested route if needed  */}
           <Route path='/photos/:userId(\d+)/:imageId(\d+)'>
             <ImageProfilePage isLoaded={isLoaded} />
+            {/* {userRouteOk && imageRouteOk ? (
+              <ImageProfilePage isLoaded={isLoaded} />
+            ) : userRouteOk ? (
+              <Redirect to={`/photos/${userId}`} />
+            ) : (
+              <Redirect to={`/`} />
+            )} */}
           </Route>
 
           <Route path='/photos/upload'>

@@ -38,9 +38,13 @@ function Root() {
   );
 }
 
+//NOTE: strict mode renders components twice on development to detect errors in your code.
 ReactDOM.render(
   <React.StrictMode>
     <Root />
   </React.StrictMode>,
   document.getElementById('root')
 );
+
+//For testing out non-strict mode
+// ReactDOM.render(<Root />, document.getElementById('root'));
