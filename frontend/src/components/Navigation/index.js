@@ -20,7 +20,10 @@ export default function Navigation({ isLoaded }) {
     sessionLinks = (
       <>
         <Link to='/photos/upload'>UPLOAD PAGE</Link>
-        <Link to='/photos/1/1'>EXAMPLE IMAGE CRUD PAGE</Link>
+        <Link to='/photos/1/'>Demo User Profile Page</Link>
+        <Link to='/photos/1/1'>DemoUser Image Page</Link>
+        <Link to='/photos/2/'>User2 Profile Page</Link>
+        <Link to='/photos/2/11'>User2 Image Page</Link>
         <ProfileButton user={sessionUser} />
       </>
     );
