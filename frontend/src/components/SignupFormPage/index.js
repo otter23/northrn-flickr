@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 import * as sessionActions from '../../store/session';
 
+import Navigation from '../Navigation';
+
 import flickrIcon from '../../images/icons/flickr-icon.svg';
-import flickrLogo from '../../images/flickrLogo.svg';
 import signupBg from '../../images/login-bg-2000x1333.jpg';
 
 function SignupFormPage() {
@@ -57,19 +58,7 @@ function SignupFormPage() {
       className='signup-background'
       style={{ backgroundImage: `url(${signupBg})` }}
     >
-      <nav className='signup-nav'>
-        <div className='signup-nav-inner'>
-          <Link to='/' className='signup-nav-link'>
-            <img
-              className='signup-nav-logo'
-              src={flickrLogo}
-              alt='logo'
-              viewBox='0 0 100 100'
-              preserveAspectRatio='xMidYMid meet'
-            />
-          </Link>
-        </div>
-      </nav>
+      <Navigation />
 
       <div className='signup-card-container'>
         <div className='signup-card'>

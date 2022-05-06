@@ -10,6 +10,7 @@ import App from './App';
 import { restoreCSRF, csrfFetch } from './store/csrf';
 
 import * as sessionActions from './store/session';
+import * as photosActions from './store/photos';
 
 //create the redux store
 import configureStore from './store';
@@ -23,6 +24,7 @@ if (process.env.NODE_ENV !== 'production') {
   window.csrfFetch = csrfFetch; //add helper function to window to make csrf protected fetch calls to backend api
   window.store = store; //easy access to store and its methods in browser console
   window.sessionActions = sessionActions; //test session redux state
+  window.photosActions = photosActions; //test photos redux state
 }
 
 //root wrapper used to wrap <App/>  in various provider components
@@ -36,9 +38,13 @@ function Root() {
   );
 }
 
+//NOTE: strict mode renders components twice on development to detect errors in your code.
 ReactDOM.render(
   <React.StrictMode>
     <Root />
   </React.StrictMode>,
   document.getElementById('root')
 );
+
+//For testing out non-strict mode
+// ReactDOM.render(<Root />, document.getElementById('root'));

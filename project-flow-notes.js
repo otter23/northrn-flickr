@@ -156,8 +156,11 @@ SEQUELIZE:
 Heroku CLI - Connect to DB
   ~$ heroku pg:psql postgresql-pointy-91357 --app northrn-flickr
   =# \dt - list tables
+  =# \d table_name - describe a table
   =# select * from "Table"  to see data
 
+  heroku run npm run sequelize db:migrate
+  heroku run npm run sequelize db:seed:all
 
 
 EXPRESS AUTHENTICATION FLOW:
@@ -278,16 +281,59 @@ Create log ou component
 */
 /*
 
-Challenges
+Challenges:
+
+
 
 mainly getting css to work as intended
 learned that need to add styling to root, html, body, for react component to fill the page
 learned about width % and margin auto for resizing the screen
 flex does not affect a text node, need to wrap the text in something
+understanding the concept of a build and that all the styling is in one file
+-understanding how important class name conventions are and never to use ids for styling since they are too selective
 
 Database setup - went smoothly
 
-CRUD Feature 1
+PLanning
+  -not having a full understanding of flickrs website flow and how to make my own version of their flow
+  -after talking things through with a fellow flickr person helped to create a plan first before diving into building out the front end and backend API
 
+
+Modularity
+  -wasn't thinking in components and modular in the beginning
+  -had to refactor navigation and footer from a single page to separate components
+  -forgot could use if statements to conditionally display to different pages
+
+
+//IMAGE CRUD
+
+  BACKEND:
+    -conflating the frontend url vs backend api routes
+    -understanding require auth and making sure to compare the userid to the session user.id
+
+  FRONTEND:
+    -Setting up store and thunks
+      -only made a shallow copy of state, forgot to deep clone the nested objects and arrays, was a bit tricky but not too bad to figure out
+
+    -Routing:
+      -using regex in Route path one \d+ instead of \\d+
+      -needed to use exact for nested routes at the app level, otherwise need to route with in the component
+      -app loading the wrong route before user session loaded
+        -added a clause so app won't render until session is loaded.
+    -eager loading db data into redux state on the initial app render helped with any reference errors down the line
+    -race conditions between useEffects and whether state has been loaded or not
+          -only load app once needed state is loaded.
+          -should probably make route specific instead of entire app
+
+
+
+
+TO DO:
+add proper error handling to api routes so get better messages when sequelize message returns
+also add proper error handling to thunks
+
+add styling to profile button dropDown
+
+change app load to be only depended on isLoaded, and then route specific waiting for other state
 
 */

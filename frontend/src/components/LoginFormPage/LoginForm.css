@@ -14,8 +14,9 @@
 
 /* https://www.pexels.com/search/birds/ */
 /* https://www.pexels.com/photo/greyscale-photography-of-birds-3401967/ */
+/* https://images.pexels.com/photos/8793250/pexels-photo-8793250.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260 */
 .login-background {
-  /* background-image: url('https://images.pexels.com/photos/3375493/pexels-photo-3375493.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=4000&w=6000'); */
+  /* background-image: url('https://images.pexels.com/photos/3375493/pexels-photo-3375493.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=1333&w=2000'); */
   background-size: cover;
   height: 100%;
   width: 100%;
@@ -23,29 +24,6 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-}
-
-.login-nav {
-  background-color: var(--nav);
-  height: 48px;
-  width: 100%;
-}
-
-.login-nav-inner {
-  display: flex;
-  align-items: center;
-  height: 48px;
-  width: 80%;
-  margin: auto;
-}
-
-.login-nav-link {
-  display: flex;
-}
-
-.login-nav-logo {
-  width: 98px;
-  height: 21.6px;
 }
 
 .login-card-container {
