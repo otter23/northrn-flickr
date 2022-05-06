@@ -1,0 +1,161 @@
+.profile-coverPhoto {
+  /* height: 250px; */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* display: flex;
+  flex-direction: column; */
+
+  /* align-items: flex-end; */
+  /* justify-content: flex-end; */
+}
+
+.profile-coverPhoto-inner-div {
+  width: 80%;
+  height: 250px;
+  margin: auto;
+  bottom: 10px;
+
+  /* display: flex; */
+  display: grid;
+  grid-template-areas:
+    '.  .'
+    'left right';
+
+  grid-template-rows: 1fr 160px;
+}
+
+/* .cover-photo {
+  object-fit: contain;
+  width: 100%;
+  height: 250px;
+} */
+
+.profile-img-username-div {
+  grid-area: left;
+}
+
+.profile-image {
+  height: 100px;
+  width: 100px;
+  background-position: center;
+  background-size: contain;
+  border-radius: 100px;
+
+  /* background-color: rgb(148, 163, 220); */
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+
+/* .profile-image div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 80px;
+} */
+
+.profile-info-upper {
+  grid-area: mid;
+}
+
+.profile-name {
+  color: white;
+  font-size: 26px;
+}
+
+.profile-row-two {
+  background-color: white;
+}
+
+.profile-row-two li {
+  list-style-type: none;
+}
+
+.profile-row-two-inner {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.profile-row-two-inner a {
+  text-decoration: none;
+  padding: 12px 20px;
+  color: rgb(0, 145, 220);
+}
+
+.profile-about,
+.profile-albums,
+.profile-faves,
+.profile-galleries,
+.profile-groups {
+  /* cursor: text; */
+  color: #000000;
+}
+
+.profile-row-two-inner li.profile-photostream a {
+  cursor: pointer;
+}
+
+.profile-row-two-inner a.profile-photostream-link-active {
+  border-bottom: 3px solid rgb(0, 145, 220);
+}
+
+/* .profile-toolbar {
+  height: 52px;
+  margin-bottom: 5px;
+} */
+
+.profile-photo-list-container {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  width: 100%;
+  height: 100%;
+  padding: 20px 50px 20px 50px;
+  flex-grow: 1;
+  background-color: rgb(243, 245, 246);
+
+  /* align-self: flex-start;
+    padding-left: 20px; */
+}
+
+/* instead of inner div overflow, just make nav and footer sticky */
+.profile-photo-list-inner-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  align-content: flex-start;
+  margin: 0px;
+  padding: 0px;
+  padding-bottom: 20px;
+  width: 100%;
+  /* max-height: 600px; */
+  height: 100%;
+  gap: 5px;
+  /* overflow-y: auto; */
+}
+
+.profile-photo-list-container li {
+  list-style-type: none;
+  display: inline-flex;
+
+  /* display: inline-flex; */
+}
+
+.profile-photo-list-container li a {
+  display: inline-flex;
+
+  /* display: inline-flex; */
+}
+
+.profile-photo-list-container img {
+  object-fit: contain;
+  width: 100%;
+  max-height: 200px;
+  /* max-width: 504px;
+  max-height: 300px;
+  width: auto;
+  height: auto; */
+}
