@@ -4,7 +4,7 @@ const router = require('express').Router();
 const asyncHandler = require('express-async-handler');
 
 const { setTokenCookie } = require('../../utils/auth.js');
-const { User, Image } = require('../../db/models');
+const { User, Image, Comment } = require('../../db/models');
 
 //error validation functions
 const { check } = require('express-validator');
@@ -65,6 +65,23 @@ router.get(
     });
 
     return res.json(images);
+  })
+);
+
+//GET ALL USER COMMENTS by userId
+router.get(
+  '/:userId(\\d+)/comments',
+  asyncHandler(async (req, res) => {
+    //grab id of user
+    const userId = req.params.userId;
+
+    //query db for all images that belong to user
+    const comments = await Comment.findAll({
+      where: { userId },
+      order: [['createdAt', 'DESC']],
+    });
+
+    return res.json(comments);
   })
 );
 
