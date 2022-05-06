@@ -15,16 +15,15 @@ import shareIcon from '../../images/icons/share-icon.svg';
 
 export default function ImageProfilePage({ isLoaded }) {
   const dispatch = useDispatch();
+  const { userId } = useParams();
+  const { imageId } = useParams();
 
   // subscribe to redux session states
   const sessionUser = useSelector((state) => state.session.user);
   // const users = useSelector((state) => state.users); //not built yet
-  const photos = useSelector((state) => state.photos);
+  const allPhotos = useSelector((state) => state.photos.allPhotos);
+  const userPhotos = useSelector((state) => state.photos[userId]);
 
-  const { userId } = useParams();
-  const { imageId } = useParams();
-
-  const [isPhotos, setIsPhotos] = useState(false);
   const [userRouteOk, setUserRouteOk] = useState(false);
   const [imageRouteOk, setImageRouteOk] = useState(false);
   const [renderReady, setRenderReady] = useState(false);
@@ -49,38 +48,37 @@ export default function ImageProfilePage({ isLoaded }) {
   const [errors, setErrors] = useState([]);
   const [deleteErrors, setDeleteErrors] = useState([]);
 
-  //eager load all user photos based on userId in url
-  //only dispatch thunk if user exists (see below)
-  // useEffect(() => {
-  //   if (userId) dispatch(photosActions.getUserPhotosThunk(userId));
-  // }, [userId, dispatch]);
+  //NOTE: photos.allPhotos eager loaded before app can render component
+  //NOTE:logged in user photos are eager loaded on app initiation or upon login
 
-  //photos.allPhotos eager loaded before app can render component
-  //logged in user photos are eager loaded on app initiation or upon login
-
-  // check if URL user and image exists, if so load URL user images to state
-  //ALT: could make new thunk to send a findOne() to API route and see if exists in db...
+  // check if URL user exists, if so load URL User's images to state
+  //ALT: could make new thunk to send a findOne() to API route and see if image or user exists in db...
   useEffect(() => {
-    // if (!photos.allPhotos.length > 0) return;  //not necessary bc app won't render without photos in Redux state
-
-    //check Redux State for image and user, returns -1 if no instances found, otherwise returns first index
-    const userExists = photos.allPhotos.findIndex(
+    //check Redux State for user, returns -1 if no instances found, otherwise returns first index
+    const userExists = allPhotos?.findIndex(
       (image) => image.userId === parseInt(userId)
-    );
-    const imageExists = photos.allPhotos.findIndex(
-      (image) => image.id === parseInt(imageId)
     );
 
     if (userExists !== -1) {
-      dispatch(photosActions.getUserPhotosThunk(userId)).then(() =>
-        setIsPhotos(true)
-      );
+      dispatch(photosActions.getUserPhotosThunk(userId)).then(() => {
+        setRenderReady(true); //ensures user photos in state before rendering
+      });
       setUserRouteOk(true);
     }
-    if (imageExists !== -1) setImageRouteOk(true);
-    setRenderReady(true);
-    //adding photos state to dependency list creates infinite loop, only need to run once
+
+    //adding allPhotos state to dependency list creates infinite loop, only need to run once
   }, [userId, imageId, dispatch]); // how get rid of complaint?
+
+  //check if image exists in state, again prob better to check db...
+  useEffect(() => {
+    //once user's in state check to see if image exists
+
+    const imageExists = userPhotos && userPhotos[imageId];
+    console.log('TEST', imageExists);
+    if (imageExists) setImageRouteOk(true);
+
+    //run again once userPhotos updates
+  }, [userId, imageId, userPhotos]);
 
   //update authorization state if page userId and session user match
   useEffect(() => {
@@ -91,15 +89,13 @@ export default function ImageProfilePage({ isLoaded }) {
 
   //Initialize image's description and title and form values
   useEffect(() => {
-    if (isPhotos) {
-      setTitle(photos[userId][imageId]?.title);
+    if (userPhotos) {
+      setTitle(userPhotos[imageId]?.title);
       setDescription(
-        photos[userId][imageId]?.description
-          ? photos[userId][imageId]?.description
-          : ''
+        userPhotos[imageId]?.description ? userPhotos[imageId]?.description : ''
       );
     }
-  }, [imageId, userId, isPhotos, photos]);
+  }, [imageId, userId, userPhotos]);
 
   //Check focus of title/description form
   useEffect(() => {
@@ -252,7 +248,8 @@ export default function ImageProfilePage({ isLoaded }) {
               <img
                 className='imageP-photo'
                 src={
-                  'https://images.pexels.com/photos/54108/peacock-bird-spring-animal-54108.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+                  `${userPhotos && userPhotos[imageId]?.imageUrl}`
+                  // 'https://images.pexels.com/photos/54108/peacock-bird-spring-animal-54108.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
                 }
                 alt='specific'
               ></img>
@@ -404,5 +401,5 @@ export default function ImageProfilePage({ isLoaded }) {
         </div>
       </>
     );
-  } else return <h1>Loading</h1>;
+  } else return;
 }

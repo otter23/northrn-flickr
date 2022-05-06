@@ -324,6 +324,11 @@ Modularity
     -race conditions between useEffects and whether state has been loaded or not
           -only load app once needed state is loaded.
           -should probably make route specific instead of entire app
+    -race conditions
+      -state not loading before rendering and checking routes
+      -part of issue is not having enough stores setup, e.g. a user store
+      -also would help to add a fetch one image route
+      -easier to query the db then check state
 
 
 
