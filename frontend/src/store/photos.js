@@ -1,12 +1,12 @@
 //Redux state slice to hold images from db
 
-import { csrfFetch } from './csrf'; //restoreCSRF
+import { csrfFetch } from './utils/csrf'; //restoreCSRF
 
 //ACTION TYPES:
 const GET_ALL_PHOTOS = 'photos/getAllPhotos';
 
 const GET_USER_PHOTOS = 'photos/getUserPhotos';
-const ADD_PHOTOS = 'photos/addPhoto';
+const ADD_PHOTO = 'photos/addPhoto';
 const UPDATE_PHOTO = 'photos/updatePhoto';
 const DELETE_PHOTO = 'photos/deletePhoto';
 
@@ -20,7 +20,7 @@ export const getAllPhotos = (allPhotos) => ({
 
 //Payload: one user photo object
 export const addPhoto = (userPhoto) => ({
-  type: ADD_PHOTOS,
+  type: ADD_PHOTO,
   payload: { userPhoto },
 });
 
@@ -53,7 +53,7 @@ export const getAllPhotosThunk = () => async (dispatch) => {
     const allPhotos = await response.json();
     dispatch(getAllPhotos(allPhotos));
     return response;
-  }
+  } else throw response;
 };
 
 //request to backend for all of a user's photos
@@ -73,12 +73,13 @@ export const getUserPhotosThunk = (userId) => async (dispatch) => {
 
     dispatch(getUserPhotos(userPhotos, userId));
     return response;
-  }
+  } else throw response;
 };
 
 //request to backend to add a single user photo
 export const addPhotoThunk = (formData) => async (dispatch) => {
   const { userId, title, description, imageUrl } = formData;
+
   const response = await csrfFetch('/api/images', {
     method: 'POST',
     body: JSON.stringify({
@@ -88,15 +89,19 @@ export const addPhotoThunk = (formData) => async (dispatch) => {
       imageUrl,
     }),
   });
-  const userPhoto = await response.json();
-  dispatch(addPhoto(userPhoto));
-  response.userPhoto = userPhoto;
-  return response;
+
+  if (response.ok) {
+    const userPhoto = await response.json();
+    dispatch(addPhoto(userPhoto));
+    response.userPhoto = userPhoto;
+    return response;
+  } else throw response;
 };
 
 //request to backend to update a single user photo
 export const updatePhotoThunk = (formData) => async (dispatch) => {
   const { imageId, title, description } = formData;
+
   const response = await csrfFetch(`/api/images/${imageId}`, {
     method: 'PATCH',
     body: JSON.stringify({
@@ -104,10 +109,13 @@ export const updatePhotoThunk = (formData) => async (dispatch) => {
       description,
     }),
   });
-  const userPhoto = await response.json();
-  dispatch(updatePhoto(userPhoto));
-  response.userPhoto = userPhoto;
-  return response;
+
+  if (response.ok) {
+    const userPhoto = await response.json();
+    dispatch(updatePhoto(userPhoto));
+    response.userPhoto = userPhoto;
+    return response;
+  } else throw response;
 };
 
 //request to backend to delete a single user photo
@@ -115,12 +123,15 @@ export const deletePhotoThunk = (userId, imageId) => async (dispatch) => {
   const response = await csrfFetch(`/api/images/${imageId}`, {
     method: 'DELETE',
   });
-  const resBody = await response.json();
-  console.log('DELETE: ', resBody);
-  if (resBody.message === 'Success') {
-    dispatch(deletePhoto(userId, imageId));
-  }
-  return response;
+
+  if (response.ok) {
+    const resBody = await response.json();
+    console.log('DELETE: ', resBody);
+    if (resBody.message === 'Success') {
+      dispatch(deletePhoto(userId, imageId));
+    }
+    return response;
+  } else throw response;
 };
 
 //Photo REDUCER:
@@ -176,7 +187,7 @@ export default function photosReducer(state = initialState, action) {
       newState[userId] = action.payload.userPhotos;
       return newState;
 
-    case ADD_PHOTOS:
+    case ADD_PHOTO:
       userId = action.payload.userPhoto.userId;
       imageId = action.payload.userPhoto.id;
       //add photo to beginning of array sorted by "createdAt"
@@ -213,9 +224,13 @@ export default function photosReducer(state = initialState, action) {
 
 //TEST THUNKS:
 
+//RUN THESE TWO FIRST BEFORE TESTING UPDATE AND DELETE
 // window.store.dispatch(window.photosActions.getAllPhotosThunk())
 // window.store.dispatch(window.photosActions.getUserPhotosThunk(1))
 
+//Test unauthorized ids as well, e.g. photos not owned by the logged in user
+
+//ADD PHOTO
 // window.store.dispatch(
 //   window.photosActions.addPhotoThunk({
 //     userId: 1,
@@ -224,14 +239,15 @@ export default function photosReducer(state = initialState, action) {
 //     imageUrl:
 //       'https://images.pexels.com/photos/63330/geese-water-birds-waterfowl-63330.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
 //   })
-// );
+// ).catch(async (res) => { const resBody= await res.json(); console.log(res,resBody)})
 
+//UPDATE PHOTO
 // window.store.dispatch(
 //   window.photosActions.updatePhotoThunk({
 //     imageId: 1,
 //     title: 'UPDATED PHOTO',
 //     description: "UPDATED DESCRIPTION",
 //   })
-// );
+// ).catch(async (res) => { const resBody= await res.json(); console.log(res,resBody)})
 
-// window.store.dispatch(window.photosActions.deletePhotoThunk(1, 11));
+// window.store.dispatch(window.photosActions.deletePhotoThunk(1, 11)).catch(async (res) => { const resBody= await res.json(); console.log(res,resBody)})

@@ -55,13 +55,19 @@ router.post(
     const sessionUserId = parseInt(req.user.id, 10); //ensures will only succeed if requireAuth succeeds
     const { userId, imageId, comment } = req.body;
 
-    const newComment = await Comment.create({
-      userId,
-      imageId,
-      comment,
-    });
+    if (sessionUserId === userId) {
+      const newComment = await Comment.create({
+        userId,
+        imageId,
+        comment,
+      });
 
-    return res.json(newComment);
+      return res.json(newComment);
+      //return res.redirect to login if unauthorized??
+    } else {
+      res.status(401);
+      return res.json({ errors: 'Unauthorized' });
+    }
   })
 );
 
@@ -82,6 +88,12 @@ router.patch(
     const commentId = req.params.commentId;
 
     const commentToUpdate = await Comment.findByPk(commentId);
+
+    if (!commentToUpdate) {
+      res.status(422);
+      return res.json({ errors: 'Comment not found' });
+    }
+
     const { comment } = req.body;
 
     //check if comment belongs to signed in user
@@ -89,7 +101,8 @@ router.patch(
       const updatedComment = await commentToUpdate.update({ comment });
       return res.json(updatedComment);
     } else {
-      return res.json('Unauthorized');
+      res.status(401);
+      return res.json({ errors: 'Unauthorized' });
     }
   })
 );
@@ -105,15 +118,21 @@ router.delete(
 
     const commentToDelete = await Comment.findByPk(commentId);
 
-    //check if comment belongs to signed in user
-    if (sessionUserId === commentToDelete.userId) {
+    if (!commentToDelete) {
+      res.status(422);
+      return res.json({ errors: 'Comment not found' });
+    }
+
+    if (sessionUserId === commentToDelete?.userId) {
+      //check if comment belongs to signed in user
       // comments do not have any dependencies
       // delete comment from database
       await Comment.destroy({ where: { id: commentId } });
 
       return res.json({ message: 'Success' });
     } else {
-      return res.json('Unauthorized');
+      res.status(401); //sets res.ok to false
+      return res.json({ errors: 'Unauthorized' });
     }
   })
 );
@@ -144,7 +163,7 @@ module.exports = router;
 //   }),
 // })
 //   .then((res) => res.json())
-//   .then((data) => console.log(data));
+//   .then((data) => console.log(data)).catch(async (res) => { const resBody= await res.json(); console.log(res,resBody)})
 
 //PATCH
 // csrfFetch('/api/comments/7', {
@@ -155,11 +174,22 @@ module.exports = router;
 //   }),
 // })
 //   .then((res) => res.json())
-//   .then((data) => console.log(data));
+//   .then((data) => console.log(data)).catch(async (res) => { const resBody= await res.json(); console.log(res,resBody)})
+
+//Unauthorized
+// csrfFetch('/api/comments/5', {
+//   method: 'PATCH',
+//   headers: { 'Content-Type': 'application/json' },
+//   body: JSON.stringify({
+//     comment: 'UPDATED',
+//   }),
+// })
+//   .then((res) => res.json())
+//   .then((data) => console.log(data)).catch(async (res) => { const resBody= await res.json(); console.log(res,resBody)})
 
 // DELETE
 // csrfFetch('/api/comments/1', {
 //   method: 'DELETE',
 // })
 //   .then((res) => res.json())
-//   .then((data) => console.log(data));
+//   .then((data) => console.log(data)).catch(async (res) => { const resBody= await res.json(); console.log(res,resBody)})

@@ -1,6 +1,6 @@
 //Redux state slice to hold the current session user's information
 
-import { csrfFetch } from './csrf'; //restoreCSRF
+import { csrfFetch } from './utils/csrf'; //restoreCSRF
 
 //Session Action Types:
 const SET_USER = 'session/setUser';

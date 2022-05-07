@@ -330,6 +330,14 @@ Modularity
       -also would help to add a fetch one image route
       -easier to query the db then check state
 
+  Error Handling
+    -not understanding that fetch does throw network errors automatically and it seems 400 (bad request) and 401 (unauthorized) status codes, but e.g. not 422
+    -fetch() function will automatically throw an error for network errors but not for HTTP errors such as 4xx or 5xx responses.
+    -For HTTP errors we can check the response.ok property to see if the request failed and reject the promise ourselves by calling return Promise.reject(error); or throwing an error if async
+
+
+
+
 
 
 
@@ -345,6 +353,11 @@ add user api route
 add get one photos api thunk
 
 
-click handler in the img map list and dont user url param, pass down imageUrl form image object as prop
+//SPA where only clicks can navigate
+    //represent userId with a UUID
+    //each URL is just a reference to something else under the hood
+    //this gets parsed under the hood, so people can't just randomly peruse your site
+    //that or you don't have urls at all
+    //click handler in the img map list and dont user url param, pass down imageUrl form image object as prop
 
-make navs absolute */
+make nav bars absolute */
