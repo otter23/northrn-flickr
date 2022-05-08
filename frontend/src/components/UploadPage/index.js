@@ -8,7 +8,7 @@ import * as photosActions from '../../store/photos';
 
 import Navigation from '../Navigation';
 
-import flickrIcon from '../../images/icons/flickr-icon.svg';
+import flickrIcon from '../../images/n_flickr_birds.svg';
 
 //can only visit this page if logged in
 export default function UploadPage({ isLoaded }) {
@@ -113,10 +113,10 @@ export default function UploadPage({ isLoaded }) {
               <div className='upload-logo-icon-container'>
                 <img
                   src={flickrIcon}
-                  alt='logo'
+                  alt='logo icon'
                   viewBox='0 0 100 100'
                   preserveAspectRatio='xMidYMid meet'
-                  className='logo'
+                  className='upload-logo-icon'
                 />
               </div>
 

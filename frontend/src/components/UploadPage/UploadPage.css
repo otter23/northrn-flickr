@@ -51,6 +51,10 @@
   padding: 0px;
 }
 
+.upload-logo-icon {
+  height: 20px;
+}
+
 .upload-header {
   text-align: center;
   margin: 0px;

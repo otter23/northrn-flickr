@@ -6,7 +6,7 @@ import * as sessionActions from '../../store/session';
 
 import Navigation from '../Navigation';
 
-import flickrIcon from '../../images/icons/flickr-icon.svg';
+import flickrIcon from '../../images/n_flickr_birds.svg';
 import signupBg from '../../images/login-bg-2000x1333.jpg';
 
 function SignupFormPage() {
@@ -65,10 +65,10 @@ function SignupFormPage() {
           <div className='signup-logo-icon-container'>
             <img
               src={flickrIcon}
-              alt='logo'
+              alt='logo icon'
               viewBox='0 0 100 100'
               preserveAspectRatio='xMidYMid meet'
-              className='logo'
+              className='signup-logo-icon'
             />
           </div>
 

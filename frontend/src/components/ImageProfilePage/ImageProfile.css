@@ -25,10 +25,15 @@
   display: flex;
   right: 0px;
   bottom: 0px;
+  cursor: default;
 }
 
 .imageP-delete-button {
   cursor: pointer;
+}
+
+.imageP-delete-button span {
+  color: rgb(164, 8, 8);
 }
 
 .imageP-delete-form-container {

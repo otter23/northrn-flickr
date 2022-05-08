@@ -21,22 +21,57 @@ body,
 #root {
   display: flex;
   flex-direction: column;
+  /* min-height: 100vh; */
   /* used to only apply to splash, double check in  */
   overflow-y: auto;
 }
 
 /* THEME */
 :root {
-  --light1: #e9edc9;
-  --light2: #eddcd2;
-  --light3: #faedcd;
-  --light4: #ffd8b0;
-  --light5: #eae6d9;
-  --light6: #ebeae2;
+  /* official Flickr logo text colors: */
+  /* color: rgb(0, 98, 220); */
+  /* color: rgb(255, 0, 132);  */
+  --logoTextBlue: #0062dc;
+  --logoTextPink: #ff0084;
 
-  --highlight1: #fefae0;
+  /* official Flickr circle colors: */
+  /* color: rgb(234, 54, 131);
+  color: rgb(36, 101, 212); */
+
+  /* nFlickr circle colors: */
+  /* color: rgb(32, 97, 205);
+  color: rgb(223, 51, 128); */
+  --iconCircleBlue: #2061cd;
+  --iconCirclePink: #df3380;
+
+  /* Original bird cheek */
+  /* color: rgb(255, 101, 95); */
+  /* color: #ff655f; */
+
+  /* new bird cheeks */
+  /* color: rgb(234, 54, 54);
+  color: #ea3636;
+  color: rgb(223, 51, 51);
+  color: #df3333; */
+
+  --nav: #212124;
+
+  /* flickr button blue */
+  --mid1: rgb(18, 143, 220);
+  --mid2: rgb(0, 109, 172);
+  --mid3: rgb(36, 101, 212);
+  --mid4: rgb(60, 145, 214);
 
   --bg1: #f4f4f4;
+
+  --btn: rgb(63, 143, 214);
+  --btnTrue: rgb(18, 143, 220);
+  --btnHover: rgb(66, 150, 225);
+  --btnDelete: rgb(226, 41, 43);
+  --btnCancel: rgb(151, 158, 162);
+  --inputOutline: rgb(63, 143, 214);
+
+  --formLinkText: rgb(0, 109, 172);
 
   --table1: #dedede;
 
@@ -47,22 +82,6 @@ body,
   --delete1: rgb(176, 42, 42);
 
   --bar: #ffca12;
-
-  --nav: #212124;
-
-  /* flickr button blue */
-  --mid1: #128fdc;
-  --mid2: #006dac;
-
-  /* --mid2: #dda15e; */
-  --mid3: #bc6c25;
-  --mid4: #8b7c40;
-
-  --dark1: #283618;
-  --dark2: #74532e;
-  --dark3: #774112;
-  --dark4: #47280d;
-  --dark5: rgb(53, 72, 53);
 
   font-family: Proxima Nova, Helvetica, sans-serif;
   /* font-family: Helvetica; */

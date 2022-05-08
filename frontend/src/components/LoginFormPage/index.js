@@ -9,7 +9,7 @@ import Navigation from '../Navigation';
 //format for Create-react-app which uses SVGR under the hood:
 //import { ReactComponent as FlickrLogo } from './Flickr.svg';
 
-import flickrIcon from '../../images/icons/flickr-icon.svg';
+import flickrIcon from '../../images//n_flickr_birds.svg';
 import loginBg from '../../images/login-bg-2000x1333.jpg';
 
 export default function LoginFormPage() {
@@ -94,10 +94,10 @@ export default function LoginFormPage() {
           <div className='login-logo-icon-container'>
             <img
               src={flickrIcon}
-              alt='logo'
+              alt='logo icon'
               viewBox='0 0 100 100'
               preserveAspectRatio='xMidYMid meet'
-              className='logo'
+              className='login-logo-icon'
             />
           </div>
 

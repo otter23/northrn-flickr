@@ -1,111 +1,194 @@
 import './Navigation.css';
 
-import React from 'react';
-import { NavLink, Link, Route, Switch } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { NavLink, Link, Route, Switch, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 
-import flickrLogo from '../../images/flickrLogo.svg';
+import flickrLogo from '../../images/n_flickr_logo.svg';
+import flickrLogoColored from '../../images/n_flickr_logo_colored.svg';
+
+import uploadIcon from '../../images/icons/upload-icon.svg';
+import searchIcon from '../../images/icons/search-blue-icon.svg';
+import notificationsIcon from '../../images/icons/notifications-icon.svg';
 
 export default function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
+
+  const [userProfile, setUserProfile] = useState(false);
+  const [explore, setExplore] = useState(true);
+
+  const location = useLocation();
+  const userProfileRegex = /\/photos\/\d+$/;
+  const exploreRegex = /\/explore$/;
+
+  useEffect(() => {
+    if (userProfileRegex.test(location.pathname)) setUserProfile(true);
+  }, []);
+
+  useEffect(() => {
+    if (exploreRegex.test(location.pathname)) setExplore(false);
+  }, []);
+
   let userId;
   if (sessionUser) {
     userId = sessionUser.id;
   }
 
   let sessionLinks;
-  //is user, show profile button, else show login/signup links
+  //is user, show profile button/menu, else show login/signup links
   if (sessionUser) {
     sessionLinks = (
       <>
-        <Link to='/photos/upload'>UPLOAD PAGE</Link>
-        <Link to='/photos/1/'>Demo User Profile Page</Link>
-        <Link to='/photos/1/1'>DemoUser Image Page</Link>
-        <Link to='/photos/2/'>User2 Profile Page</Link>
-        <Link to='/photos/2/11'>User2 Image Page</Link>
-        <ProfileButton user={sessionUser} />
+        {explore && (
+          <li className='main-nav-search'>
+            <Link to='/explore' className='main-nav-icon-container'>
+              <img
+                className='main-nav-search-icon'
+                src={searchIcon}
+                alt='logo'
+                viewBox='0 0 100 100'
+                preserveAspectRatio='xMidYMid meet'
+              />
+            </Link>
+          </li>
+        )}
+
+        <li className='main-nav-upload'>
+          <Link to={`/photos/upload`} className='main-nav-icon-container'>
+            <img
+              className='main-nav-upload-icon'
+              src={uploadIcon}
+              alt='logo'
+              viewBox='0 0 100 100'
+              preserveAspectRatio='xMidYMid meet'
+            />
+          </Link>
+        </li>
+
+        <li className='main-nav-notification'>
+          <div className='main-nav-icon-container'>
+            <img
+              className='main-nav-upload-icon'
+              src={notificationsIcon}
+              alt='logo'
+              viewBox='0 0 100 100'
+              preserveAspectRatio='xMidYMid meet'
+            />
+          </div>
+        </li>
+        <li className='main-nav-userMenu'>
+          <ProfileButton user={sessionUser} />
+        </li>
       </>
     );
   } else {
     sessionLinks = (
       <>
-        <div className='login'>
-          <Link to='/login'>Log In</Link>
-        </div>
-
-        <div className='signup'>
-          <Link to='/sign-up'>Sign Up</Link>
-        </div>
+        {explore && (
+          <li className='main-nav-search'>
+            <Link to='/explore' className='main-nav-icon-container'>
+              <img
+                className='main-nav-search-icon'
+                src={searchIcon}
+                alt='logo'
+                viewBox='0 0 100 100'
+                preserveAspectRatio='xMidYMid meet'
+              />
+            </Link>
+          </li>
+        )}
+        <li className='main-nav-login'>
+          <div>
+            <Link to='/login'>Log In</Link>
+          </div>
+        </li>
+        <li>
+          <div className='main-nav-signup-btn-container'>
+            <button className='main-nav-signup-btn' type='button'>
+              <Link to='/sign-up'>Sign Up</Link>
+            </button>
+          </div>
+        </li>
       </>
     );
   }
 
-  let rootPath;
-  if (sessionUser) {
-    rootPath = (
-      <nav className='nav'>
-        <div className='nav-inner'>
-          <div className='left-nav'>
-            <NavLink exact to='/'>
-              <img
-                className='logo-nav'
-                src={flickrLogo}
-                alt='logo'
-                viewBox='0 0 100 100'
-                preserveAspectRatio='xMidYMid meet'
-              />
-            </NavLink>
-          </div>
-          {isLoaded && sessionLinks}
-        </div>
-      </nav>
-    );
-  } else {
-    rootPath = (
-      <nav className='splash-nav'>
-        <div className='splash-nav-inner'>
-          <div className='splash-left-nav'>
-            <NavLink exact to='/'>
-              <img
-                className='splash-nav-logo'
-                src={flickrLogo}
-                alt='logo'
-                viewBox='0 0 100 100'
-                preserveAspectRatio='xMidYMid meet'
-              />
-            </NavLink>
-          </div>
+  const mainNav = (
+    <nav className='main-nav'>
+      <div className='main-nav-inner'>
+        <div className='main-nav-left'>
+          <div className='main-nav-menu'></div>
+          <NavLink exact to='/' className='main-nav-link'>
+            <img
+              className='main-nav-logo'
+              src={flickrLogo}
+              alt='logo'
+              viewBox='0 0 100 100'
+              preserveAspectRatio='xMidYMid meet'
+            />
+          </NavLink>
 
-          <div className='splash-nav-right'>
-            <div className='splash-nav-search-div'>
-              <form className='splash-nav-search-form'>
+          {sessionUser && !userProfile && (
+            <div className='main-nav-photostream'>
+              <Link to={`/photos/${sessionUser?.id}`}> Your Photostream </Link>
+            </div>
+          )}
+        </div>
+
+        <div className='main-nav-right'>
+          <ul className='main-nav-right-list'>{sessionLinks}</ul>
+        </div>
+      </div>
+    </nav>
+  );
+
+  const splashNav = (
+    <nav className='splash-nav'>
+      <div className='splash-nav-inner'>
+        <div className='splash-left-nav'>
+          <NavLink exact to='/'>
+            <img
+              className='splash-nav-logo'
+              src={flickrLogo}
+              alt='logo'
+              viewBox='0 0 100 100'
+              preserveAspectRatio='xMidYMid meet'
+            />
+          </NavLink>
+        </div>
+
+        <div className='splash-nav-right'>
+          {/* updated from div to Link */}
+          <div className='splash-nav-search-div'>
+            <form className='splash-nav-search-form'>
+              <Link to='/explore' className='splash-nav-search-link'>
                 <label></label>
-                <div className='material-icons'>search</div>
+                <div className='material-icons splash-search-icon'>search</div>
                 <input
                   type='search'
                   placeholder='Photos, people, or groups'
                   disabled={true}
                 ></input>
-              </form>
-            </div>
-
-            <div>
-              <Link className='splash-login' to='/login'>
-                Log In
               </Link>
-            </div>
+            </form>
+          </div>
 
-            <div>
-              <Link className='splash-signup' to='/sign-up'>
-                Sign Up
-              </Link>
-            </div>
+          <div>
+            <Link className='splash-login' to='/login'>
+              Log In
+            </Link>
+          </div>
+
+          <div>
+            <Link className='splash-signup' to='/sign-up'>
+              Sign Up
+            </Link>
           </div>
         </div>
-      </nav>
-    );
-  }
+      </div>
+    </nav>
+  );
 
   const photosUploadNav = (
     <nav className='upload-nav'>
@@ -114,7 +197,8 @@ export default function Navigation({ isLoaded }) {
           <img
             className='upload-nav-logo'
             src={
-              'https://combo.staticflickr.com/pw/images/flickr-logo-small.png'
+              flickrLogoColored
+              // 'https://combo.staticflickr.com/pw/images/flickr-logo-small.png'
             }
             alt='logo'
           />
@@ -172,14 +256,15 @@ export default function Navigation({ isLoaded }) {
     <>
       <Switch>
         <Route exact path='/'>
-          {rootPath}
+          {splashNav}
         </Route>
         <Route path='/login'>{authNav}</Route>
         <Route path='/sign-up'>{authNav}</Route>
+        <Route path='/explore'>{mainNav}</Route>
         <Route exact path='/photos/:userId(\d+)'>
-          {authNav}
+          {mainNav}
         </Route>
-        <Route path='/photos/:userId(\d+)/:imageId(\d+)'>{authNav}</Route>
+        <Route path='/photos/:userId(\d+)/:imageId(\d+)'>{mainNav}</Route>
         <Route path='/photos/upload'>{photosUploadNav}</Route>
       </Switch>
     </>

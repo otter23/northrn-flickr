@@ -342,14 +342,14 @@ Modularity
 
 
 TO DO:
-add proper error handling to api routes so get better messages when sequelize message returns
-also add proper error handling to thunks
+about page
+add user api route and update "username" to read actual username
+add more seed date
 
-add styling to profile button dropDown
+Add proper error handling to components  to receive error handling that was added to api routes and thunks
 
-change app load to be only depended on isLoaded, and then route specific waiting for other state
+change app load to be only depended on isLoaded, and then route specific waiting for other slices of redux state
 
-add user api route
 add get one photos api thunk
 
 
@@ -360,4 +360,9 @@ add get one photos api thunk
     //that or you don't have urls at all
     //click handler in the img map list and dont user url param, pass down imageUrl form image object as prop
 
-make nav bars absolute */
+make nav bars absolute  or overflow-y the main photo list container
+
+
+
+updated styling, updated main nav, updated routes, added new logos, added explore page
+*/

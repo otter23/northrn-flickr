@@ -11,6 +11,9 @@
   padding: 16px 0px;
   flex-grow: 1;
   max-height: 56px;
+  /* position: absolute;
+  bottom: 0px;
+  left: 0px; */
 }
 
 .footer-top-row {

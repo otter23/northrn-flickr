@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
-import Navigation from './components/Navigation';
 import SplashPage from './components/SplashPage';
 import LoginFormPage from './components/LoginFormPage';
 import SignupFormPage from './components/SignupFormPage';
 import UserProfilePage from './components/UserProfilePage';
 import ImageProfilePage from './components/ImageProfilePage';
 import UploadPage from './components/UploadPage';
+import ExplorePage from './components/ExplorePage';
 
 import * as sessionActions from './store/session';
 import * as photosActions from './store/photos';
@@ -59,10 +59,15 @@ export default function App() {
           <Route exact path='/'>
             {/* LAnding Page once logged in */}
             {sessionUser ? (
-              <Navigation isLoaded={isLoaded} />
+              // <LandingPage isLoaded={isLoaded} />
+              <Redirect to='/explore'></Redirect>
             ) : (
               <SplashPage isLoaded={isLoaded} />
             )}
+          </Route>
+
+          <Route path='/explore'>
+            <ExplorePage isLoaded={isLoaded} />
           </Route>
 
           <Route path='/login'>
