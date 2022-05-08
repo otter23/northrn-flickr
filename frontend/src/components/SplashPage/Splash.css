@@ -39,6 +39,8 @@
   margin-top: 38px;
   margin-bottom: 30px;
   font-weight: 600;
+  /* offset-x | offset-y | blur-radius | color */
+  text-shadow: 1px 1px 1px rgb(90, 90, 90);
 }
 
 .splash-find-inspiration + h2 {
@@ -46,6 +48,7 @@
   text-align: center;
   margin: 0px;
   margin-bottom: 50px;
+  text-shadow: 1px 1px 1px rgb(90, 90, 90);
 }
 
 .splash-start-for-free {
@@ -73,11 +76,13 @@
   text-decoration: none;
   color: white;
   font-size: 14px;
+  text-shadow: 1px 1px 1px gray;
 }
 .splash-photo-username a {
   text-decoration: none;
   color: white;
   font-size: 14px;
+  text-shadow: 1px 1px 1px gray;
 }
 
 .splash-photo-username a:hover,

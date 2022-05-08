@@ -55,6 +55,10 @@
   padding: 0px;
 }
 
+.signup-logo-icon {
+  height: 20px;
+}
+
 .signup-header {
   text-align: center;
   margin: 0px;

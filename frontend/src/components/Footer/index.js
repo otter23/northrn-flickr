@@ -64,6 +64,7 @@ export default function Footer() {
         </Route>
         <Route path='/login'></Route>
         <Route path='/sign-up'></Route>
+        <Route path='/explore'>{mainFooter}</Route>
         <Route path='/photos/:userId'>{mainFooter}</Route>
         <Route path='/photos/:userId/:imageId'>{mainFooter}</Route>
         <Route path='/photos/upload'>{mainFooter}</Route>

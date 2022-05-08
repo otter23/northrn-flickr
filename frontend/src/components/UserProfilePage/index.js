@@ -98,12 +98,12 @@ export default function UserProfilePage({ isLoaded }) {
 
         <div className='profile-row-two'>
           <ul className='profile-row-two-inner'>
-            <li className='.profile-about'>
+            <li className='profile-about'>
               <div>
                 <span>About</span>
               </div>
             </li>
-            <li className='.profile-photostream'>
+            <li className='profile-photostream'>
               <NavLink
                 to={`/photos/${userId}`}
                 className={(state) =>
@@ -113,42 +113,45 @@ export default function UserProfilePage({ isLoaded }) {
                 <span>Photostream</span>
               </NavLink>
             </li>
-            <li className='.profile-albums'>
+            <li className='profile-albums'>
               <div>
                 <span>Albums</span>
               </div>
             </li>
-            <li className='.profile-faves'>
+            <li className='profile-faves'>
               <div>
                 <span>Faves</span>
               </div>
             </li>
-            <li className='.profile-galleries'>
+            <li className='profile-galleries'>
               <div>
                 <span>Galleries</span>
               </div>
             </li>
-            <li className='.profile-groups'>
+            <li className='profile-groups'>
               <div to='#'>
                 <span>Groups</span>
               </div>
             </li>
           </ul>
         </div>
+
         <div className='profile-toolbar'></div>
-        <div className='profile-photo-list-container'>
-          <ul className='profile-photo-list-inner-container'>
-            {userPhotos &&
-              Object.values(userPhotos)?.map((image) => {
-                return (
-                  <li key={image?.id}>
-                    <Link to={`/photos/${userId}/${image?.id}`}>
-                      <img src={image?.imageUrl} alt={image?.title}></img>
-                    </Link>
-                  </li>
-                );
-              })}
-          </ul>
+        <div className='profile-photo-list-scroll'>
+          <div className='profile-photo-list-container'>
+            <ul className='profile-photo-list-inner-container'>
+              {userPhotos &&
+                Object.values(userPhotos)?.map((image) => {
+                  return (
+                    <li key={image?.id}>
+                      <Link to={`/photos/${userId}/${image?.id}`}>
+                        <img src={image?.imageUrl} alt={image?.title}></img>
+                      </Link>
+                    </li>
+                  );
+                })}
+            </ul>
+          </div>
         </div>
 
         <Footer />

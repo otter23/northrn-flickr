@@ -7,10 +7,11 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 
-import { restoreCSRF, csrfFetch } from './store/csrf';
+import { restoreCSRF, csrfFetch } from './store/utils/csrf';
 
 import * as sessionActions from './store/session';
 import * as photosActions from './store/photos';
+import * as commentsActions from './store/comments';
 
 //create the redux store
 import configureStore from './store';
@@ -25,6 +26,7 @@ if (process.env.NODE_ENV !== 'production') {
   window.store = store; //easy access to store and its methods in browser console
   window.sessionActions = sessionActions; //test session redux state
   window.photosActions = photosActions; //test photos redux state
+  window.commentsActions = commentsActions; //test photos redux state
 }
 
 //root wrapper used to wrap <App/>  in various provider components
@@ -39,6 +41,7 @@ function Root() {
 }
 
 //NOTE: strict mode renders components twice on development to detect errors in your code.
+//thus if you have an alert, would show the alert twice
 ReactDOM.render(
   <React.StrictMode>
     <Root />

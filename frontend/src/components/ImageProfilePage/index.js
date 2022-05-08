@@ -74,7 +74,6 @@ export default function ImageProfilePage({ isLoaded }) {
     //once user's in state check to see if image exists
 
     const imageExists = userPhotos && userPhotos[imageId];
-    console.log('TEST', imageExists);
     if (imageExists) setImageRouteOk(true);
 
     //run again once userPhotos updates
@@ -238,7 +237,7 @@ export default function ImageProfilePage({ isLoaded }) {
             </div>
           </form>
         </div>
-        <div>
+        <div className='imageP-body-container'>
           <Navigation isLoaded={isLoaded} />
           <div className='imageP-photo-div'>
             <div className='imageP-photo-div-inner'>

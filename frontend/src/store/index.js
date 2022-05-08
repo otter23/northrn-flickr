@@ -4,10 +4,12 @@ import thunk from 'redux-thunk';
 //import slices of state:
 import sessionReducer from './session';
 import photosReducer from './photos';
+import commentsReducer from './comments';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   photos: photosReducer,
+  comments: commentsReducer,
 });
 
 let enhancer;

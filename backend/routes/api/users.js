@@ -4,7 +4,7 @@ const router = require('express').Router();
 const asyncHandler = require('express-async-handler');
 
 const { setTokenCookie } = require('../../utils/auth.js');
-const { User, Image } = require('../../db/models');
+const { User, Image, Comment } = require('../../db/models');
 
 //error validation functions
 const { check } = require('express-validator');
@@ -51,6 +51,42 @@ router.post(
   })
 );
 
+//GET ALL USER IDS in db
+router.get(
+  '/ids',
+  asyncHandler(async (req, res) => {
+    //query db for users
+    const users = await User.findAll({});
+
+    //grab only userIds
+    const userIds = {};
+    users.forEach((user) => {
+      userIds[user.id] = user.id;
+    });
+
+    return res.json(userIds);
+  })
+);
+
+//GET ONE USER by userId
+router.get(
+  '/:userId(\\d+)',
+  asyncHandler(async (req, res) => {
+    const userId = req.params.userId;
+    //query db for userID
+    const user = await User.findByPk(userId);
+    console.log(user);
+
+    if (user) {
+      //send safe user object if session found
+      return res.json({
+        user: user.toSafeObject(),
+      });
+      //send empty obj if no user session found
+    } else return res.json({});
+  })
+);
+
 //GET ALL USER IMAGES by userId
 router.get(
   '/:userId(\\d+)/images',
@@ -68,9 +104,36 @@ router.get(
   })
 );
 
+//GET ALL USER COMMENTS by userId
+router.get(
+  '/:userId(\\d+)/comments',
+  asyncHandler(async (req, res) => {
+    //grab id of user
+    const userId = req.params.userId;
+
+    //query db for all comments that belong to user
+    const comments = await Comment.findAll({
+      where: { userId },
+      order: [['createdAt', 'DESC']],
+    });
+
+    return res.json(comments);
+  })
+);
+
 module.exports = router;
 
 //TESTING USERS ROUTESs:
+
+//GET ALL UserIds
+// fetch('/api/users/ids')
+//   .then((res) => res.json())
+//   .then((data) => console.log(data));
+
+//GET ONE UserId
+// fetch('/api/users/2')
+//   .then((res) => res.json())
+//   .then((data) => console.log(data));
 
 //create a XSRF token first using token test route
 // visit http://localhost:5000/XSRF/token

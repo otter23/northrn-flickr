@@ -325,20 +325,44 @@ Modularity
           -only load app once needed state is loaded.
           -should probably make route specific instead of entire app
     -race conditions
-      -state not loading before rendering and checking routes
+      -redux state not loading before rendering and checking routes
       -part of issue is not having enough stores setup, e.g. a user store
       -also would help to add a fetch one image route
       -easier to query the db then check state
+
+  Error Handling
+    -not understanding that fetch does throw network errors automatically and it seems 400 (bad request) and 401 (unauthorized) status codes, but e.g. not 422
+    -fetch() function will automatically throw an error for network errors but not for HTTP errors such as 4xx or 5xx responses.
+    -For HTTP errors we can check the response.ok property to see if the request failed and reject the promise ourselves by calling return Promise.reject(error); or throwing an error if async
+
+
+
 
 
 
 
 TO DO:
-add proper error handling to api routes so get better messages when sequelize message returns
-also add proper error handling to thunks
+about page
+add user api route and update "username" to read actual username
+add more seed date
 
-add styling to profile button dropDown
+Add proper error handling to components  to receive error handling that was added to api routes and thunks
 
-change app load to be only depended on isLoaded, and then route specific waiting for other state
+change app load to be only depended on isLoaded, and then route specific waiting for other slices of redux state
 
+add get one photos api thunk
+
+
+//SPA where only clicks can navigate
+    //represent userId with a UUID
+    //each URL is just a reference to something else under the hood
+    //this gets parsed under the hood, so people can't just randomly peruse your site
+    //that or you don't have urls at all
+    //click handler in the img map list and dont user url param, pass down imageUrl form image object as prop
+
+make nav bars absolute  or overflow-y the main photo list container
+
+
+
+updated styling, updated main nav, updated routes, added new logos, added explore page
 */

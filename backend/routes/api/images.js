@@ -67,8 +67,10 @@ router.post(
       });
 
       return res.json(newImage);
+      // return res.redirect(`${req.baseUrl}/${newImage.id}`);
     } else {
-      return res.json('Unauthorized');
+      res.status(401);
+      return res.json({ errors: 'Unauthorized' });
     }
   })
 );
@@ -89,16 +91,22 @@ router.patch(
     const sessionUserId = parseInt(req.user.id, 10);
     const imageId = req.params.imageId;
 
-    const image = await Image.findByPk(imageId);
-    //add if statements
+    const imageToUpdate = await Image.findByPk(imageId);
+
+    if (!imageToUpdate) {
+      res.status(422);
+      return res.json({ errors: 'Image not found' });
+    }
+
     const { title, description } = req.body; //user not allowed to update imageUrl
 
     //check if image belongs to signed in user
-    if (sessionUserId === image.userId) {
-      const updatedImage = await image.update({ title, description });
+    if (sessionUserId === imageToUpdate.userId) {
+      const updatedImage = await imageToUpdate.update({ title, description });
       return res.json(updatedImage);
     } else {
-      return res.json('Unauthorized');
+      res.status(401);
+      return res.json({ errors: 'Unauthorized' });
     }
   })
 );
@@ -112,10 +120,15 @@ router.delete(
     const sessionUserId = parseInt(req.user.id, 10);
     const imageId = req.params.imageId;
 
-    const image = await Image.findByPk(imageId);
+    const imageToDelete = await Image.findByPk(imageId);
+
+    if (!imageToDelete) {
+      res.status(422);
+      return res.json({ errors: 'Image not found' });
+    }
 
     //check if image belongs to signed in user
-    if (sessionUserId === image.userId) {
+    if (sessionUserId === imageToDelete.userId) {
       //Destroy Images dependencies first:
       //find all albums associated to the imageId
       const albumAssociations = await JoinImageAlbum.findAll({
@@ -140,8 +153,26 @@ router.delete(
 
       return res.json({ message: 'Success' });
     } else {
-      return res.json('Unauthorized');
+      res.status(401);
+      return res.json({ errors: 'Unauthorized' });
     }
+  })
+);
+
+//GET ALL IMAGE COMMENTS by imageId
+router.get(
+  '/:imageId(\\d+)/comments',
+  asyncHandler(async (req, res) => {
+    //grab id of image
+    const imageId = req.params.imageId;
+
+    //query db for all comments that belong to image
+    const comments = await Comment.findAll({
+      where: { imageId },
+      order: [['createdAt', 'DESC']],
+    });
+
+    return res.json(comments);
   })
 );
 
@@ -149,7 +180,7 @@ module.exports = router;
 
 //Test Routes
 
-//GET ALL
+//GET ALL IMAGES
 // fetch("/api/images").then( res => res.json() ).then(data => console.log(data) )
 
 //GET ALL USER IMAGES
@@ -190,3 +221,6 @@ module.exports = router;
 // })
 //   .then((res) => res.json())
 //   .then((data) => console.log(data));
+
+//GET ALL IMAGE Comments
+// fetch("/api/images/1/comments").then( res => res.json() ).then(data => console.log(data) )

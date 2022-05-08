@@ -56,6 +56,10 @@
   padding: 0px;
 }
 
+.login-logo-icon {
+  height: 20px;
+}
+
 .login-header {
   text-align: center;
   margin: 0px;
