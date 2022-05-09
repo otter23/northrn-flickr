@@ -25,7 +25,7 @@ function ProfileButton({ user }) {
     const closeMenu = ({ target }) => {
       //     setShowMenu(false);
       //could do something wih "activeElement instead
-      if (target !== menu.current && !menu.current.contains(target)) {
+      if (target !== menu.current && !menu.current?.contains(target)) {
         setShowMenu((prev) => !prev);
       }
     };

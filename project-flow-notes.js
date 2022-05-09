@@ -335,16 +335,24 @@ Modularity
     -fetch() function will automatically throw an error for network errors but not for HTTP errors such as 4xx or 5xx responses.
     -For HTTP errors we can check the response.ok property to see if the request failed and reject the promise ourselves by calling return Promise.reject(error); or throwing an error if async
 
+  CSS flex boxes
+      -getting css to behave properly with overflow and scrolling and mobile
 
-
-
+    -controlled input changed to uncontrolled, must give value prop of input a default value of string value={title ?? ""}
 
 
 
 TO DO:
+re-route upload page to image profile
+finish comments page
 about page
 add user api route and update "username" to read actual username
-add more seed date
+add more seed data
+add array of cover photo options
+
+FIX allPhotos state after delete
+CREATE delete allimage commens route
+
 
 Add proper error handling to components  to receive error handling that was added to api routes and thunks
 
@@ -364,5 +372,8 @@ make nav bars absolute  or overflow-y the main photo list container
 
 
 
-updated styling, updated main nav, updated routes, added new logos, added explore page
+fixed delete/update photo action reducer and added delete imageComment action creator. updated n.flickr logo to thick. refactored ImageProfile forms to individual components. updated styling throughout.
+
+
+
 */

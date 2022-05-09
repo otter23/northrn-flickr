@@ -1,4 +1,4 @@
-.imageP-body-container {
+.imageP-root-inner {
   width: 100%;
   height: 100%;
   display: flex;
@@ -37,15 +37,20 @@
 }
 
 .imageP-delete-form-container {
-  position: absolute;
+  position: fixed;
+  top: 0;
+  left: 0;
+
   background-color: rgba(243, 245, 246, 0.7);
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
+  /* height: 100%; */
+  /* height: auto; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 200;
+  z-index: 4000;
 }
 .imageP-delete-text1 {
   display: flex;
@@ -80,7 +85,7 @@
   gap: 10px;
 }
 
-.imageP-delete-btn {
+.imageP-cancel-btn {
   padding: 0px 20px;
   border: 1px solid white;
   border-radius: 3px;
@@ -92,6 +97,34 @@
   font-weight: 200;
   color: white;
   background-color: rgb(151, 158, 162);
+  /* background-color: var(--btnDelete2); */
+
+  cursor: pointer;
+  /* transition: border 0.5s, background-color 0.5s, color 0.5s; */
+  transition-property: background-color;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+  transition-delay: 0s;
+}
+
+.imageP-cancel-btn:hover {
+  background-color: rgb(81, 136, 224);
+}
+
+.imageP-delete-btn {
+  padding: 0px 20px;
+  border: 1px solid white;
+  border-radius: 3px;
+  width: 100%;
+  height: 29px;
+
+  font-size: 14px;
+  text-decoration: none;
+  font-weight: 200;
+  color: white;
+  /* background-color: rgb(151, 158, 162); */
+  /* background-color: var(--btnDelete2); */
+  background-color: rgba(209, 61, 54, 0.9);
 
   cursor: pointer;
   /* transition: border 0.5s, background-color 0.5s, color 0.5s; */
@@ -102,36 +135,106 @@
 }
 
 .imageP-delete-btn:hover {
-  background-color: rgb(81, 136, 224);
+  /* background-color: rgb(81, 136, 224); */
+  background-color: rgba(209, 61, 54, 1);
+  border: 1px solid var(--btnDelete2);
 }
 
 /*  */
-.imageP-bottom-div {
-  padding: 0px 200px;
+
+.imageP-body-lower-container {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  /* justify-content: center; */
+  align-items: center;
+  background-color: var(--bg1);
+
+  /* 100% is initial size of html. */
+  /* height: 100%; */
+  height: auto;
+  width: 100%;
+  flex-grow: 1;
 }
 
-.imageP-title-desc {
-  cursor: pointer;
-  border: 1px solid black;
+.imageP-body-lower-inner {
+  /* padding: 26px 200px; */
+  padding: 26px 0px;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
 }
+
+.imageP-title-desc-container {
+  display: flex;
+  width: 100%;
+  gap: 20px;
+}
+
+.imageP-profile-image {
+  height: 60px;
+  width: 60px;
+  background-position: center;
+  background-size: contain;
+  border-radius: 60px;
+}
+
+.imageP-username-title-div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+}
+
+.imageP-username-title-div a {
+  text-decoration: none;
+  color: var(--mid2);
+}
+.imageP-username {
+  font-size: 20px;
+}
+
+.imageP-title-desc-div {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  /* border-bottom: 1px solid rgb(225, 229, 231); */
+  border-bottom: 1px solid rgb(203, 206, 207);
+  font-size: 14px;
+  gap: 10px;
+  padding-bottom: 10px;
+  max-width: 700px;
+}
+
+.imageP-form-control {
+  max-width: 700px;
+}
+
+.imageP-title {
+  font-size: 16px;
+}
+
+.imageP-desc {
+  font-size: 14px;
+}
+
+.imageP-profile-image {
+  height: 60px;
+  width: 60px;
+  background-position: center;
+  background-size: contain;
+  border-radius: 60px;
+}
+
+/*  */
+/*  */
+/*  */
 
 .noPointer {
   cursor: text;
 }
 
 .imageP-spacer-div {
-  height: 50px;
-}
-
-.imageP-comment-div {
-  margin-top: 20px;
-}
-
-.hidden {
-  display: none;
+  height: 10px;
 }
 
 .imageP-error-container {
@@ -242,4 +345,112 @@
 
 .imageP-btn:hover {
   background-color: rgb(81, 136, 224);
+}
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/* COMMENT DIV SECTION */
+
+.imageP-comment-list-container {
+  margin-top: 20px;
+  margin-left: 23px;
+}
+
+.imageP-comment-container {
+  display: flex;
+  width: 100%;
+  gap: 20px;
+}
+
+.imageP-comment-image {
+  height: 32px;
+  width: 32px;
+  background-position: center;
+  background-size: contain;
+  border-radius: 32px;
+}
+
+.imageP-comment-right-div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-bottom: 15px;
+  font-size: 14px;
+}
+
+.imageP-comment-username-div a {
+  text-decoration: none;
+  color: var(--mid2);
+}
+
+.imageP-comment-username-div a:hover {
+  text-decoration: underline;
+}
+
+.imageP-newComment-container {
+  display: flex;
+  gap: 20px;
+}
+
+.imageP-newComment-image {
+  height: 32px;
+  width: 32px;
+  background-position: center;
+  background-size: contain;
+  border-radius: 32px;
+}
+
+.imageP-newComment-form {
+}
+
+.imageP-newComment-textarea {
+  outline: none;
+  border: none;
+  border-radius: 3px;
+  /* resize: none; */
+}
+
+.imageP-comment-btn-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-top: 2px;
+  padding-bottom: 10px;
+  width: 100%;
+  height: 32px;
+}
+
+.imageP-comment-btn {
+  padding: 0px 20px;
+  border: 1px solid var(--mid1);
+  border-radius: 4px;
+  height: 32px;
+
+  font-size: 16px;
+  text-decoration: none;
+  font-weight: 200;
+  color: white;
+  background-color: var(--mid1);
+
+  cursor: pointer;
+  /* transition: border 0.5s, background-color 0.5s, color 0.5s; */
+  transition-property: background-color;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+  transition-delay: 0s;
+}
+
+.imageP-comment-btn:hover {
+  background-color: rgb(81, 136, 224);
+}
+
+/* needs to be at the bottom */
+.hidden {
+  display: none;
+}
+
+#root.overflow {
+  overflow: hidden;
 }

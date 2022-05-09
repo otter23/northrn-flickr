@@ -139,7 +139,7 @@ export default function UserProfilePage({ isLoaded }) {
         </div>
 
         <div className='profile-toolbar'></div>
-        <div className='profile-photo-list-scroll'>
+        <div className='profile-photo-body-container'>
           <div className='profile-photo-list-container'>
             <ul className='profile-photo-list-inner-container'>
               {userPhotos &&

@@ -14,6 +14,9 @@ html,
 body,
 #root {
   height: 100%;
+  /* only 100% works with sticky */
+  /* will allow the parent (root) container to continue to grow as necessary */
+  /* min-height: 100vh; */
   width: 100%;
   margin: 0px;
 }
@@ -24,6 +27,7 @@ body,
   /* min-height: 100vh; */
   /* used to only apply to splash, double check in  */
   overflow-y: auto;
+  position: relative;
 }
 
 /* THEME */
@@ -62,12 +66,13 @@ body,
   --mid3: rgb(36, 101, 212);
   --mid4: rgb(60, 145, 214);
 
-  --bg1: #f4f4f4;
+  --bg1: rgb(243, 245, 246);
 
   --btn: rgb(63, 143, 214);
   --btnTrue: rgb(18, 143, 220);
   --btnHover: rgb(66, 150, 225);
   --btnDelete: rgb(226, 41, 43);
+  --btnDelete2: rgb(209, 61, 54);
   --btnCancel: rgb(151, 158, 162);
   --inputOutline: rgb(63, 143, 214);
 
