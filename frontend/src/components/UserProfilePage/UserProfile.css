@@ -33,6 +33,11 @@
 
 .profile-img-username-div {
   grid-area: left;
+  display: flex;
+  /* flex-direction: column; */
+  /* justify-content: center; */
+  gap: 15px;
+  /* align-items: center; */
 }
 
 .profile-image {
@@ -56,12 +61,17 @@
 } */
 
 .profile-info-upper {
+  padding-top: 37px;
   grid-area: mid;
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center; */
 }
 
 .profile-name {
   color: white;
   font-size: 26px;
+  text-shadow: 1px 1px 1px rgb(90, 90, 90);
 }
 
 .profile-row-two {

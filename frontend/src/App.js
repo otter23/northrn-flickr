@@ -13,6 +13,7 @@ import ExplorePage from './components/ExplorePage';
 
 import * as sessionActions from './store/session';
 import * as photosActions from './store/photos';
+import * as usersActions from './store/users';
 
 export default function App() {
   const sessionUser = useSelector((state) => state.session.user);
@@ -21,6 +22,7 @@ export default function App() {
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [isPhotosLoaded, setIsPhotosLoaded] = useState(false);
+  const [isUsersLoaded, setIsUsersLoaded] = useState(false);
   const [sessionUserId, setSessionUserId] = useState(null);
 
   //grab userId and imageId if exists from location.pathname
@@ -36,7 +38,12 @@ export default function App() {
     dispatch(photosActions.getAllPhotosThunk()).then(() =>
       setIsPhotosLoaded(true)
     );
-  }, [dispatch]);
+
+    //eager load all users in db into state
+    dispatch(usersActions.getAllUsersThunk()).then(() =>
+      setIsUsersLoaded(true)
+    );
+  }, [dispatch, sessionUserId]);
 
   //load userId to state once userSession is loaded
   useEffect(() => {
@@ -52,7 +59,7 @@ export default function App() {
   //ensure app rendering waits for sessionUser (if exists) to be loaded to state
   //TO DO: can remove isLoaded props most likely except for Navigation.
   // Or just make Navigation dependent on sessionUser only
-  if (isLoaded && isPhotosLoaded) {
+  if (isLoaded && isPhotosLoaded && isUsersLoaded) {
     return (
       <>
         <Switch>

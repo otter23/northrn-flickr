@@ -340,24 +340,23 @@ Modularity
 
     -controlled input changed to uncontrolled, must give value prop of input a default value of string value={title ?? ""}
 
+  React - general issues with race conditions and conditionals and isloaded
+  most of the time useEffect cansolve these issues and subscribing to the right state
+  also adding conditionals pre render
 
 
 TO DO:
-re-route upload page to image profile
-finish comments page
-about page
-add user api route and update "username" to read actual username
 add more seed data
-add array of cover photo options
+Add proper error handling to Dispatched and submitHandlers where needed
+Make sure properly receives error handling that was added to api routes and thunks
 
-FIX allPhotos state after delete
-CREATE delete allimage commens route
-
-
-Add proper error handling to components  to receive error handling that was added to api routes and thunks
+add Comment Update feature to imageProfile
+Add about page
+Add array of cover photo options
+Add array of userprofile options
+Add set interval for homepage
 
 change app load to be only depended on isLoaded, and then route specific waiting for other slices of redux state
-
 add get one photos api thunk
 
 
@@ -367,13 +366,5 @@ add get one photos api thunk
     //this gets parsed under the hood, so people can't just randomly peruse your site
     //that or you don't have urls at all
     //click handler in the img map list and dont user url param, pass down imageUrl form image object as prop
-
-make nav bars absolute  or overflow-y the main photo list container
-
-
-
-fixed delete/update photo action reducer and added delete imageComment action creator. updated n.flickr logo to thick. refactored ImageProfile forms to individual components. updated styling throughout.
-
-
 
 */

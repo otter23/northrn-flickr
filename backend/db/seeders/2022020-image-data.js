@@ -50,6 +50,11 @@ module.exports = {
         {userId: 3, title: "Bird3", description: "Caught this bird just as the sun peaked over the horizon",imageUrl: "https://images.pexels.com/photos/792416/pexels-photo-792416.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=1500&w=2520", },
         {userId: 3, title: "Bird4", description: "striking eagle",imageUrl: "https://images.pexels.com/photos/36846/bald-eagle-adler-bird-of-prey-raptor.jpg?auto=compress&cs=tinysrgb&dpr=2&h=1500&w=2520", },
         {userId: 3, title: "Bird5", description: "the cutest litttle ducklet!",imageUrl: "https://images.pexels.com/photos/162140/duckling-birds-yellow-fluffy-162140.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=1500&w=2520", },
+        {userId: 4, title: "Bird1", description: "What a wonderful Bird",imageUrl: "https://images.pexels.com/photos/45853/grey-crowned-crane-bird-crane-animal-45853.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=1500&w=2520", },
+        {userId: 4, title: "Bird2", description: "My favorite bird",imageUrl: "https://images.pexels.com/photos/416179/pexels-photo-416179.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=1500&w=2520", },
+        {userId: 4, title: "Bird3", description: "Caught this bird just as the sun peaked over the horizon",imageUrl: "https://images.pexels.com/photos/792416/pexels-photo-792416.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=1500&w=2520", },
+        {userId: 4, title: "Bird4", description: "striking eagle",imageUrl: "https://images.pexels.com/photos/36846/bald-eagle-adler-bird-of-prey-raptor.jpg?auto=compress&cs=tinysrgb&dpr=2&h=1500&w=2520", },
+        {userId: 4, title: "Bird5", description: "the cutest litttle ducklet!",imageUrl: "https://images.pexels.com/photos/162140/duckling-birds-yellow-fluffy-162140.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=1500&w=2520", },
       ],
       {}
     );

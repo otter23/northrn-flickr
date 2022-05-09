@@ -12,6 +12,7 @@ import { restoreCSRF, csrfFetch } from './store/utils/csrf';
 import * as sessionActions from './store/session';
 import * as photosActions from './store/photos';
 import * as commentsActions from './store/comments';
+import * as usersActions from './store/users';
 
 //create the redux store
 import configureStore from './store';
@@ -26,7 +27,8 @@ if (process.env.NODE_ENV !== 'production') {
   window.store = store; //easy access to store and its methods in browser console
   window.sessionActions = sessionActions; //test session redux state
   window.photosActions = photosActions; //test photos redux state
-  window.commentsActions = commentsActions; //test photos redux state
+  window.commentsActions = commentsActions; //test comments redux state
+  window.usersActions = usersActions; //test users redux state
 }
 
 //root wrapper used to wrap <App/>  in various provider components

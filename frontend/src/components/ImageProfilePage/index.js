@@ -9,6 +9,7 @@ import Navigation from '../Navigation';
 import Footer from '../Footer';
 import CommentForm from './CommentForm';
 import DeleteImageForm from './DeleteImageForm';
+import DeleteCommentForm from './DeleteCommentForm';
 // import UpdateImageForm from './UpdateImageForm';
 
 // import cartIcon from '../../images/icons/cart-icon.svg';
@@ -25,8 +26,8 @@ export default function ImageProfilePage({ isLoaded }) {
 
   // subscribe to redux session states
   const sessionUser = useSelector((state) => state.session.user);
-  // const users = useSelector((state) => state.users); //not built yet
-  const allPhotos = useSelector((state) => state.photos.allPhotos);
+  const users = useSelector((state) => state.users);
+  // const allPhotos = useSelector((state) => state.photos.allPhotos);
   const userPhotos = useSelector((state) => state.photos[userId]);
   const imageComments = useSelector((state) => state.comments[imageId]);
 
@@ -39,6 +40,10 @@ export default function ImageProfilePage({ isLoaded }) {
   //slices of react state for controlled inputs and error handling
   const [deleted, setDeleted] = useState(false);
   const [deleteFormHidden, setDeleteFormHidden] = useState(true);
+
+  const [commentToBeDeleted, setCommentToBeDeleted] = useState(null);
+  const [deleteCommentFormHidden, setDeleteCommentFormHidden] = useState(true);
+  const [highlightComment, setHighlightComment] = useState(false);
 
   const form = useRef(null);
   const [formHidden, setFormHidden] = useState(true);
@@ -60,8 +65,8 @@ export default function ImageProfilePage({ isLoaded }) {
   //ALT: could make new thunk to send a findOne() to API route and see if image or user exists in db...
   useEffect(() => {
     //check Redux State for user, returns -1 if no instances found, otherwise returns first index
-    const userExists = allPhotos?.findIndex(
-      (image) => image.userId === parseInt(userId)
+    const userExists = Object.values(users)?.findIndex(
+      (user) => user.id === parseInt(userId)
     );
 
     if (userExists !== -1) {
@@ -190,6 +195,15 @@ export default function ImageProfilePage({ isLoaded }) {
           imageId={imageId}
         />
 
+        {/* {!deleteCommentFormHidden && ( */}
+        <DeleteCommentForm
+          setDeleteCommentFormHidden={setDeleteCommentFormHidden}
+          deleteCommentFormHidden={deleteCommentFormHidden}
+          commentId={commentToBeDeleted}
+          imageId={imageId}
+        />
+        {/* )} */}
+
         <div className='imageP-root-inner'>
           <Navigation isLoaded={isLoaded} />
           <div className='imageP-photo-div'>
@@ -252,7 +266,9 @@ export default function ImageProfilePage({ isLoaded }) {
 
                 <div className='imageP-username-title-div'>
                   <div className='imageP-username'>
-                    <Link to={`/photos/${userId}`}>username</Link>
+                    <Link to={`/photos/${userId}`}>
+                      {users[userId]?.username ?? 'username'}
+                    </Link>
                   </div>
                   <div
                     className={`imageP-title-desc-div
@@ -359,28 +375,62 @@ export default function ImageProfilePage({ isLoaded }) {
                   Object.values(imageComments).map((comment) => {
                     return (
                       <div
-                        key={comment.id}
-                        className='imageP-comment-container'
+                        key={comment?.id}
+                        className={`imageP-comment-container`}
                       >
                         <Link
-                          to={`/photos/${comment.userId}`}
+                          to={`/photos/${comment?.userId}`}
                           className='imageP-comment-image'
                           style={{ backgroundImage: `url(${userIcon})` }}
                         ></Link>
-                        <div className='imageP-comment-right-div'>
+                        <div
+                          className={`imageP-comment-right-div
+                        ${highlightComment ? 'highlight' : ''}
+                        `}
+                        >
                           {/* add date of comment */}
                           <div className='imageP-comment-username-div'>
-                            <Link to={`/photos/${comment.userId}`}>
-                              username
+                            <Link to={`/photos/${comment?.userId}`}>
+                              {users[comment?.userId]?.username ?? 'username'}
                             </Link>
                           </div>
-                          <div>{comment.comment}</div>
+                          <div>{comment?.comment}</div>
+
+                          <div
+                            type='button'
+                            className={`imageP-delete-comment-button
+                            ${
+                              sessionUser?.id === comment?.userId
+                                ? ''
+                                : 'hidden'
+                            }
+                            `}
+                            onClick={() => {
+                              setCommentToBeDeleted(comment?.id);
+                              setDeleteCommentFormHidden((prev) => !prev);
+                              document
+                                .getElementById('root')
+                                .classList.toggle('overflow');
+                            }}
+                          >
+                            <span
+                              className='material-symbols-outlined'
+                              onMouseEnter={() => setHighlightComment(true)}
+                              onMouseOut={() => setHighlightComment(false)}
+                            >
+                              delete
+                            </span>
+                          </div>
                         </div>
                       </div>
                     );
                   })}
 
-                <div className='imageP-newComment-container'>
+                <div
+                  className={`imageP-newComment-container ${
+                    !sessionUser && 'hidden'
+                  }`}
+                >
                   <div>
                     <div
                       className='imageP-newComment-image'
@@ -391,6 +441,7 @@ export default function ImageProfilePage({ isLoaded }) {
                     setErrors={setErrors}
                     sessionUser={sessionUser}
                     imageId={imageId}
+                    isAuthorized={isAuthorized}
                   />
                 </div>
               </div>
