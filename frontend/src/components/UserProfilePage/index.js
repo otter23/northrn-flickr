@@ -39,6 +39,8 @@ export default function UserProfilePage({ isLoaded }) {
       (image) => image.userId === parseInt(userId)
     );
 
+    console.log('USER', userExists);
+
     if (userExists !== -1) {
       //update state if user exists
       dispatch(photosActions.getUserPhotosThunk(userId)).then(() => {});

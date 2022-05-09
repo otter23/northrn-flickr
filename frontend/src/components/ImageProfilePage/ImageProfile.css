@@ -36,6 +36,23 @@
   color: rgb(164, 8, 8);
 }
 
+.imageP-delete-comment-form-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  background-color: rgba(243, 245, 246, 0.7);
+  width: 100vw;
+  min-height: 100vh;
+  /* height: 100%; */
+  /* height: auto; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 4000;
+}
+
 .imageP-delete-form-container {
   position: fixed;
   top: 0;
@@ -52,6 +69,7 @@
   align-items: center;
   z-index: 4000;
 }
+
 .imageP-delete-text1 {
   display: flex;
   align-items: center;
@@ -378,7 +396,13 @@
   gap: 2px;
   padding-bottom: 15px;
   font-size: 14px;
+  position: relative;
+  width: 700px;
 }
+
+/* .highlight:hover {
+  border: 1px solid var(--mid4);
+} */
 
 .imageP-comment-username-div a {
   text-decoration: none;
@@ -387,6 +411,13 @@
 
 .imageP-comment-username-div a:hover {
   text-decoration: underline;
+}
+
+.imageP-delete-comment-button {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  cursor: pointer;
 }
 
 .imageP-newComment-container {

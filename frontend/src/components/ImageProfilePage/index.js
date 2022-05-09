@@ -9,6 +9,7 @@ import Navigation from '../Navigation';
 import Footer from '../Footer';
 import CommentForm from './CommentForm';
 import DeleteImageForm from './DeleteImageForm';
+import DeleteCommentForm from './DeleteCommentForm';
 // import UpdateImageForm from './UpdateImageForm';
 
 // import cartIcon from '../../images/icons/cart-icon.svg';
@@ -39,6 +40,10 @@ export default function ImageProfilePage({ isLoaded }) {
   //slices of react state for controlled inputs and error handling
   const [deleted, setDeleted] = useState(false);
   const [deleteFormHidden, setDeleteFormHidden] = useState(true);
+
+  const [commentToBeDeleted, setCommentToBeDeleted] = useState(null);
+  const [deleteCommentFormHidden, setDeleteCommentFormHidden] = useState(true);
+  const [highlightComment, setHighlightComment] = useState(false);
 
   const form = useRef(null);
   const [formHidden, setFormHidden] = useState(true);
@@ -189,6 +194,15 @@ export default function ImageProfilePage({ isLoaded }) {
           userId={userId}
           imageId={imageId}
         />
+
+        {/* {!deleteCommentFormHidden && ( */}
+        <DeleteCommentForm
+          setDeleteCommentFormHidden={setDeleteCommentFormHidden}
+          deleteCommentFormHidden={deleteCommentFormHidden}
+          commentId={commentToBeDeleted}
+          imageId={imageId}
+        />
+        {/* )} */}
 
         <div className='imageP-root-inner'>
           <Navigation isLoaded={isLoaded} />
@@ -360,14 +374,18 @@ export default function ImageProfilePage({ isLoaded }) {
                     return (
                       <div
                         key={comment.id}
-                        className='imageP-comment-container'
+                        className={`imageP-comment-container`}
                       >
                         <Link
                           to={`/photos/${comment.userId}`}
                           className='imageP-comment-image'
                           style={{ backgroundImage: `url(${userIcon})` }}
                         ></Link>
-                        <div className='imageP-comment-right-div'>
+                        <div
+                          className={`imageP-comment-right-div
+                        ${highlightComment ? 'highlight' : ''}
+                        `}
+                        >
                           {/* add date of comment */}
                           <div className='imageP-comment-username-div'>
                             <Link to={`/photos/${comment.userId}`}>
@@ -375,6 +393,28 @@ export default function ImageProfilePage({ isLoaded }) {
                             </Link>
                           </div>
                           <div>{comment.comment}</div>
+
+                          <div
+                            type='button'
+                            className={`imageP-delete-comment-button
+                            ${sessionUser.id === comment.userId ? '' : 'hidden'}
+                            `}
+                            onClick={() => {
+                              setCommentToBeDeleted(comment.id);
+                              setDeleteCommentFormHidden((prev) => !prev);
+                              document
+                                .getElementById('root')
+                                .classList.toggle('overflow');
+                            }}
+                          >
+                            <span
+                              className='material-symbols-outlined'
+                              onMouseEnter={() => setHighlightComment(true)}
+                              onMouseOut={() => setHighlightComment(false)}
+                            >
+                              delete
+                            </span>
+                          </div>
                         </div>
                       </div>
                     );
