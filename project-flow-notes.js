@@ -346,18 +346,15 @@ Modularity
 
 
 TO DO:
-
-Add proper error handling to components  to receive error handling that was added to api routes and thunks
-
-
-add Comment Update to imageProfile
-Add about page
 add more seed data
-add array of cover photo options
-add array of userprofile options
-add set interval for homepage
+Add proper error handling to Dispatched and submitHandlers where needed
+Make sure properly receives error handling that was added to api routes and thunks
 
-
+add Comment Update feature to imageProfile
+Add about page
+Add array of cover photo options
+Add array of userprofile options
+Add set interval for homepage
 
 change app load to be only depended on isLoaded, and then route specific waiting for other slices of redux state
 add get one photos api thunk
@@ -369,12 +366,5 @@ add get one photos api thunk
     //this gets parsed under the hood, so people can't just randomly peruse your site
     //that or you don't have urls at all
     //click handler in the img map list and dont user url param, pass down imageUrl form image object as prop
-
-make nav bars absolute  or overflow-y the main photo list container
-
-
-used user store to fix routing for new user signup, added usernames,
-added back photostream link, added proper authorization to comment actions
-
 
 */
