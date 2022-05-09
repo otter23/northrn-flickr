@@ -29,6 +29,7 @@ const DeleteImageForm = ({
 
       if (response.ok) {
         setDeleted(true);
+        document.getElementById('root').classList.remove('overflow');
         return;
       }
     } catch (errorResponse) {
@@ -68,7 +69,7 @@ const DeleteImageForm = ({
               type='button'
               onClick={() => {
                 setDeleteFormHidden(true);
-                document.getElementById('root').classList.toggle('overflow');
+                document.getElementById('root').classList.remove('overflow');
               }}
             >
               Cancel

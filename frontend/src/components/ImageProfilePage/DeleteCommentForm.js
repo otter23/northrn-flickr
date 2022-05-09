@@ -16,6 +16,7 @@ const DeleteCommentForm = ({
   const handleDeleteSubmit = async (e) => {
     e.preventDefault();
     setDeleteErrors([]); //reset error state
+    document.getElementById('root').classList.remove('overflow');
 
     // send request to backend API image route (DELETE api/image/:imageId)
     try {
@@ -66,7 +67,7 @@ const DeleteCommentForm = ({
               type='button'
               onClick={() => {
                 setDeleteCommentFormHidden(true);
-                document.getElementById('root').classList.toggle('overflow');
+                document.getElementById('root').classList.remove('overflow');
               }}
             >
               Cancel

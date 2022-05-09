@@ -56,6 +56,10 @@ export default function App() {
       dispatch(photosActions.getUserPhotosThunk(sessionUserId));
   }, [sessionUserId, dispatch]);
 
+  // useEffect(() => {
+  //   document.getElementById('root').classList.remove('overflow');
+  // });
+
   //ensure app rendering waits for sessionUser (if exists) to be loaded to state
   //TO DO: can remove isLoaded props most likely except for Navigation.
   // Or just make Navigation dependent on sessionUser only
