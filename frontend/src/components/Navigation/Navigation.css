@@ -6,6 +6,11 @@
 .main-nav {
   background-color: var(--nav);
   height: 48px;
+  position: sticky;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  z-index: 2000;
 }
 
 .main-nav-inner {
@@ -32,8 +37,8 @@
 
 .main-nav-logo {
   /* width: 98px; */
-  /* height: 21.6px; */
-  height: 24px;
+  height: 21.6px;
+  /* height: 24px; */
 }
 
 .main-nav-photostream {
@@ -200,6 +205,7 @@
 /* AUTH NAV */
 
 .upload-nav {
+  /* TO DO UPDATE TO STICKY */
   background-color: rgb(249, 249, 249);
   height: 48px;
   width: 100%;
@@ -217,9 +223,9 @@
 
 .upload-nav-logo {
   /* when imported image link doesn't need resizing */
-  /* height: 21.6px; */
+  height: 21.6px;
   /* width: 98px; */
-  height: 24px;
+  /* height: 24px; */
 }
 
 .upload-nav-inner li {
@@ -266,6 +272,7 @@
   color: var(--mid3);
   font-weight: 600;
 }
+
 /*  */
 /*  */
 /*  */
@@ -290,9 +297,10 @@
 
 .auth-nav-logo {
   /* width: 98px; */
-  /* height: 21.6px; */
-  height: 24px;
+  height: 21.6px;
+  /* height: 24px; */
 }
+
 /*  */
 /*  */
 /*  */
@@ -301,9 +309,12 @@
 .splash-nav {
   background-color: rgba(0, 0, 0, 0.25);
   width: 100%;
-  position: absolute;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 2000;
+
   display: flex;
-  z-index: 2;
 }
 
 .splash-nav-inner {
@@ -318,8 +329,8 @@
 .splash-nav-logo {
   /* width: 98px; */
   /* original doesn't need height set */
-  /* height: 21.6px; */
-  height: 24px;
+  height: 21.6px;
+  /* height: 24px; */
 }
 
 .splash-nav-right {

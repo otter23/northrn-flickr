@@ -2,7 +2,7 @@ import './UploadPage.css';
 
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect, Link, useHistory } from 'react-router-dom';
 
 import * as photosActions from '../../store/photos';
 
@@ -13,6 +13,7 @@ import flickrIcon from '../../images/n_flickr_birds.svg';
 //can only visit this page if logged in
 export default function UploadPage({ isLoaded }) {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   // subscribe to session redux State
   const sessionUser = useSelector((state) => state.session.user);
@@ -82,9 +83,8 @@ export default function UploadPage({ isLoaded }) {
         setDescription('');
         setImageUrl('');
 
-        return;
+        return history.push(`/photos/${userId}/${response.userPhoto.id}`);
         //once page built can have redirect here:
-        // return <Redirect to={`/photos/${userId}`} />;
       }
     } catch (errorResponse) {
       //TO DO add sequelize error handling parsing
@@ -96,6 +96,8 @@ export default function UploadPage({ isLoaded }) {
   // If not logged-in, redirect to login page without a render
   if (!sessionUser) {
     return <Redirect to='/login' />;
+    // } else if (uploadSuccess) { //loses race condition
+    //   return <Redirect to={`/photos/${userId}/${uploadedImg.id}`} />;
   } else {
     return (
       <>

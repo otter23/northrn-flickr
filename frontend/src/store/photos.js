@@ -200,7 +200,9 @@ export default function photosReducer(state = initialState, action) {
       userId = action.payload.userPhoto.userId;
       imageId = action.payload.userPhoto.id;
       //find index of image to update
-      index = newState.allPhotos.findIndex((image) => image.id === imageId);
+      index = newState.allPhotos.findIndex(
+        (image) => image.id === parseInt(imageId)
+      );
       //replace image in allPhotos array
       newState.allPhotos[index] = action.payload.userPhoto;
       //replace image in userPhoto obj
@@ -210,8 +212,11 @@ export default function photosReducer(state = initialState, action) {
     case DELETE_PHOTO:
       userId = action.payload.userId;
       imageId = action.payload.imageId;
+
       //find index of image to delete
-      index = newState.allPhotos.findIndex((image) => image.id === imageId);
+      index = newState.allPhotos.findIndex(
+        (image) => image.id === parseInt(imageId)
+      );
       //remove image from allPhotos array
       newState.allPhotos.splice(index, 1);
       //remove image from userPhoto obj

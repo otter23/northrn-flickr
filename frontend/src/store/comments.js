@@ -5,10 +5,13 @@ import { csrfFetch } from './utils/csrf'; //restoreCSRF
 //ACTION TYPES:
 const GET_ALL_COMMENTS = 'comments/getAllComments';
 
-const GET_IMAGE_COMMENTS = 'comments/getUserComments';
+const GET_IMAGE_COMMENTS = 'comments/getImageComments';
 const ADD_COMMENT = 'comments/addComment';
 const UPDATE_COMMENT = 'comments/updateComment';
 const DELETE_COMMENT = 'comments/deleteComment';
+
+//USED only to update the store after an image is deleted, which cascades and deleted all image comments
+const DELETE_IMAGE_COMMENTS = 'comments/deleteImageComments';
 
 //REGULAR ACTION CREATORS (implicit returns)
 
@@ -40,6 +43,11 @@ export const updateComment = (userComment) => ({
 export const deleteComment = (imageId, commentId) => ({
   type: DELETE_COMMENT,
   payload: { imageId, commentId },
+});
+
+export const deleteImageComments = (imageId) => ({
+  type: DELETE_IMAGE_COMMENTS,
+  payload: { imageId },
 });
 
 //THUNK ACTION CREATORS:
@@ -216,7 +224,7 @@ export default function commentsReducer(state = initialState, action) {
       commentId = action.payload.userComment.id;
       //find index of comment to update
       index = newState.allComments.findIndex(
-        (comment) => comment.id === commentId
+        (comment) => comment.id === parseInt(commentId)
       );
       //replace comment in allComments array
       newState.allComments[index] = action.payload.userComment;
@@ -229,13 +237,32 @@ export default function commentsReducer(state = initialState, action) {
       commentId = action.payload.commentId;
       //find index of comment to delete
       index = newState.allComments.findIndex(
-        (comment) => comment.id === commentId
+        (comment) => comment.id === parseInt(commentId)
       );
       //remove comment from allComments array
       newState.allComments.splice(index, 1);
-      //remove comment from userComment obj
+      //remove comment from imageComment obj
       delete newState[imageId][commentId];
       return newState;
+
+    case DELETE_IMAGE_COMMENTS:
+      imageId = action.payload.imageId;
+
+      //NOTE THIS IS NOT SCALABLE, prob faster to just call Get_all_Comment instead
+      //Remove each comment from allComments
+      Object.keys(newState[imageId]).forEach((commentId) => {
+        //find index of comment to delete
+        index = newState.allComments.findIndex(
+          (comment) => comment.id === commentId
+        );
+        //remove comment from allComments array
+        newState.allComments.splice(index, 1);
+      });
+
+      //remove imageObj from state
+      delete newState[imageId];
+      return newState;
+
     default:
       return state;
   }
@@ -270,6 +297,9 @@ export default function commentsReducer(state = initialState, action) {
 
 //DELETE
 // window.store.dispatch(window.commentsActions.deleteCommentThunk(1, 11)).catch(async (res) => { const resBody= await res.json(); console.log(res,resBody)})
+
+//DELETE IMAGE COMMENTS from store
+// window.store.dispatch(window.commentsActions.deleteImageComments(22))
 
 //EXAMPLE COMPONENT CODE WITH ERROR HANDLER
 // try {

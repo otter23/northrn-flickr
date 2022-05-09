@@ -66,6 +66,10 @@
 
 .profile-row-two {
   background-color: white;
+  position: sticky;
+  top: 48px;
+  left: 0px;
+  z-index: 1000;
 }
 
 .profile-row-two li {
@@ -107,33 +111,33 @@ li.profile-photostream a {
   margin-bottom: 5px;
 } */
 
-.profile-photo-list-scroll {
+.profile-photo-body-container {
   display: flex;
   flex-direction: column;
+  /* justify-content: center; */
   align-items: center;
-  background-color: rgb(243, 245, 246);
+  background-color: var(--bg1);
+  /* height: 100%; */
+  height: auto;
   width: 100%;
-  height: 100%;
-  overflow-y: auto;
+  flex-grow: 1;
 }
 
 .profile-photo-list-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  width: 80%;
-  /* height: 100%; */
+  background-color: var(--bg1);
 
   flex-grow: 1;
-  background-color: rgb(243, 245, 246);
-  padding: 20px 50px 20px 50px;
+  width: 80%;
+  /* height: 100%; */
+  /* height: auto; */
 
-  /* align-self: flex-start;
-    padding-left: 20px; */
+  padding: 20px 50px 20px 50px;
 }
 
-/* instead of inner div overflow, just make nav and footer absolute and overflow of page should scroll between em */
 .profile-photo-list-inner-container {
   display: flex;
   flex-wrap: wrap;
@@ -146,6 +150,7 @@ li.profile-photostream a {
   width: 100%;
   /* max-height: 900px; */
   /* height: 100%; */
+  /* height: auto; */
   flex: 1;
   gap: 8px;
 }
@@ -153,14 +158,10 @@ li.profile-photostream a {
 .profile-photo-list-container li {
   list-style-type: none;
   display: inline-flex;
-
-  /* display: inline-flex; */
 }
 
 .profile-photo-list-container li a {
   display: inline-flex;
-
-  /* display: inline-flex; */
 }
 
 .profile-photo-list-container img {
@@ -175,5 +176,8 @@ li.profile-photostream a {
 }
 
 .profile-photo-list-container img:hover {
-  transform: scale(1.05);
+  /* transform: scale(1.05); */
+  transform: scale(1.2);
+
+  box-shadow: 0px 0px 1px 4px rgba(60, 145, 214, 1);
 }

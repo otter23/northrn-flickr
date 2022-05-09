@@ -7,7 +7,9 @@ import { Redirect, NavLink, Link, useParams } from 'react-router-dom';
 import Navigation from '../Navigation';
 import Footer from '../Footer';
 import userCover from '../../images/demoUser-cover.jpg';
+// https://www.pexels.com/photo/low-angle-photography-of-flock-of-bird-flying-1578310/
 import userIcon from '../../images/demoUser-icon.jpg';
+// https://www.pexels.com/photo/grey-and-black-camera-on-green-background-1983037/
 
 export default function UserProfilePage({ isLoaded }) {
   const dispatch = useDispatch();
@@ -137,7 +139,7 @@ export default function UserProfilePage({ isLoaded }) {
         </div>
 
         <div className='profile-toolbar'></div>
-        <div className='profile-photo-list-scroll'>
+        <div className='profile-photo-body-container'>
           <div className='profile-photo-list-container'>
             <ul className='profile-photo-list-inner-container'>
               {userPhotos &&
