@@ -340,22 +340,26 @@ Modularity
 
     -controlled input changed to uncontrolled, must give value prop of input a default value of string value={title ?? ""}
 
+  React - general issues with race conditions and conditionals and isloaded
+  most of the time useEffect cansolve these issues and subscribing to the right state
+  also adding conditionals pre render
 
 
 TO DO:
-re-route upload page to image profile
+
 Add proper error handling to components  to receive error handling that was added to api routes and thunks
 
+
 add Comment Update to imageProfile
-about page
-add user api route and update "username" to read actual username
+Add about page
 add more seed data
 add array of cover photo options
+add array of userprofile options
+add set interval for homepage
 
 
 
 change app load to be only depended on isLoaded, and then route specific waiting for other slices of redux state
-
 add get one photos api thunk
 
 
@@ -369,10 +373,8 @@ add get one photos api thunk
 make nav bars absolute  or overflow-y the main photo list container
 
 
-
-fix routing for new user  - need user store...
-add flavicon
-
+used user store to fix routing for new user signup, added usernames,
+added back photostream link, added proper authorization to comment actions
 
 
 */

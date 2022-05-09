@@ -128,8 +128,8 @@ export default function Navigation({ isLoaded }) {
               preserveAspectRatio='xMidYMid meet'
             />
           </NavLink>
-
-          {sessionUser && !userProfile && (
+          {/* && !userProfile */}
+          {sessionUser && (
             <div className='main-nav-photostream'>
               <Link to={`/photos/${sessionUser?.id}`}> Your Photostream </Link>
             </div>
