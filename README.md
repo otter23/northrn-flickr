@@ -6,17 +6,22 @@ Git Wiki: https://github.com/otter23/northrn-flickr/wiki
 
 ## Northrn Flickr at a Glance
 
-Northn Flickr is a full stack application that allows users to browse, add, and comment on photos. Users are not required to sign up for an account if they are just browsing and searching for photos. Logged in users can add a photo, create an album of photos, add comments to a photo, and edit/delete their own comments. Currently, Northn Flickr is seeded with xx bird photos from all over the United States.
+Northn Flickr is a full stack application that allows users to browse, add, and comment on bird photos. Users are not required to sign up for an account if they are just browsing and searching for photos. Logged in users can add a photo, update their own photo's title and description, and remove their own photo. A logged in user can also add comments to a photo, and delete their own comments. Share your bird photos with the world and engage with your fellow birding community.
+
+## Application Architecture and Technologies
+
+- Javascript, React.js, Redux, HTML, CSS, Express, PostgreSQL, Sequelize
 
 ## Getting Development Environment Up And Running
 
-- Git clone repo to your local machine
+- Clone this repository (only this branch) to your local machine:
+  - `bash git clone https://github.com/otter23/northrn-flickr.git `
 - Install Dependencies:
   - run: `npm install` in the root folder
 - In /backend folder
-  - Create a '.env' file that mirrors the '.env.example' file
+  Create a '.env' file based on the 'example.emv' with proper settings for your development environment
   - Create a user in your local postgreSQL database that matches your .env
-    -run: `psql -c "CREATE USER <username> PASSWORD '<password>' CREATEDB"`
+    - run: `psql -c "CREATE USER <username> PASSWORD '<password>' CREATEDB"`
   - run the following commands in order:
     - `npx dotenv sequelize create:db`
     - `npx dotenv sequelize db:migrate`
@@ -28,9 +33,15 @@ Northn Flickr is a full stack application that allows users to browse, add, and 
   - run: `cd frontend/`
   - run: `npm start`
 
-## Application Architecture and Technologies
+## Challenges
 
-Frontend: React + Redux + vanilla CSS
-Backend: Express + PostgreSQL database
+- React race conditions, routing and redirects:
 
-## Challenges and Solutions
+  - App loading the wrong routes before user session or other redux state data is loaded
+  - Parent rendering before state updated by child
+  - Solved via adding conditionals based on state variables, optional chaining, useEffects to ensure all routes can render without errors
+  - adding context would have helped in a couple situations to persist non database data between renders
+
+- ## CSS
+
+  - Working without a framework can be very challenging to get things to behave as intended.
