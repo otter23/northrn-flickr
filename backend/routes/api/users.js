@@ -56,15 +56,18 @@ router.get(
   '/ids',
   asyncHandler(async (req, res) => {
     //query db for users
-    const users = await User.findAll({});
+    const users = await User.findAll();
 
     //grab only userIds
-    const userIds = {};
+    const safeUsers = {};
     users.forEach((user) => {
-      userIds[user.id] = user.id;
+      let safeUser = {};
+      safeUser.id = user.id;
+      safeUser.username = user.username;
+      safeUsers[user.id] = safeUser;
     });
 
-    return res.json(userIds);
+    return res.json(safeUsers);
   })
 );
 

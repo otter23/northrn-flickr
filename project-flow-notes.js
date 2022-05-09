@@ -344,17 +344,15 @@ Modularity
 
 TO DO:
 re-route upload page to image profile
-finish comments page
+Add proper error handling to components  to receive error handling that was added to api routes and thunks
+
+add Comment Update to imageProfile
 about page
 add user api route and update "username" to read actual username
 add more seed data
 add array of cover photo options
 
-FIX allPhotos state after delete
-CREATE delete allimage commens route
 
-
-Add proper error handling to components  to receive error handling that was added to api routes and thunks
 
 change app load to be only depended on isLoaded, and then route specific waiting for other slices of redux state
 
@@ -372,7 +370,8 @@ make nav bars absolute  or overflow-y the main photo list container
 
 
 
-fixed delete/update photo action reducer and added delete imageComment action creator. updated n.flickr logo to thick. refactored ImageProfile forms to individual components. updated styling throughout.
+fix routing for new user  - need user store...
+add flavicon
 
 
 
