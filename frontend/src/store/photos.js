@@ -77,17 +77,42 @@ export const getUserPhotosThunk = (userId) => async (dispatch) => {
 };
 
 //request to backend to add a single user photo
-export const addPhotoThunk = (formData) => async (dispatch) => {
-  const { userId, title, description, imageUrl } = formData;
+// export const addPhotoThunk = (formData) => async (dispatch) => {
+//   const { userId, title, description, imageUrl } = formData;
+
+//   const response = await csrfFetch('/api/images', {
+//     method: 'POST',
+//     body: JSON.stringify({
+//       userId,
+//       title,
+//       description,
+//       imageUrl,
+//     }),
+//   });
+
+//   if (response.ok) {
+//     const userPhoto = await response.json();
+//     dispatch(addPhoto(userPhoto));
+//     response.userPhoto = userPhoto;
+//     return response;
+//   } else throw response;
+// };
+
+//request to backend to add a single user photo
+export const addPhotoThunk = (data) => async (dispatch) => {
+  const { userId, title, description, image } = data;
+  const formData = new FormData();
+  formData.append('userId', userId);
+  formData.append('title', title);
+  formData.append('description', description);
+
+  // for single file
+  if (image) formData.append('image', image);
 
   const response = await csrfFetch('/api/images', {
     method: 'POST',
-    body: JSON.stringify({
-      userId,
-      title,
-      description,
-      imageUrl,
-    }),
+    headers: { 'Content-Type': 'multipart/form-data' },
+    body: formData,
   });
 
   if (response.ok) {
