@@ -18,7 +18,11 @@ const app = express();
 //ADD MIDDLEWARE
 app.use(morgan('dev'));
 app.use(cookieParser()); //parses cookies in req
-app.use(express.json()); //parses all incoming json req.body
+
+//for aws, middleware thhat parses incoming requests with urlencoded payloads and is based on body-parser.
+app.use(express.urlencoded({ extended: false }));
+//parses all incoming json req.body
+app.use(express.json());
 
 // ADD SECURITY MIDDLEWARE:
 
