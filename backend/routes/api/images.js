@@ -46,9 +46,9 @@ const validateImage = [
   // check('description')
   //   .isLength({ max: 255 })
   //   .withMessage('Description can only be 255 characters'),
-  check('imageUrl')
-    .exists({ checkFalsy: true })
-    .withMessage('Please provide an ImageUrl'),
+  // check('imageUrl')
+  //   .exists({ checkFalsy: true })
+  //   .withMessage('Please provide an ImageUrl'),
   handleValidationErrors,
 ];
 
@@ -82,15 +82,16 @@ const validateImage = [
 router.post(
   '/',
   requireAuth, //if no user info in verified jwt, then will throw error
-  singleMulterUpload('image'), //adds file to req
+  singleMulterUpload('image'), //adds image file to req
   validateImage, //if validation errors, errors thrown with array of error messages
   asyncHandler(async (req, res) => {
     const sessionUserId = parseInt(req.user.id, 10); //ensures will only succeed if requireAuth succeeds
     const { title, description, userId } = req.body;
 
-    const imageUrl = await singlePublicFileUpload(req.file);
-
-    if (sessionUserId === userId) {
+    if (sessionUserId === parseInt(userId, 10)) {
+      //uploads file to aws and returns source url
+      const imageUrl = await singlePublicFileUpload(req.file);
+      //add image to database
       const newImage = await Image.create({
         userId,
         title,
