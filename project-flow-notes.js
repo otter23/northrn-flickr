@@ -162,6 +162,11 @@ Heroku CLI - Connect to DB
   heroku run npm run sequelize db:migrate
   heroku run npm run sequelize db:seed:all
 
+  heroku run npx sequelize-cli db:seed:undo:all
+  heroku run npx sequelize-cli db:migrate:undo:all
+  heroku run npx sequelize-cli db:migrate
+  heroku run npx sequelize-cli db:seed:all
+
 
 EXPRESS AUTHENTICATION FLOW:
 
@@ -341,12 +346,24 @@ Modularity
     -controlled input changed to uncontrolled, must give value prop of input a default value of string value={title ?? ""}
 
   React - general issues with race conditions and conditionals and isloaded
-  most of the time useEffect cansolve these issues and subscribing to the right state
+  most of the time useEffect can solve these issues and subscribing to the right state
   also adding conditionals pre render
 
 
 TO DO:
 add more seed data
+fix title update bug, should auto focus title text, make form closing modal less sensitive to pressing enter
+delete has error messages
+add hover over edit icon for photo title.description
+create attempted comment redirect to login page
+add custom alert that waits for async
+
+"onUpdate and onDelete options to the association calls"
+update delete api routes to Cascade, need to update model first, since delete cascade is set to null by default
+https://stackoverflow.com/questions/23128816/sequelize-js-ondelete-cascade-is-not-deleting-records-sequelize
+
+Welcome page with about you and a continue to app "thanks for checking out m app!"
+
 Add proper error handling to Dispatched and submitHandlers where needed
 Make sure properly receives error handling that was added to api routes and thunks
 
@@ -366,5 +383,8 @@ add get one photos api thunk
     //this gets parsed under the hood, so people can't just randomly peruse your site
     //that or you don't have urls at all
     //click handler in the img map list and dont user url param, pass down imageUrl form image object as prop
+
+
+utilize context
 
 */

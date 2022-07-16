@@ -261,6 +261,7 @@ export default function Navigation({ isLoaded }) {
         <Route path='/login'>{authNav}</Route>
         <Route path='/sign-up'>{authNav}</Route>
         <Route path='/explore'>{mainNav}</Route>
+        <Route path='/search'>{mainNav}</Route>
         <Route exact path='/photos/:userId(\d+)'>
           {mainNav}
         </Route>

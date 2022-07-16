@@ -10,6 +10,7 @@ import UserProfilePage from './components/UserProfilePage';
 import ImageProfilePage from './components/ImageProfilePage';
 import UploadPage from './components/UploadPage';
 import ExplorePage from './components/ExplorePage';
+import SearchPage from './components/SearchPage';
 
 import * as sessionActions from './store/session';
 import * as photosActions from './store/photos';
@@ -87,6 +88,10 @@ export default function App() {
 
           <Route path='/sign-up'>
             <SignupFormPage isLoaded={isLoaded} />
+          </Route>
+
+          <Route path='/search'>
+            <SearchPage isLoaded={isLoaded} />
           </Route>
 
           {/* Note: also matches /photos/:userId/  */}

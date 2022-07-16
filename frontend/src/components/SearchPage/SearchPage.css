@@ -1,0 +1,122 @@
+/* .search-root-inner {
+  height: 100%;
+} */
+
+.search-row-two {
+  background-color: white;
+  position: sticky;
+  top: 48px;
+  left: 0px;
+  z-index: 1000;
+}
+
+.search-row-two li {
+  list-style-type: none;
+}
+
+.search-row-two-inner {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.search-row-two-inner a {
+  text-decoration: none;
+  padding: 12px 20px;
+  color: rgb(0, 145, 220);
+}
+
+.search-trending,
+.search-events {
+  cursor: default;
+  /* make links again in future work */
+  color: rgb(102, 102, 102);
+}
+
+li.search-search-link-container a {
+  cursor: pointer;
+}
+
+.search-search-link-active {
+  border-bottom: 3px solid rgb(0, 145, 220);
+}
+
+.search-body-container {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  background-color: var(--bg1);
+  /* height: 100%; */
+  height: auto;
+  width: 100%;
+  flex-grow: 1;
+}
+
+.search-text {
+  font-size: 24px;
+  font-weight: 300;
+  margin: 20px 0px 5px 0px;
+  width: 80%;
+}
+
+.search-photo-list-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: var(--bg1);
+
+  flex-grow: 1;
+  width: 80%;
+  /* height: 100%; */
+  /* height: auto; */
+
+  padding: 5px 50px 20px 50px;
+}
+
+.search-photo-list-inner-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  align-content: flex-start;
+  margin: 0px;
+  padding: 0px;
+  padding-bottom: 20px;
+  width: 100%;
+  /* max-height: 700px; */
+  /* height: 100%; */
+  /* height: auto; */
+  flex: 1;
+  gap: 8px;
+}
+
+.search-photo-list-container li {
+  list-style-type: none;
+  display: inline-flex;
+}
+
+.search-photo-list-container li a {
+  display: inline-flex;
+}
+
+.search-photo-list-container img {
+  object-fit: contain;
+  width: 100%;
+  max-height: 200px;
+  /* max-width: 504px;
+  max-height: 300px;
+  width: auto;
+  height: auto; */
+  transition: transform 0.5s ease-in-out;
+  /* transition: box-shadow 0.5s ease-in-out; */
+}
+
+.search-photo-list-container img:hover {
+  /* transform: scale(1.05); */
+  transform: scale(1.05);
+  /* border: 2px solid rgba(60, 145, 214, 1); */
+  /* offset-x | offset-y | blur-radius | spread-radius | color */
+  box-shadow: 0px 0px 1px 4px rgba(60, 145, 214, 1);
+}
