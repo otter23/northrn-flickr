@@ -14,6 +14,7 @@ const s3 = new AWS.S3({ apiVersion: '2006-03-01' });
 
 // --------------------------- Public UPLOAD ------------------------
 
+//returns a promise that returns the file URL that you want to save to DB
 const singlePublicFileUpload = async (file) => {
   const { originalname, mimetype, buffer } = await file;
   const path = require('path');
@@ -39,7 +40,7 @@ const multiplePublicFileUpload = async (files) => {
   );
 };
 
-// --------------------------- Prviate UPLOAD ------------------------
+// --------------------------- Private UPLOAD ------------------------
 
 const singlePrivateFileUpload = async (file) => {
   const { originalname, mimetype, buffer } = await file;
@@ -84,10 +85,35 @@ const storage = multer.memoryStorage({
   },
 });
 
+//generates the middleware necessary to convert the data from your form into readable fields and files
 const singleMulterUpload = (nameOfKey) =>
   multer({ storage: storage }).single(nameOfKey);
+
 const multipleMulterUpload = (nameOfKey) =>
   multer({ storage: storage }).array(nameOfKey);
+
+// ------------------------ Delete file from AWS ---------------------------
+
+const awsDeleteFiles = async (...files) => {
+  const objects = files.map((file) => {
+    return { Key: file };
+  });
+  const params = {
+    Bucket: NAME_OF_BUCKET,
+    Delete: {
+      Objects: objects,
+    },
+  };
+
+  return await s3.deleteObjects(params, function (err, data) {
+    if (err) console.log(err, err.stack);
+    else console.log('delete', data);
+  });
+};
+
+const deleteSingleFile = async (file) => {
+  return await awsDeleteFiles(file);
+};
 
 module.exports = {
   s3,
@@ -98,4 +124,6 @@ module.exports = {
   retrievePrivateFile,
   singleMulterUpload,
   multipleMulterUpload,
+  awsDeleteFiles,
+  deleteSingleFile,
 };
