@@ -14,8 +14,15 @@ export async function csrfFetch(url, options = {}) {
   // "application/json", and set the "XSRF-TOKEN" header to the value of the
   // "XSRF-TOKEN" cookie
   if (options.method.toUpperCase() !== 'GET') {
-    options.headers['Content-Type'] =
-      options.headers['Content-Type'] || 'application/json';
+    //To send files to server for aws upload, the Content-Type Header must be "multipart/form-data"
+    //when add formData to body of request, the  browser will automatically set
+    // appropriate headers/boundaries, so need to remove the Content-Type header if it is multipart/form-data
+    if (options.headers['Content-Type'] === 'multipart/form-data') {
+      delete options.headers['Content-Type'];
+    } else {
+      options.headers['Content-Type'] =
+        options.headers['Content-Type'] || 'application/json';
+    }
     options.headers['XSRF-Token'] = Cookies.get('XSRF-TOKEN');
   }
 
