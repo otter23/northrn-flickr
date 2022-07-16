@@ -100,14 +100,16 @@ export const getUserPhotosThunk = (userId) => async (dispatch) => {
 
 //request to backend to add a single user photo
 export const addPhotoThunk = (data) => async (dispatch) => {
-  const { userId, title, description, image } = data;
+  const { userId, title, description, imageFile } = data;
+
+  //format data for AWS middleware to handle
   const formData = new FormData();
   formData.append('userId', userId);
   formData.append('title', title);
   formData.append('description', description);
 
   // for single file
-  if (image) formData.append('image', image);
+  if (imageFile) formData.append('image', imageFile);
 
   const response = await csrfFetch('/api/images', {
     method: 'POST',
@@ -151,7 +153,7 @@ export const deletePhotoThunk = (userId, imageId) => async (dispatch) => {
 
   if (response.ok) {
     const resBody = await response.json();
-    console.log('DELETE: ', resBody);
+    // console.log('DELETE: ', resBody);
     if (resBody.message === 'Success') {
       dispatch(deletePhoto(userId, imageId));
     }

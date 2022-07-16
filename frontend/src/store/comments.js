@@ -151,7 +151,7 @@ export const deleteCommentThunk = (imageId, commentId) => async (dispatch) => {
 
   if (response.ok) {
     const resBody = await response.json();
-    console.log('DELETE: ', resBody);
+    // console.log('DELETE: ', resBody);
     if (resBody.message === 'Success') {
       dispatch(deleteComment(imageId, commentId));
     }
