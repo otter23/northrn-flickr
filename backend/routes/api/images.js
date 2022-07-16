@@ -10,6 +10,9 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { requireAuth } = require('../../utils/auth');
 
+//AWS helper functions
+const { singleMulterUpload, singlePublicFileUpload } = require('../../awsS3');
+
 //GET ALL IMAGES IN DATABASE - //maybe add to /explore
 router.get(
   '/',
@@ -49,14 +52,43 @@ const validateImage = [
   handleValidationErrors,
 ];
 
-//ADD PHOTO - LOGGED-IN USER ONLY
+//ADD PHOTO URL - LOGGED-IN USER ONLY
+// router.post(
+//   '/',
+//   requireAuth, //if no user info in verified jwt, then will throw error
+//   validateImage, //if validation errors, errors thrown with array of error messages
+//   asyncHandler(async (req, res) => {
+//     const sessionUserId = parseInt(req.user.id, 10); //ensures will only succeed if requireAuth succeeds
+//     const { title, description, imageUrl, userId } = req.body;
+
+//     if (sessionUserId === userId) {
+//       const newImage = await Image.create({
+//         userId,
+//         title,
+//         description,
+//         imageUrl,
+//       });
+
+//       return res.json(newImage);
+//       // return res.redirect(`${req.baseUrl}/${newImage.id}`);
+//     } else {
+//       res.status(401);
+//       return res.json({ errors: 'Unauthorized' });
+//     }
+//   })
+// );
+
+//ADD PHOTO AWS - LOGGED-IN USER ONLY
 router.post(
   '/',
   requireAuth, //if no user info in verified jwt, then will throw error
+  singleMulterUpload('image'), //adds file to req
   validateImage, //if validation errors, errors thrown with array of error messages
   asyncHandler(async (req, res) => {
     const sessionUserId = parseInt(req.user.id, 10); //ensures will only succeed if requireAuth succeeds
-    const { title, description, imageUrl, userId } = req.body;
+    const { title, description, userId } = req.body;
+
+    const imageUrl = await singlePublicFileUpload(req.file);
 
     if (sessionUserId === userId) {
       const newImage = await Image.create({
