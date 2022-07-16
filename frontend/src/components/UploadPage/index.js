@@ -36,6 +36,14 @@ export default function UploadPage({ isLoaded }) {
   const [imageUrl, setImageUrl] = useState('');
   const [imageUrlLabel, setImageUrlLabel] = useState(false);
 
+  const [imageFile, setImageFile] = useState('');
+
+  //single file upload
+  const updateFile = (e) => {
+    const file = e.target.files[0];
+    if (file) setImageFile(file);
+  };
+
   const [errors, setErrors] = useState([]);
   const [uploadSuccess, setUploadSuccess] = useState(false);
 
@@ -51,8 +59,12 @@ export default function UploadPage({ isLoaded }) {
     }
   }, [userId, photos]);
 
-  function isImage(url) {
-    return /\.(jpg|jpeg|png|webp|avif|gif|svg)(\?.*)?$/.test(url);
+  // function isImage(url) {
+  //   return /\.(jpg|jpeg|png|webp|avif|gif|svg)(\?.*)?$/.test(url);
+  // }
+  function isImage(file) {
+    const test = file.type.split('/')[1];
+    return /(jpg|jpeg|png|webp|avif|gif|svg)/.test(test);
   }
 
   //on submit dispatch addPhotoThunk
@@ -60,8 +72,11 @@ export default function UploadPage({ isLoaded }) {
     e.preventDefault();
     setErrors([]); //reset error state
 
-    if (!isImage(imageUrl)) {
-      return setErrors(['Please provide a url linked directly to an image.']);
+    // if (!isImage(imageUrl)) {
+    //   return setErrors(['Please provide a url linked directly to an image.']);
+    // }
+    if (!isImage(imageFile)) {
+      return setErrors(['Please provide an image file.']);
     }
     // send request to backend API image route (POST api/image/)
     try {
@@ -70,7 +85,7 @@ export default function UploadPage({ isLoaded }) {
           userId,
           title,
           description: description || null,
-          imageUrl,
+          imageFile,
         })
       );
 
@@ -87,6 +102,10 @@ export default function UploadPage({ isLoaded }) {
         //once page built can have redirect here:
       }
     } catch (errorResponse) {
+      if (errorResponse.status === 401) {
+        setErrors(['Unauthorized']);
+        return;
+      }
       //TO DO add sequelize error handling parsing
       const data = await errorResponse.json();
       if (data && data.errors) setErrors(data.errors);
@@ -192,7 +211,7 @@ export default function UploadPage({ isLoaded }) {
                   />
                 </div>
 
-                <div
+                {/* <div
                   className={`upload-form-group ${
                     imageUrlLabel ? 'upload-form-group-color' : ''
                   }`}
@@ -214,6 +233,34 @@ export default function UploadPage({ isLoaded }) {
                     name='imageUrl'
                     value={imageUrl}
                     onChange={(e) => setImageUrl(e.target.value)}
+                    onFocus={() => setImageUrlLabel((prev) => !prev)}
+                    onBlur={() => setImageUrlLabel((prev) => !prev)}
+                    required
+                  />
+                </div> */}
+
+                <div
+                  className={`upload-form-group ${
+                    imageUrlLabel ? 'upload-form-group-color' : ''
+                  }`}
+                >
+                  <label
+                    className={`upload-label ${
+                      imageUrl.length > 0 || imageUrlLabel
+                        ? 'upload-label-small'
+                        : ''
+                    } ${imageUrlLabel ? 'upload-label-color' : ''}`}
+                    htmlFor='imageUpload'
+                  >
+                    Photo Upload
+                  </label>
+                  <input
+                    id='imageUpload'
+                    className={`upload-input`}
+                    type='file'
+                    name='imageUpload'
+                    // value={imageFile} //not a controlled input
+                    onChange={updateFile}
                     onFocus={() => setImageUrlLabel((prev) => !prev)}
                     onBlur={() => setImageUrlLabel((prev) => !prev)}
                     required
