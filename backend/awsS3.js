@@ -20,9 +20,14 @@ const singlePublicFileUpload = async (file) => {
   const path = require('path');
   // name of the file in your S3 bucket will be the date in ms plus the extension name
   const Key = new Date().getTime().toString() + path.extname(originalname);
+
   const uploadParams = {
     Bucket: NAME_OF_BUCKET,
     Key,
+    // added content type to avoid default "application/octet-stream"
+    ContentType: `${mimetype}`,
+    //ContentDisposition tells browser to download file with the given name instead of viewing file
+    // ContentDisposition: 'attachment; filename=some_file_name.jpg',
     Body: buffer,
     ACL: 'public-read',
   };
