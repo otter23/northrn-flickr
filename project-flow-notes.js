@@ -278,6 +278,14 @@ Create log ou component
 
 //setup root with package.json to communicate with heroku
     //backend will serve the static frontend build
+
+
+AWS setup:
+https://github.com/jdrichardsappacad/aws-walkthrough-nothunk
+
+npm install multer
+npm install aws-sdk
+
 */
 /*
 
