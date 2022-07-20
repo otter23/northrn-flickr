@@ -198,3 +198,31 @@ div .upload-hidden {
   height: 200px;
   width: 200px;
 }
+
+/* New aws input file styling */
+.upload-photo-container {
+  cursor: pointer;
+}
+
+.upload-photo-label {
+  cursor: pointer;
+  background-color: rgb(249, 249, 249);
+}
+
+.upload-photo {
+  /* visibility: hidden; */
+  display: none;
+}
+
+.upload-photo-text {
+  cursor: pointer;
+  resize: none;
+  color: black;
+  font-family: inherit;
+}
+
+.upload-fil-size {
+  padding: 7px 16px;
+  font: 16px;
+  font-family: inherit;
+}
