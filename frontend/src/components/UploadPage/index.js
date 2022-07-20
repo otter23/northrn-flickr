@@ -1,6 +1,6 @@
 import './UploadPage.css';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, Link, useHistory } from 'react-router-dom';
 
@@ -14,6 +14,8 @@ import flickrIcon from '../../images/n_flickr_birds.svg';
 export default function UploadPage({ isLoaded }) {
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const uploadPhotoInputRef = useRef(null);
 
   // subscribe to session redux State
   const sessionUser = useSelector((state) => state.session.user);
@@ -33,16 +35,11 @@ export default function UploadPage({ isLoaded }) {
   const [description, setDescription] = useState('');
   const [descriptionLabel, setDescriptionLabel] = useState(false);
 
-  const [imageUrl, setImageUrl] = useState('');
+  // const [imageUrl, setImageUrl] = useState('');
   const [imageUrlLabel, setImageUrlLabel] = useState(false);
 
-  const [imageFile, setImageFile] = useState('');
-
-  //single file upload
-  const updateFile = (e) => {
-    const file = e.target.files[0];
-    if (file) setImageFile(file);
-  };
+  const [imageFile, setImageFile] = useState(null);
+  const [imageName, setImageName] = useState(null);
 
   const [errors, setErrors] = useState([]);
   const [uploadSuccess, setUploadSuccess] = useState(false);
@@ -59,12 +56,34 @@ export default function UploadPage({ isLoaded }) {
     }
   }, [userId, photos]);
 
+  //single file upload
+  const updateFile = (e) => {
+    const file = e.target.files[0];
+    if (file) setImageFile(file);
+    if (file) setImageName(file.name);
+    // if (file && !title) setTitle(file.name);
+  };
+
+  //when click wrapper div, initiate file input
+  const focusFileSelector = () => uploadPhotoInputRef.current.click();
+
   // function isImage(url) {
   //   return /\.(jpg|jpeg|png|webp|avif|gif|svg)(\?.*)?$/.test(url);
   // }
   function isImage(file) {
     const test = file.type.split('/')[1];
-    return /(jpg|jpeg|png|webp|avif|gif|svg)/.test(test);
+    return /(jpg|jpeg|pjpeg|bmp|png|apng|webp|avif|gif|svg|tiff)/.test(test);
+  }
+
+  //pass in file.size
+  function returnFileSize(number) {
+    if (number < 1024) {
+      return number + 'bytes';
+    } else if (number >= 1024 && number < 1048576) {
+      return (number / 1024).toFixed(1) + 'KB';
+    } else if (number >= 1048576) {
+      return (number / 1048576).toFixed(1) + 'MB';
+    }
   }
 
   //on submit dispatch addPhotoThunk
@@ -75,9 +94,12 @@ export default function UploadPage({ isLoaded }) {
     // if (!isImage(imageUrl)) {
     //   return setErrors(['Please provide a url linked directly to an image.']);
     // }
-    if (!isImage(imageFile)) {
+
+    //if no image file or wrong image file
+    if (!imageFile) return setErrors(['Please provide an image file.']);
+    if (!isImage(imageFile))
       return setErrors(['Please provide an image file.']);
-    }
+
     // send request to backend API image route (POST api/image/)
     try {
       const response = await dispatch(
@@ -96,7 +118,8 @@ export default function UploadPage({ isLoaded }) {
         //reset form
         setTitle('');
         setDescription('');
-        setImageUrl('');
+        // setImageUrl('');
+        setImageFile(null);
 
         return history.push(`/photos/${userId}/${response.userPhoto.id}`);
         //once page built can have redirect here:
@@ -240,32 +263,56 @@ export default function UploadPage({ isLoaded }) {
                 </div> */}
 
                 <div
-                  className={`upload-form-group ${
+                  className={`upload-form-group upload-photo-container ${
                     imageUrlLabel ? 'upload-form-group-color' : ''
                   }`}
+                  onClick={focusFileSelector}
                 >
                   <label
-                    className={`upload-label ${
-                      imageUrl.length > 0 || imageUrlLabel
-                        ? 'upload-label-small'
-                        : ''
+                    className={`upload-label upload-photo-label ${
+                      imageFile || imageUrlLabel ? 'upload-label-small' : ''
                     } ${imageUrlLabel ? 'upload-label-color' : ''}`}
-                    htmlFor='imageUpload'
+                    // htmlFor='imageUpload'
                   >
-                    Photo Upload
+                    Choose Photo to Upload
                   </label>
                   <input
                     id='imageUpload'
-                    className={`upload-input`}
+                    className={`upload-input upload-photo`}
                     type='file'
+                    //gray out unacceptable file choices, can use image/*.
+                    accept='.jpg,.jpeg,.png,.webp,.avif,.gif,.svg,'
                     name='imageUpload'
                     // value={imageFile} //not a controlled input
+                    ref={uploadPhotoInputRef}
                     onChange={updateFile}
+                    // required
+                  />
+                  <textarea
+                    id='imageUpload-text'
+                    className={`upload-input upload-photo-text`}
+                    type='text'
+                    name='imageUpload-text'
+                    value={imageName ?? ''}
+                    // onChange={(e) => setImageName(e.target.value)}
                     onFocus={() => setImageUrlLabel((prev) => !prev)}
                     onBlur={() => setImageUrlLabel((prev) => !prev)}
-                    required
+                    disabled
                   />
                 </div>
+                {imageFile ? (
+                  <div
+                    className={`upload-form-group upload-fil-size ${
+                      imageUrlLabel ? 'upload-form-group-color' : ''
+                    }`}
+                  >
+                    <div className={`upload-fil-size-text`}>
+                      File Size: {returnFileSize(imageFile?.size)}{' '}
+                    </div>
+                  </div>
+                ) : (
+                  ''
+                )}
 
                 <div className='upload-btn-container'>
                   <button className='upload-btn' type='submit'>
