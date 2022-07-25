@@ -36,6 +36,10 @@
   color: rgb(164, 8, 8);
 }
 
+.imageP-delete-button span:hover {
+  filter: brightness(150%);
+}
+
 .imageP-delete-comment-form-container {
   position: fixed;
   top: 0;
@@ -214,13 +218,25 @@
 .imageP-title-desc-div {
   display: flex;
   flex-direction: column;
-  cursor: pointer;
   /* border-bottom: 1px solid rgb(225, 229, 231); */
   border-bottom: 1px solid rgb(203, 206, 207);
   font-size: 14px;
   gap: 10px;
   padding-bottom: 10px;
   max-width: 700px;
+
+  position: relative;
+}
+
+.imageP-image-text-edit {
+  position: absolute;
+  right: 0px;
+  bottom: 10px;
+  cursor: pointer;
+}
+
+.imageP-image-text-edit:hover {
+  color: black;
 }
 
 .imageP-form-control {
@@ -420,6 +436,10 @@
   cursor: pointer;
 }
 
+.imageP-delete-comment-button span:hover {
+  color: black;
+}
+
 .imageP-newComment-container {
   display: flex;
   gap: 20px;
@@ -433,8 +453,7 @@
   border-radius: 32px;
 }
 
-.imageP-newComment-form {
-}
+/* .imageP-newComment-form {} */
 
 .imageP-newComment-textarea {
   outline: none;

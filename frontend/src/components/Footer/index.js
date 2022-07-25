@@ -5,9 +5,9 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 
-import fbIcon from '../../images/icons/fb-icon.svg';
-import twitterIcon from '../../images/icons/twitter-icon.svg';
-import instaIcon from '../../images/icons/insta-icon.svg';
+// import fbIcon from '../../images/icons/fb-icon.svg';
+// import twitterIcon from '../../images/icons/twitter-icon.svg';
+// import instaIcon from '../../images/icons/insta-icon.svg';
 
 export default function Footer() {
   //subscribe to redux session state
