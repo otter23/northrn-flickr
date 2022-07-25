@@ -34,6 +34,7 @@ export default function ImageProfilePage({ isLoaded }) {
   const [userRouteOk, setUserRouteOk] = useState(false);
   const [imageRouteOk, setImageRouteOk] = useState(false);
   const [renderReady, setRenderReady] = useState(false);
+
   //controls whether session User can edit a page
   const [isAuthorized, setIsAuthorized] = useState(false);
 
@@ -77,7 +78,8 @@ export default function ImageProfilePage({ isLoaded }) {
     }
 
     //adding allPhotos state to dependency list creates infinite loop, only need to run once
-  }, [userId, imageId, dispatch]); // how get rid of complaint?
+    // eslint-disable-next-line
+  }, [userId, imageId, dispatch]);
 
   //check if image exists in state, again prob better to check db...
   useEffect(() => {
@@ -92,6 +94,7 @@ export default function ImageProfilePage({ isLoaded }) {
     }
 
     //run again once userPhotos updates
+    // eslint-disable-next-line
   }, [userId, imageId, userPhotos]);
 
   //update authorization state if page userId and session user match
@@ -271,18 +274,26 @@ export default function ImageProfilePage({ isLoaded }) {
                     </Link>
                   </div>
                   <div
-                    className={`imageP-title-desc-div
-                ${formHidden ? '' : 'hidden'}
-                ${isAuthorized ? '' : 'noPointer'}   `}
-                    onClick={() => {
-                      if (isAuthorized) setFormHidden((prev) => !prev);
-                      setPrevTitle(title);
-                      setPrevDescription(description);
-                      form.current.focus();
-                    }}
+                    className={`imageP-title-desc-div ${
+                      formHidden ? '' : 'hidden'
+                    }`}
+                    // ${isAuthorized ? '' : 'noPointer'}
                   >
                     <div className='imageP-title'>{title}</div>
                     <div className='imageP-desc'>{description}</div>
+                    {isAuthorized && (
+                      <div
+                        className={`material-symbols-outlined imageP-image-text-edit`}
+                        onClick={() => {
+                          if (isAuthorized) setFormHidden((prev) => !prev);
+                          setPrevTitle(title);
+                          setPrevDescription(description);
+                          form.current.focus();
+                        }}
+                      >
+                        edit
+                      </div>
+                    )}
                   </div>
 
                   <form
@@ -398,13 +409,11 @@ export default function ImageProfilePage({ isLoaded }) {
 
                           <div
                             type='button'
-                            className={`imageP-delete-comment-button
-                            ${
+                            className={`imageP-delete-comment-button ${
                               sessionUser?.id === comment?.userId
                                 ? ''
                                 : 'hidden'
-                            }
-                            `}
+                            }`}
                             onClick={() => {
                               setCommentToBeDeleted(comment?.id);
                               setDeleteCommentFormHidden((prev) => !prev);
