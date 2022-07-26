@@ -10,7 +10,8 @@ import Navigation from '../Navigation';
 //import { ReactComponent as FlickrLogo } from './Flickr.svg';
 
 import flickrIcon from '../../images//n_flickr_birds.svg';
-import loginBg from '../../images/login-bg-2000x1333.jpg';
+// import loginBg from '../../images/login-bg-2000x1333.jpg';
+import loginBg from '../../images/login-bg-sky-2400x1600.jpg';
 
 export default function LoginFormPage() {
   const dispatch = useDispatch();
@@ -245,7 +246,7 @@ export default function LoginFormPage() {
             </div>
           </div>
 
-          <div className='login-footer'>
+          {/* <div className='login-footer'>
             <div className='login-footer-left'>
               English
               <span className='material-symbols-outlined login-footer-icon'>
@@ -258,7 +259,7 @@ export default function LoginFormPage() {
               <span>Privacy</span>
               <span>Terms</span>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

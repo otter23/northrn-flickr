@@ -1,20 +1,12 @@
-@import url('../../index.css');
-
 /* smacss and bem ideology */
-
-/* https://fonts.google.com/icons?icon.query=eye */
-/* Allows you to customize icons specific to this page view */
-.material-symbols-outlined {
-  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-  height: 1.5rem;
-  width: 1.5rem;
-  fill: currentColor;
-  color: gray;
-}
 
 /* https://www.pexels.com/search/birds/ */
 /* https://www.pexels.com/photo/greyscale-photography-of-birds-3401967/ */
 /* https://images.pexels.com/photos/8793250/pexels-photo-8793250.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260 */
+/* https://unsplash.com/photos/zU2BzAcY8zA */
+/* https://unsplash.com/photos/f8Xv_KfROpo */
+/* https://unsplash.com/photos/FiMvNM44-IE */
+
 .login-background {
   /* background-image: url('https://images.pexels.com/photos/3375493/pexels-photo-3375493.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=1333&w=2000'); */
   background-size: cover;
@@ -38,7 +30,7 @@
 
 .login-card {
   width: 350px;
-  max-height: 475px;
+  min-height: 475px;
   /* min-height: calc(100vh - 3rem); */
   padding: 25px;
   /* border: 1px solid var(--table1); */
@@ -257,7 +249,8 @@
 
 .login-link-forgot {
   text-decoration: none;
-  color: #006dac;
+  /* color: #006dac; */
+  color: black;
   cursor: text;
 }
 

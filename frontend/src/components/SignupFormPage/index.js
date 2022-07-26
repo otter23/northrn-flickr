@@ -7,7 +7,8 @@ import * as sessionActions from '../../store/session';
 import Navigation from '../Navigation';
 
 import flickrIcon from '../../images/n_flickr_birds.svg';
-import signupBg from '../../images/login-bg-2000x1333.jpg';
+// import signupBg from '../../images/login-bg-2000x1333.jpg';
+import signupBg from '../../images/login-bg-sky-2400x1600.jpg';
 
 function SignupFormPage() {
   const dispatch = useDispatch();
@@ -209,11 +210,12 @@ function SignupFormPage() {
           <div className='signup-card-bottom'>
             <div className='signup-terms-privacy'>
               <p>
-                By signing up, you agree with Northrn Flickr's &nbsp;
+                By signing up, you agree with Northrn Flickr's
+                non-existent&nbsp;
                 <Link className='signup-link-terms' to='#'>
-                  Terms of Services &nbsp;
+                  Terms of Services&nbsp;
                 </Link>
-                and &nbsp;
+                and&nbsp;
                 <Link className='signup-link-privacy' to='#'>
                   Privacy Policy
                 </Link>
@@ -229,7 +231,7 @@ function SignupFormPage() {
             </div>
           </div>
 
-          <div className='signup-footer'>
+          {/* <div className='signup-footer'>
             <div className='signup-footer-left'>
               English
               <span className='material-symbols-outlined signup-footer-icon'>
@@ -242,7 +244,7 @@ function SignupFormPage() {
               <span>Privacy</span>
               <span>Terms</span>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

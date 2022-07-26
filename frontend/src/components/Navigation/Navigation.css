@@ -249,9 +249,14 @@
 .upload-nav-right {
   display: flex;
   justify-content: space-around;
+  justify-content: flex-end;
   align-items: center;
   width: 100%;
   flex-grow: 1;
+
+  gap: 20px;
+
+  padding-right: 10px;
 }
 
 .upload-nav-link {
