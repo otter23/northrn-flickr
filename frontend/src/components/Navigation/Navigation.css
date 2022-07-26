@@ -44,6 +44,10 @@
   width: 155px;
 }
 
+.main-nav-photostream:hover {
+  filter: brightness(120%);
+}
+
 .main-nav-photostream a {
   text-decoration: none;
   /* cursor: pointer; */
@@ -75,10 +79,14 @@
 }
 
 .main-nav-search-icon,
-.main-nav-upload-icon,
 .main-nav-upload-icon {
   height: 24px;
   width: 24px;
+}
+
+.main-nav-search-icon:hover,
+.main-nav-upload-icon:hover {
+  filter: brightness(120%);
 }
 
 .main-nav-login a {
@@ -194,6 +202,10 @@
   cursor: pointer;
   color: var(--mid3);
   font-weight: 600;
+}
+
+.upload-nav-photostream:hover {
+  filter: brightness(120%);
 }
 
 /* ***************************************************** */
