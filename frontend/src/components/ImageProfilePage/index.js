@@ -8,6 +8,7 @@ import { Link, useParams, Redirect } from 'react-router-dom';
 import Navigation from '../Navigation';
 import Footer from '../Footer';
 import CommentForm from './CommentForm';
+import EditCommentForm from './EditCommentForm';
 import DeleteImageForm from './DeleteImageForm';
 import DeleteCommentForm from './DeleteCommentForm';
 // import UpdateImageForm from './UpdateImageForm';
@@ -74,6 +75,13 @@ export default function ImageProfilePage({ isLoaded }) {
   const form = useRef(null);
   const [formHidden, setFormHidden] = useState(true);
 
+  //edit comment state and handlers for child component
+  const [commentToBeEdited, setCommentToBeEdited] = useState(null);
+  const [editCommentFormHidden, setEditCommentFormHidden] = useState(true);
+  const hideEditForm = () => setEditCommentFormHidden(true);
+  const resetCommentToBeEdited = () => setCommentToBeEdited(null);
+
+  //image title and description state
   const [title, setTitle] = useState('');
   const [prevTitle, setPrevTitle] = useState('');
   const [titleLabel, setTitleLabel] = useState(false);
@@ -435,33 +443,47 @@ export default function ImageProfilePage({ isLoaded }) {
                               {users[comment?.userId]?.username ?? 'username'}
                             </Link>
                             <div className='imageP-comment-date'>
-                              {dayjs(comment?.updatedAt).fromNow()}
+                              {dayjs(comment?.createdAt).fromNow()}
                             </div>
                           </div>
                           <div className='imageP-comment-text-div'>
-                            {comment?.comment}
+                            {!editCommentFormHidden &&
+                            commentToBeEdited === comment?.id ? (
+                              <EditCommentForm
+                                setErrors={setErrors}
+                                comment={comment}
+                                hideEditForm={hideEditForm}
+                                resetCommentToBeEdited={resetCommentToBeEdited}
+                              />
+                            ) : (
+                              comment?.comment
+                            )}
                           </div>
                           {comment?.userId === sessionUser?.id && (
                             <>
-                              <button
-                                type='button'
-                                className={`imageP-edit-comment-button`}
-                                onClick={() => {
-                                  setCommentToBeDeleted(comment?.id);
-                                  setDeleteCommentFormHidden((prev) => !prev);
-                                  document
-                                    .getElementById('root')
-                                    .classList.toggle('overflow');
-                                }}
-                              >
-                                <span
-                                  className='material-symbols-outlined'
-                                  onMouseEnter={() => setHighlightComment(true)}
-                                  onMouseOut={() => setHighlightComment(false)}
+                              {commentToBeEdited !== comment?.id && (
+                                <button
+                                  type='button'
+                                  className={`imageP-edit-comment-button`}
+                                  onClick={() => {
+                                    setCommentToBeEdited(comment?.id);
+                                    // setEditCommentFormHidden((prev) => !prev);
+                                    setEditCommentFormHidden(false);
+                                  }}
                                 >
-                                  edit
-                                </span>
-                              </button>
+                                  <span
+                                    className='material-symbols-outlined'
+                                    onMouseEnter={() =>
+                                      setHighlightComment(true)
+                                    }
+                                    onMouseOut={() =>
+                                      setHighlightComment(false)
+                                    }
+                                  >
+                                    edit
+                                  </span>
+                                </button>
+                              )}
 
                               <button
                                 type='button'
