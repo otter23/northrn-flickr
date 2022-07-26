@@ -11,7 +11,7 @@ const EditCommentForm = ({
   const dispatch = useDispatch();
 
   const buttonComment = useRef(null);
-  const [buttonCommentHidden, setButtonCommentHidden] = useState(false);
+  const [buttonCommentDisabled, setButtonCommentDisabled] = useState(false);
 
   const commentForm = useRef(null);
 
@@ -30,11 +30,11 @@ const EditCommentForm = ({
   useEffect(() => {
     // const regex = /[a-zA-Z]+/;
     if (updatedComment.length === 0) {
-      setButtonCommentHidden(true);
+      setButtonCommentDisabled(true);
       // } else if (!regex.test(updatedComment)) {
       //   setButtonCommentHidden(true);
     } else {
-      setButtonCommentHidden(false);
+      setButtonCommentDisabled(false);
     }
   }, [updatedComment]);
 
@@ -62,7 +62,7 @@ const EditCommentForm = ({
       );
 
       if (response.ok) {
-        setButtonCommentHidden(true);
+        setButtonCommentDisabled(true);
         resetCommentToBeEdited();
         hideEditForm();
         return;
@@ -107,7 +107,7 @@ const EditCommentForm = ({
         <button
           className={`imageP-comment-btn`}
           type='submit'
-          disabled={buttonCommentHidden}
+          disabled={buttonCommentDisabled}
         >
           Done
         </button>

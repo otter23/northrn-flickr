@@ -32,6 +32,10 @@ body,
   position: relative;
 }
 
+#root.overflow {
+  overflow: hidden;
+}
+
 /* THEME */
 :root {
   /* official Flickr logo text colors: */

@@ -143,6 +143,8 @@ export default function ImageProfilePage({ isLoaded }) {
   useEffect(() => {
     if (sessionUser?.id === parseInt(userId)) {
       setIsAuthorized(true);
+    } else {
+      setIsAuthorized(false);
     }
   }, [userId, sessionUser]);
 
@@ -511,21 +513,19 @@ export default function ImageProfilePage({ isLoaded }) {
                     );
                   })}
 
-                <div
-                  className={`imageP-newComment-container ${
-                    !sessionUser && 'hidden'
-                  }`}
-                >
+                <div className={`imageP-newComment-container`}>
                   <div>
                     <div className='imageP-newComment-image'></div>
                   </div>
-                  <CommentForm
-                    setErrors={setErrors}
-                    sessionUser={sessionUser}
-                    imageId={imageId}
-                    isAuthorized={isAuthorized}
-                    restartInterval={restartInterval}
-                  />
+                  <div className='imageP-newComment-form-container'>
+                    <CommentForm
+                      setErrors={setErrors}
+                      sessionUser={sessionUser}
+                      imageId={imageId}
+                      isAuthorized={isAuthorized}
+                      restartInterval={restartInterval}
+                    />
+                  </div>
                 </div>
               </div>
 
