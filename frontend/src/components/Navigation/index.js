@@ -10,11 +10,13 @@ import flickrLogoColored from '../../images/n_flickr_logo_colored.svg';
 
 import uploadIcon from '../../images/icons/upload-icon.svg';
 import searchIcon from '../../images/icons/search-blue-icon.svg';
-import notificationsIcon from '../../images/icons/notifications-icon.svg';
+import searchIconDark from '../../images/icons/search-dark-blue-icon.svg';
+// import notificationsIcon from '../../images/icons/notifications-icon.svg';
 
 export default function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
 
+  // eslint-disable-next-line
   const [userProfile, setUserProfile] = useState(false);
   const [explore, setExplore] = useState(true);
 
@@ -24,10 +26,12 @@ export default function Navigation({ isLoaded }) {
 
   useEffect(() => {
     if (userProfileRegex.test(location.pathname)) setUserProfile(true);
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     if (exploreRegex.test(location.pathname)) setExplore(false);
+    // eslint-disable-next-line
   }, []);
 
   let userId;
@@ -66,7 +70,7 @@ export default function Navigation({ isLoaded }) {
           </Link>
         </li>
 
-        <li className='main-nav-notification'>
+        {/* <li className='main-nav-notification'>
           <div className='main-nav-icon-container'>
             <img
               className='main-nav-upload-icon'
@@ -76,7 +80,7 @@ export default function Navigation({ isLoaded }) {
               preserveAspectRatio='xMidYMid meet'
             />
           </div>
-        </li>
+        </li> */}
         <li className='main-nav-userMenu'>
           <ProfileButton user={sessionUser} />
         </li>
@@ -210,14 +214,14 @@ export default function Navigation({ isLoaded }) {
                 Your Photostream
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link className='upload-nav-create' to={`#`}>
                 Create
               </Link>
-            </li>
+            </li> */}
           </ul>
           <ul className='upload-nav-right'>
-            <li>
+            {/* <li>
               <Link className='upload-nav-oldUploadr' to={`#`}>
                 Old Uploadr
               </Link>
@@ -225,6 +229,17 @@ export default function Navigation({ isLoaded }) {
             <li>
               <Link className='upload-nav-newHere' to={`#`}>
                 New Here?
+              </Link>
+            </li> */}
+            <li className='main-nav-search'>
+              <Link to='/explore' className='main-nav-icon-container'>
+                <img
+                  className='main-nav-search-icon'
+                  src={searchIconDark}
+                  alt='logo'
+                  viewBox='0 0 100 100'
+                  preserveAspectRatio='xMidYMid meet'
+                />
               </Link>
             </li>
             <li>
