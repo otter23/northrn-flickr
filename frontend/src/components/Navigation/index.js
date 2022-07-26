@@ -165,17 +165,22 @@ export default function Navigation({ isLoaded }) {
         <div className='splash-nav-right'>
           {/* updated from div to Link */}
           <div className='splash-nav-search-div'>
-            <form className='splash-nav-search-form'>
+            <div>
               <Link to='/explore' className='splash-nav-search-link'>
-                <label></label>
-                <div className='material-icons splash-search-icon'>search</div>
-                <input
+                Explore
+              </Link>
+            </div>
+            {/* <form className='splash-nav-search-form'>
+            <Link to='/explore' className='splash-nav-search-link'>
+            <label></label>
+            <div className='material-icons splash-search-icon'>search</div>
+            <input
                   type='search'
                   placeholder='Photos, people, or groups'
                   disabled={true}
                 ></input>
-              </Link>
-            </form>
+            </Link>
+            </form> */}
           </div>
 
           <div>
