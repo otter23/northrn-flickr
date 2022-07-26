@@ -194,7 +194,7 @@
 
 .imageP-profile-image {
   height: 60px;
-  width: 60px;
+  min-width: 60px;
   background-position: center;
   background-size: contain;
   border-radius: 60px;
@@ -204,6 +204,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  /* width: 700px; */
   gap: 10px;
 }
 
@@ -248,7 +249,13 @@
 }
 
 .imageP-desc {
+  padding-right: 30px;
   font-size: 14px;
+
+  /* display spaces and line breaks */
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: normal;
 }
 
 .imageP-profile-image {
@@ -389,7 +396,7 @@
 
 .imageP-comment-list-container {
   margin-top: 20px;
-  margin-left: 23px;
+  margin-left: 28px;
 }
 
 .imageP-comment-container {
@@ -400,7 +407,9 @@
 
 .imageP-comment-image {
   height: 32px;
-  width: 32px;
+  min-width: 32px;
+
+  background-image: url('../../images/demoUser-icon.jpg');
   background-position: center;
   background-size: contain;
   border-radius: 32px;
@@ -416,9 +425,34 @@
   width: 700px;
 }
 
+.imageP-comment-text-div {
+  padding-right: 60px;
+
+  /* display spaces and line breaks */
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
 /* .highlight:hover {
   border: 1px solid var(--mid4);
+  background-color: rgba(128, 128, 128, 0.2);
 } */
+
+.imageP-comment-username-div {
+  display: flex;
+  gap: 10px;
+
+  padding-right: 60px;
+}
+
+@media screen and (max-width: 500px) {
+  .imageP-comment-username-div {
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 5px;
+  }
+}
 
 .imageP-comment-username-div a {
   text-decoration: none;
@@ -429,7 +463,26 @@
   text-decoration: underline;
 }
 
+.imageP-comment-date {
+  color: rgb(137, 137, 137);
+}
+
+.imageP-edit-comment-button {
+  all: unset;
+  display: block;
+  position: absolute;
+  right: 25px;
+  top: 0px;
+  cursor: pointer;
+}
+
+.imageP-edit-comment-button span:hover {
+  color: black;
+}
+
 .imageP-delete-comment-button {
+  all: unset;
+  display: block;
   position: absolute;
   right: 0px;
   top: 0px;
@@ -447,19 +500,24 @@
 
 .imageP-newComment-image {
   height: 32px;
-  width: 32px;
+  min-width: 32px;
+  background-image: url('../../images/demoUser-icon.jpg');
   background-position: center;
   background-size: contain;
   border-radius: 32px;
 }
 
-/* .imageP-newComment-form {} */
+.imageP-newComment-form {
+  width: 700px;
+  padding-right: 60px;
+}
 
 .imageP-newComment-textarea {
   outline: none;
   border: none;
   border-radius: 3px;
-  /* resize: none; */
+  resize: vertical;
+  width: 100%;
 }
 
 .imageP-comment-btn-container {

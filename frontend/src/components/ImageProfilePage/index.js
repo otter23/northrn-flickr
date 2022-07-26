@@ -19,23 +19,48 @@ import userIcon from '../../images/demoUser-icon.jpg';
 // import defaultUserPhoto from '../../images/login-bg-2000x1333.jpg';
 // import defaultCoverPhoto from '../../images/login-bg-2000x1333.jpg';
 
+//dayjs library used for formatting dates
+const dayjs = require('dayjs');
+const relativeTime = require('dayjs/plugin/relativeTime');
+dayjs.extend(relativeTime);
+const updateLocale = require('dayjs/plugin/updateLocale');
+dayjs.extend(updateLocale);
+dayjs.updateLocale('en', {
+  relativeTime: {
+    future: 'in %s',
+    past: '%s ago',
+    s: 'seconds',
+    m: '1 min',
+    mm: '%d min',
+    h: '1 hour',
+    hh: '%d hours',
+    d: '1 day',
+    dd: '%d days',
+    M: '1 mo',
+    MM: '%d mo',
+    y: '1 yr',
+    yy: '%d yrs',
+  },
+});
+
 export default function ImageProfilePage({ isLoaded }) {
   const dispatch = useDispatch();
   const { userId } = useParams();
   const { imageId } = useParams();
 
-  // subscribe to redux session states
+  // subscriptions to redux session states
   const sessionUser = useSelector((state) => state.session.user);
   const users = useSelector((state) => state.users);
   // const allPhotos = useSelector((state) => state.photos.allPhotos);
   const userPhotos = useSelector((state) => state.photos[userId]);
   const imageComments = useSelector((state) => state.comments[imageId]);
 
+  //state to manage routes
   const [userRouteOk, setUserRouteOk] = useState(false);
   const [imageRouteOk, setImageRouteOk] = useState(false);
   const [renderReady, setRenderReady] = useState(false);
 
-  //controls whether session User can edit a page
+  //controls whether session User can edit image or comment on a page
   const [isAuthorized, setIsAuthorized] = useState(false);
 
   //slices of react state for controlled inputs and error handling
@@ -59,8 +84,19 @@ export default function ImageProfilePage({ isLoaded }) {
 
   const [errors, setErrors] = useState([]);
 
+  //change state every 60 seconds to force react to update comment time
+  const [updateCommentTimestamps, setUpdateCommentTimestamps] = useState(false);
+  const restartInterval = () => setUpdateCommentTimestamps((prev) => !prev);
+  useEffect(() => {
+    const renderInterval = setInterval(() => {
+      setUpdateCommentTimestamps((prev) => !prev);
+    }, 60000);
+    //remove interval before starting next one, or when component dismounts
+    return () => clearInterval(renderInterval);
+  }, [updateCommentTimestamps]);
+
   //NOTE: photos.allPhotos eager loaded before app can render component
-  //NOTE:logged in user photos are eager loaded on app initiation or upon login
+  //NOTE: logged in user photos are eager loaded on app initiation or upon login
 
   // check if URL user exists, if so load URL User's images to state
   //ALT: could make new thunk to send a findOne() to API route and see if image or user exists in db...
@@ -84,7 +120,6 @@ export default function ImageProfilePage({ isLoaded }) {
   //check if image exists in state, again prob better to check db...
   useEffect(() => {
     //once user's in state check to see if image exists
-
     const imageExists = userPhotos && userPhotos[imageId];
     if (imageExists) {
       dispatch(commentsActions.getImageCommentsThunk(imageId)).then(() => {
@@ -92,8 +127,7 @@ export default function ImageProfilePage({ isLoaded }) {
       });
       setImageRouteOk(true);
     }
-
-    //run again once userPhotos updates
+    //runs again once userPhotos updates
     // eslint-disable-next-line
   }, [userId, imageId, userPhotos]);
 
@@ -387,49 +421,69 @@ export default function ImageProfilePage({ isLoaded }) {
                     return (
                       <div
                         key={comment?.id}
-                        className={`imageP-comment-container`}
+                        className={`imageP-comment-container ${
+                          highlightComment ? 'highlight' : ''
+                        }`}
                       >
                         <Link
                           to={`/photos/${comment?.userId}`}
                           className='imageP-comment-image'
-                          style={{ backgroundImage: `url(${userIcon})` }}
                         ></Link>
-                        <div
-                          className={`imageP-comment-right-div
-                        ${highlightComment ? 'highlight' : ''}
-                        `}
-                        >
-                          {/* add date of comment */}
+                        <div className={`imageP-comment-right-div`}>
                           <div className='imageP-comment-username-div'>
                             <Link to={`/photos/${comment?.userId}`}>
                               {users[comment?.userId]?.username ?? 'username'}
                             </Link>
+                            <div className='imageP-comment-date'>
+                              {dayjs(comment?.updatedAt).fromNow()}
+                            </div>
                           </div>
-                          <div>{comment?.comment}</div>
+                          <div className='imageP-comment-text-div'>
+                            {comment?.comment}
+                          </div>
+                          {comment?.userId === sessionUser?.id && (
+                            <>
+                              <button
+                                type='button'
+                                className={`imageP-edit-comment-button`}
+                                onClick={() => {
+                                  setCommentToBeDeleted(comment?.id);
+                                  setDeleteCommentFormHidden((prev) => !prev);
+                                  document
+                                    .getElementById('root')
+                                    .classList.toggle('overflow');
+                                }}
+                              >
+                                <span
+                                  className='material-symbols-outlined'
+                                  onMouseEnter={() => setHighlightComment(true)}
+                                  onMouseOut={() => setHighlightComment(false)}
+                                >
+                                  edit
+                                </span>
+                              </button>
 
-                          <div
-                            type='button'
-                            className={`imageP-delete-comment-button ${
-                              sessionUser?.id === comment?.userId
-                                ? ''
-                                : 'hidden'
-                            }`}
-                            onClick={() => {
-                              setCommentToBeDeleted(comment?.id);
-                              setDeleteCommentFormHidden((prev) => !prev);
-                              document
-                                .getElementById('root')
-                                .classList.toggle('overflow');
-                            }}
-                          >
-                            <span
-                              className='material-symbols-outlined'
-                              onMouseEnter={() => setHighlightComment(true)}
-                              onMouseOut={() => setHighlightComment(false)}
-                            >
-                              delete
-                            </span>
-                          </div>
+                              <button
+                                type='button'
+                                className={`imageP-delete-comment-button`}
+                                onClick={() => {
+                                  setCommentToBeDeleted(comment?.id);
+                                  setDeleteCommentFormHidden((prev) => !prev);
+                                  document
+                                    .getElementById('root')
+                                    .classList.toggle('overflow');
+                                }}
+                              >
+                                <span
+                                  className='material-symbols-outlined'
+                                  onMouseEnter={() => setHighlightComment(true)}
+                                  onMouseOut={() => setHighlightComment(false)}
+                                >
+                                  delete
+                                </span>
+                              </button>
+                            </>
+                          )}
                         </div>
                       </div>
                     );
@@ -441,16 +495,14 @@ export default function ImageProfilePage({ isLoaded }) {
                   }`}
                 >
                   <div>
-                    <div
-                      className='imageP-newComment-image'
-                      style={{ backgroundImage: `url(${userIcon})` }}
-                    ></div>
+                    <div className='imageP-newComment-image'></div>
                   </div>
                   <CommentForm
                     setErrors={setErrors}
                     sessionUser={sessionUser}
                     imageId={imageId}
                     isAuthorized={isAuthorized}
+                    restartInterval={restartInterval}
                   />
                 </div>
               </div>

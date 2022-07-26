@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import * as commentsActions from '../../store/comments';
 import { useDispatch } from 'react-redux';
 
-const CommentForm = ({ setErrors, sessionUser, imageId }) => {
+const CommentForm = ({ setErrors, sessionUser, imageId, restartInterval }) => {
   const dispatch = useDispatch();
 
   const buttonComment = useRef(null);
@@ -31,6 +31,7 @@ const CommentForm = ({ setErrors, sessionUser, imageId }) => {
       if (response.ok) {
         setButtonCommentHidden(true);
         setNewComment('');
+        restartInterval();
         return;
       }
     } catch (errorResponse) {
@@ -56,7 +57,7 @@ const CommentForm = ({ setErrors, sessionUser, imageId }) => {
           id='newComment'
           className='imageP-newComment-textarea'
           rows='4'
-          cols='30'
+          // cols='30'
           placeholder='Add a comment'
           name='newComment'
           value={newComment ?? ''}
