@@ -1,3 +1,5 @@
+import './ProfileButton.css';
+
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
@@ -14,6 +16,7 @@ function ProfileButton({ user }) {
   const openMenu = () => {
     //do nothing if menu already showed
     if (showMenu) return;
+    //else update show menu state
     setShowMenu(true);
   };
 
@@ -39,43 +42,82 @@ function ProfileButton({ user }) {
   //logout click handler
   const logout = (e) => {
     e.preventDefault();
-
     //removes user from jwt cookie
     dispatch(sessionActions.logout());
   };
 
   return (
     <>
-      <div
-        className='nav-user-icon-container'
-        onClick={openMenu}
-        style={{ backgroundImage: `url(${userIcon})` }}
-      >
-        {/* <button className='nav-user-icon' onClick={openMenu}>
-          Welcome {user.username}
-        </button> */}
+      <button className='nav-user-image-container' onClick={openMenu}>
         {/* <div class='material-symbols-outlined'>photo_camera</div> */}
+        <div
+          className={`nav-user-image default`}
+          style={{ backgroundImage: `url(${userIcon})` }}
+        >
+          {showMenu && (
+            <>
+              <div className='nav-user-dropdown-arrow'></div>
+              <div className='nav-user-dropdown-container' ref={menu}>
+                {/* Top row */}
+                <div className={`nav-user-message-list-item`}>
+                  <div className={`nav-user-message-img default`}></div>
+                  <div className={`nav-user-message-right`}>
+                    <div className={`nav-user-message-displayName`}>
+                      {`Welcome ${user?.username}!`}
+                    </div>
+                  </div>
+                </div>
+                {/* Middle row */}
+                <div className='nav-user-dropdown-developed'>
+                  <div className='nav-user-dropdown-developed-text'>
+                    Developed by Elan Katz
+                  </div>
+                  <div className='nav-user-dropdown-developed-images'>
+                    <a
+                      className='nav-user-dropdown-github'
+                      href='https://github.com/otter23'
+                      target='_blank'
+                      rel='noreferrer'
+                    >
+                      {' '}
+                    </a>
+                    <a
+                      className='nav-user-dropdown-github-fork'
+                      href='https://github.com/otter23/slackluster'
+                      target='_blank'
+                      rel='noreferrer'
+                    >
+                      {' '}
+                    </a>
+                    <a
+                      className='nav-user-dropdown-linkedIn'
+                      href='https://www.linkedin.com/in/elankatz/'
+                      target='_blank'
+                      rel='noreferrer'
+                    >
+                      {' '}
+                    </a>
+                    <a
+                      className='nav-user-dropdown-angellist'
+                      href='https://angel.co/u/elankatz'
+                      target='_blank'
+                      rel='noreferrer'
+                    >
+                      {' '}
+                    </a>
+                  </div>
+                </div>
 
-        {showMenu && (
-          <>
-            <div className='nav-user-dropdown-arrow'></div>
-            <div className='nav-user-dropdown-container' ref={menu}>
-              <div className='nav-user-dropdown-upper'>
-                Welcome {user.username}!
+                <div className='nav-user-logout'>
+                  <button className='nav-user-logout-btn' onClick={logout}>
+                    <div className='nav-user-logout-btn-text'>Log out</div>
+                  </button>
+                </div>
               </div>
-              <div className='nav-user-logout'>
-                <button
-                  className='nav-user-logout-btn'
-                  type='button'
-                  onClick={logout}
-                >
-                  Log Out
-                </button>
-              </div>
-            </div>
-          </>
-        )}
-      </div>
+            </>
+          )}
+        </div>
+      </button>
     </>
   );
 }

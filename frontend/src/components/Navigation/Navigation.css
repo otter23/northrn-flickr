@@ -1,7 +1,4 @@
-/*  */
-/*  */
-/*  */
-/* Main NAV */
+/* Main Nav Bar */
 
 .main-nav {
   background-color: var(--nav);
@@ -84,83 +81,6 @@
   width: 24px;
 }
 
-.nav-user-icon-container {
-  position: relative;
-  border-radius: 28px;
-  height: 28px;
-  width: 28px;
-  background-position: center;
-  background-size: contain;
-  border-radius: 100px;
-  cursor: pointer;
-}
-.nav-user-dropdown-container {
-  position: absolute;
-  background-color: #fff;
-  bottom: -121px;
-  right: 0px;
-  z-index: 2006;
-
-  width: 200px;
-  max-height: 400px;
-
-  border-radius: 3px;
-  box-shadow: 0 0 0 1px rgb(0 0 0 / 30%), 0 1px 4px 0 rgb(0 0 0 / 20%);
-  cursor: default;
-}
-
-.nav-user-dropdown-arrow {
-  position: absolute;
-  background-color: #fff;
-  bottom: -35px;
-  right: 5px;
-
-  /* .fluid .droparound .droparrow:after { */
-  display: block;
-  content: '';
-  width: 20px;
-  height: 20px;
-  margin-top: 7px;
-  background: #fff;
-  border-radius: 2px;
-  box-shadow: 0 0 0 1px rgb(0 0 0 / 30%), 0 1px 4px 0 rgb(0 0 0 / 20%);
-  -webkit-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
-
-.nav-user-dropdown-upper {
-  padding: 15px;
-}
-
-.nav-user-logout {
-  padding: 0px 15px;
-  padding-bottom: 15px;
-}
-
-.nav-user-logout-btn {
-  padding: 10px 15px;
-  border: 1px solid var(--mid1);
-  border-radius: 4px;
-  width: 100%;
-
-  font-size: 16px;
-  text-decoration: none;
-  font-weight: 200;
-  color: white;
-  background-color: var(--mid1);
-
-  cursor: pointer;
-  /* transition: border 0.5s, background-color 0.5s, color 0.5s; */
-  transition-property: background-color;
-  transition-duration: 0.2s;
-  transition-timing-function: ease;
-  transition-delay: 0s;
-}
-
-.nav-user-logout-btn:hover {
-  background-color: rgb(81, 136, 224);
-}
-
 .main-nav-login a {
   text-decoration: none;
   color: white;
@@ -199,10 +119,8 @@
   color: white;
 }
 
-/*  */
-/*  */
-/*  */
-/* AUTH NAV */
+/* ***************************************************** */
+/* AUTH NAV BAR */
 
 .upload-nav {
   /* TO DO UPDATE TO STICKY */
@@ -278,10 +196,8 @@
   font-weight: 600;
 }
 
-/*  */
-/*  */
-/*  */
-/* AUTH NAV */
+/* ***************************************************** */
+/* AUTH NAV BAR */
 .auth-nav {
   background-color: var(--nav);
   height: 48px;
@@ -306,10 +222,8 @@
   /* height: 24px; */
 }
 
-/*  */
-/*  */
-/*  */
-/* SPLASH  NAVIGATION CSS*/
+/* ***************************************************** */
+/* SPLASH  NAV BAR*/
 
 .splash-nav {
   background-color: rgba(0, 0, 0, 0.25);
