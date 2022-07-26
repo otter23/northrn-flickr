@@ -1,9 +1,11 @@
 import React, { useState, useRef } from 'react';
 import * as commentsActions from '../../store/comments';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 const CommentForm = ({ setErrors, sessionUser, imageId, restartInterval }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const buttonComment = useRef(null);
   const [buttonCommentHidden, setButtonCommentHidden] = useState(true);
@@ -24,6 +26,12 @@ const CommentForm = ({ setErrors, sessionUser, imageId, restartInterval }) => {
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
     setErrors([]); //reset error state
+
+    if (!sessionUser) {
+      alert('Please login to post a comment. Redirecting you to login page.');
+      history.push('/login');
+      return;
+    }
 
     // send request to backend API image route (POST api/comments/)
     try {
@@ -93,6 +101,7 @@ const CommentForm = ({ setErrors, sessionUser, imageId, restartInterval }) => {
             buttonCommentHidden ? 'hidden' : ''
           }`}
           type='submit'
+          disabled={newComment.length < 1}
         >
           Comment
         </button>
