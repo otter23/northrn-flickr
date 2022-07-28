@@ -33,7 +33,7 @@ body,
 }
 
 #root.overflow {
-  overflow: hidden;
+  overflow: hidden visible;
 }
 
 /* THEME */
