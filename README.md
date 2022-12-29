@@ -1,21 +1,26 @@
 # Northrn Flickr
 
-Live Site: https://northrn-flickr.herokuapp.com/
+Inspired by Flickr.com, Northn Flickr is a full stack web application that allows users to browse, add, and comment on bird photos. Users are not required to sign up for an account if they are just browsing and searching for photos. Logged in users can add a photo, update their own photo's title and description, and remove their own photo. A logged in user can also add comments to a photo, and delete their own comments. Share your bird photos with the world and engage with your fellow birding community.
+
+### Live Site:
+https://northrn-flickr.herokuapp.com/
 
 Git Wiki: https://github.com/otter23/northrn-flickr/wiki
 
-## Northrn Flickr at a Glance
 
-Northn Flickr is a full stack application that allows users to browse, add, and comment on bird photos. Users are not required to sign up for an account if they are just browsing and searching for photos. Logged in users can add a photo, update their own photo's title and description, and remove their own photo. A logged in user can also add comments to a photo, and delete their own comments. Share your bird photos with the world and engage with your fellow birding community.
+### Main Stack Technologies
 
-## Application Architecture and Technologies
+- Javascrtipt, React.js, Redux, HTML Plain old vanilla CSS3, Express, Sequelize, PostgreSQL, AWS
 
-- Javascript, React.js, Redux, HTML, CSS, Express, PostgreSQL, Sequelize
+### Northrn Flickr in Action
+
+![slackluster-example-final](https://dl.dropboxusercontent.com/s/banb4qlv90tmv9c/northrn-flickr-demo.gif)
+
 
 ## Getting Development Environment Up And Running
 
 - Clone this repository (only this branch) to your local machine:
-  - `bash git clone https://github.com/otter23/northrn-flickr.git `
+  - run: `bash git clone https://github.com/otter23/northrn-flickr.git `
 - Install Dependencies:
   - run: `npm install` in the root folder
 - In /backend folder
