@@ -11,7 +11,8 @@ https://northrn-flickr.herokuapp.com/
 - Javascrtipt, React.js, Redux, HTML Plain old vanilla CSS3, Express, Sequelize, PostgreSQL, AWS
 
 ### Northrn Flickr in Action
-![northrn flickr demo gif](https://dl.dropboxusercontent.com/s/banb4qlv90tmv9c/northrn-flickr-demo.gif)
+<!-- ![northrn flickr demo gif](https://dl.dropboxusercontent.com/s/banb4qlv90tmv9c/northrn-flickr-demo.gif) -->
+<img src="https://dl.dropboxusercontent.com/s/banb4qlv90tmv9c/northrn-flickr-demo.gif?raw=true" width="960px">
 
 
 ## Getting Development Environment Up And Running
