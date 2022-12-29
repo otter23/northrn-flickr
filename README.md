@@ -5,16 +5,13 @@ Inspired by Flickr.com, Northn Flickr is a full stack web application that allow
 ### Live Site:
 https://northrn-flickr.herokuapp.com/
 
-Git Wiki: https://github.com/otter23/northrn-flickr/wiki
-
 
 ### Main Stack Technologies
 
 - Javascrtipt, React.js, Redux, HTML Plain old vanilla CSS3, Express, Sequelize, PostgreSQL, AWS
 
 ### Northrn Flickr in Action
-
-![slackluster-example-final](https://dl.dropboxusercontent.com/s/banb4qlv90tmv9c/northrn-flickr-demo.gif)
+![northrn flickr demo gif](https://dl.dropboxusercontent.com/s/banb4qlv90tmv9c/northrn-flickr-demo.gif)
 
 
 ## Getting Development Environment Up And Running
