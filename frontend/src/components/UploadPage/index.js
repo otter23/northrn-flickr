@@ -106,7 +106,7 @@ export default function UploadPage({ isLoaded }) {
         photosActions.addPhotoThunk({
           userId,
           title,
-          description: description || null,
+          description: description || '',
           imageFile,
         })
       );
