@@ -12,7 +12,8 @@ https://northrn-flickr.herokuapp.com/
 
 ### Northrn Flickr in Action
 <!-- ![northrn flickr demo gif](https://dl.dropboxusercontent.com/s/banb4qlv90tmv9c/northrn-flickr-demo.gif) -->
-<img src="https://dl.dropboxusercontent.com/s/banb4qlv90tmv9c/northrn-flickr-demo.gif?raw=true" width="960px">
+<img src="https://dl.dropboxusercontent.com/s/banb4qlv90tmv9c/northrn-flickr-demo.gif" width="960px">
+<!-- <img src="https://dl.dropboxusercontent.com/s/banb4qlv90tmv9c/northrn-flickr-demo.gif?raw=true" width="960px"> -->
 
 
 ## Getting Development Environment Up And Running
