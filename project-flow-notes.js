@@ -286,6 +286,9 @@ https://github.com/jdrichardsappacad/aws-walkthrough-nothunk
 npm install multer
 npm install aws-sdk
 
+grab all filenames in your s3 bucket for database seeding
+aws s3api list-objects --bucket YOUR_BUCKET --output text --query "Contents[].{Key: Key}"
+
 */
 /*
 
